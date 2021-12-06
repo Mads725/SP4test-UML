@@ -14,28 +14,31 @@ public class Combat {
 
         while(activeCombat.get(0).getCurrentHealth()>0 && activeCombat.get(1).getCurrentHealth()>0) {
             if (combatRound % 2 == 0) {
-                activeCombat.get(0).takeTurn();
+                // while
+                megaLogic(activeCombat.get(0).takeTurn());
 
 
-
+                // while end
             } else if (combatRound % 2 == 1) {
-                activeCombat.get(1).takeTurn();
+                megaLogic(activeCombat.get(1).takeTurn());
+
             }
             combatRound++;
         }
 
     }
 
-    public void megaLogic() {
+    public void megaLogic(CombatCard playedCard) {
 
-        if ()
+        if (playedCard.damage != 0) {
 
+        }
+        if (playedCard.heal != 0) {
 
+        }
+        if (playedCard.strongDamageType != null) {
+
+        }
 
     }
-
-
 }
-
-
-

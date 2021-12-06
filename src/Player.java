@@ -3,6 +3,9 @@ import java.util.ArrayList;
 public class Player extends CombatEntity{
 
     public ArrayList<CombatCard> playerCards = new ArrayList<>();
+    public ArrayList<CombatCard> playerHand = new ArrayList<>();
+    int currentActionPoints;
+    int maxActionPoints;
 
     public Player(int Health) {
         this.maxHealth = Health;
@@ -13,7 +16,11 @@ public class Player extends CombatEntity{
     }
 
     @Override
-    public void takeTurn() {
+    public CombatCard takeTurn() {
+
+        // update GUI
+
+        return playerHand.get(0);
 
     }
 

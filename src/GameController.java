@@ -10,12 +10,12 @@ public class GameController {
 
         //add cards
         ArrayList<CombatCard> enemy1Cards = new ArrayList<>();
-        CombatEntity enemy1 = new Enemy(100, enemy1Cards);
+        CombatEntity enemy1 = new Enemy(100,"FIRE", enemy1Cards);
         randomEnemies.add(enemy1);
 
         //add cards
         ArrayList<CombatCard> enemy2Cards = new ArrayList<>();
-        CombatEntity enemy2 = new Enemy(100, enemy2Cards);
+        CombatEntity enemy2 = new Enemy(100, "WATER", enemy2Cards);
         randomEnemies.add(enemy2);
 
         Player player = new Player(100);
