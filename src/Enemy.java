@@ -5,6 +5,7 @@ public class Enemy extends CombatEntity{
 
     ArrayList<CombatCard> cards ;
     int currentActionPoints;
+    int maxActionPoints;
 
     public Enemy(int Health, String type, ArrayList cards) {
         this.maxHealth = Health;
@@ -21,6 +22,8 @@ public class Enemy extends CombatEntity{
         int randomNum = random.nextInt(cards.size()-1);
         return cards.get(randomNum);
     }
+
+
 
     @Override
     public int getCurrentHealth() {

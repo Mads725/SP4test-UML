@@ -14,11 +14,10 @@ public class Combat {
 
         while(activeCombat.get(0).getCurrentHealth()>0 && activeCombat.get(1).getCurrentHealth()>0) {
             if (combatRound % 2 == 0) {
-                // while
-                megaLogic(activeCombat.get(0).takeTurn());
+                while (activeCombat.get(0).currentActionPoints != 0) {
+                    megaLogic(activeCombat.get(0).takeTurn());
 
-
-                // while end
+                }
             } else if (combatRound % 2 == 1) {
                 megaLogic(activeCombat.get(1).takeTurn());
 
@@ -26,19 +25,38 @@ public class Combat {
             combatRound++;
         }
 
+        // end combat
+
     }
 
     public void megaLogic(CombatCard playedCard) {
 
         if (playedCard.damage != 0) {
-
+            if (combatRound%2 == 0) {
+                activeCombat.get(1).removeHealth(playedCard.damage);
+            } else if (combatRound%2 == 1) {
+                activeCombat.get(0).removeHealth(playedCard.damage);
+            }
         }
+
         if (playedCard.heal != 0) {
-
-        }
-        if (playedCard.strongDamageType != null) {
-
+            if (combatRound%2 == 0) {
+                activeCombat.get(0).addHealth(playedCard.heal);
+            } else if (combatRound%2 == 1) {
+                activeCombat.get(1).addHealth(playedCard.heal);
+            }
         }
 
     }
+
+    /*
+    public int modifier(String thisElement, String targetElement, in){
+        if(thisElement == "WATER" && Fire
+
+
+
+
+        return int;
+    }
+    */
 }
