@@ -3,11 +3,7 @@ import java.util.Random;
 
 public class Enemy extends CombatEntity{
 
-    ArrayList<CombatCard> cards ;
-    int currentActionPoints;
-    int maxActionPoints;
-
-    public Enemy(int Health, String type, ArrayList cards) {
+    public Enemy(int Health, String type, ArrayList<CombatCard> cards) {
         this.maxHealth = Health;
         this.currentHealth = Health;
         this.type = type;
@@ -15,18 +11,13 @@ public class Enemy extends CombatEntity{
 
     }
 
+    ArrayList<CombatCard> cards;
+
     @Override
     public CombatCard takeTurn() {
-
-        Random random = null;
-        int randomNum = random.nextInt(cards.size()-1);
+        Random r = new Random();
+        int randomNum = r.nextInt(cards.size());
         return cards.get(randomNum);
     }
 
-
-
-    @Override
-    public int getCurrentHealth() {
-        return currentHealth;
-    }
 }

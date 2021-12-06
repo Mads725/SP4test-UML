@@ -1,26 +1,30 @@
-import java.util.ArrayList;
-
 public class Combat {
 
-    ArrayList<CombatEntity> activeCombat = new ArrayList<>();
-    int combatRound = 0;
+    Player player;
+    Enemy activeEnemy;
+    private int combatRound; // Round counter. Even is the players turn. Odd is the enemies turn.
 
-    public Combat(CombatEntity activePlayer, CombatEntity activeEnemy) {
-        activeCombat.add(activePlayer);
-        activeCombat.add(activeEnemy);
+    public Combat(Player activePlayer, Enemy activeEnemy) {
+        this.player = activePlayer;
+        this.activeEnemy = activeEnemy;
+        this.combatRound = 0;
     }
 
-    public void startCombat() {
+    public void startCombat() { // Combat start and loop.
 
-        while(activeCombat.get(0).getCurrentHealth()>0 && activeCombat.get(1).getCurrentHealth()>0) {
+        while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) {
             if (combatRound % 2 == 0) {
-                while (activeCombat.get(0).currentActionPoints != 0) {
-                    megaLogic(activeCombat.get(0).takeTurn());
+                player.setCurrentActionPoints(player.getMaxActionPoints());
+                player.drawHand();
+
+                while (player.getCurrentActionPoints() != 0) {
+
+                    megaLogic(player.takeTurn());
 
                 }
-            } else if (combatRound % 2 == 1) {
-                megaLogic(activeCombat.get(1).takeTurn());
 
+            } else if (combatRound % 2 == 1) {
+                megaLogic(activeEnemy.takeTurn());
             }
             combatRound++;
         }
@@ -29,21 +33,21 @@ public class Combat {
 
     }
 
-    public void megaLogic(CombatCard playedCard) {
+    private void megaLogic(CombatCard playedCard) {
 
         if (playedCard.damage != 0) {
             if (combatRound%2 == 0) {
-                activeCombat.get(1).removeHealth(playedCard.damage);
+                player.removeHealth(playedCard.damage);
             } else if (combatRound%2 == 1) {
-                activeCombat.get(0).removeHealth(playedCard.damage);
+                activeEnemy.removeHealth(playedCard.damage);
             }
         }
 
         if (playedCard.heal != 0) {
             if (combatRound%2 == 0) {
-                activeCombat.get(0).addHealth(playedCard.heal);
+                player.addHealth(playedCard.heal);
             } else if (combatRound%2 == 1) {
-                activeCombat.get(1).addHealth(playedCard.heal);
+                activeEnemy.addHealth(playedCard.heal);
             }
         }
 

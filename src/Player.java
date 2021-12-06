@@ -2,33 +2,41 @@ import java.util.ArrayList;
 
 public class Player extends CombatEntity{
 
-    public ArrayList<CombatCard> playerCards = new ArrayList<>();
-    public ArrayList<CombatCard> playerHand = new ArrayList<>();
-    int currentActionPoints;
-    int maxActionPoints;
-
     public Player(int Health, int maxActionPoints) {
         this.maxActionPoints = maxActionPoints;
+        this.currentActionPoints = maxActionPoints;
         this.maxHealth = Health;
         this.currentHealth = Health;
 
-        generatePlayerCards(); // Generates 20 standard cards for the player to use.
+        generatePlayerCards(); // Generates 14 standard cards for the player to use.
     }
+
+    public ArrayList<CombatCard> playerCards = new ArrayList<>();
+    public ArrayList<CombatCard> playerHand = new ArrayList<>();
 
     @Override
     public CombatCard takeTurn() {
 
         // update GUI
 
-        return playerHand.get(0);
+        //Button play card 0
+        //Button play card 1
+        //Button play card 2
+        //Button play card 3
+        //Button play card 4
 
+        //Button next turn (sets actionPoints to 0)
+
+
+        playerCards.add(playerHand.get(0));
+        return playerHand.get(0);
     }
 
-
-
-    @Override
-    public int getCurrentHealth() {
-        return currentHealth;
+    public void drawHand() {
+        while(playerHand.size()<Balance.MAX_HAND_SIZE) {
+            playerHand.add(playerCards.get(0));
+            playerCards.remove(0);
+        }
     }
 
     private void generatePlayerCards() {

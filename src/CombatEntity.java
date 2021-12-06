@@ -1,11 +1,13 @@
 public abstract class CombatEntity {
 
-int currentHealth;
-int maxHealth;
-String type;
-int currentActionPoints;
+    int currentHealth;
+    int maxHealth;
+    int currentActionPoints;
+    int maxActionPoints;
+    String type;
 
-abstract public CombatCard takeTurn();
+    abstract public CombatCard takeTurn();
+
 
     public void addHealth(int heal) {
         currentHealth = currentHealth + heal;
@@ -16,9 +18,17 @@ abstract public CombatCard takeTurn();
     public void removeHealth(int damage) {
         currentHealth = currentHealth - damage;
     }
-
-abstract public int getCurrentHealth();
-
-
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+    public void setCurrentActionPoints(int currentActionPoints) {
+        this.currentActionPoints = currentActionPoints;
+    }
+    public int getCurrentActionPoints() {
+        return currentActionPoints;
+    }
+    public int getMaxActionPoints() {
+        return maxActionPoints;
+    }
 }
 
