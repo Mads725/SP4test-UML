@@ -36,12 +36,6 @@ public class Player extends CombatEntity{
         GameController.frame.repaint();
 
 
-
-
-
-
-
-
             //Button play card 0
             //Button play card 1
             //Button play card 2
@@ -52,8 +46,8 @@ public class Player extends CombatEntity{
             //usedCard = playerHand.get(0);
 
         
-        //playerCards.add(playerHand.get(0));
-        //playerHand.remove(0);
+        playerCards.add(playerHand.get(0));
+        playerHand.remove(0);
         // Update GUI missing
         //System.out.println(usedCard);
         return usedCard;

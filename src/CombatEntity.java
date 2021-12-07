@@ -8,16 +8,18 @@ public abstract class CombatEntity {
 
     abstract public CombatCard takeTurn();
 
-    public void addHealth(int heal) {
+    public void addHealth(int heal) { // Adds health when damage is healed.
         currentHealth = currentHealth + heal;
         if (currentHealth > maxHealth) {
             currentHealth = maxHealth;
         }
     }
 
-    public void removeHealth(int damage) {
+    public void removeHealth(int damage) { // Removes health when damage is taken.
         currentHealth = currentHealth - damage;
     }
+
+    // -------------------------- Getters and setters ---------------------------------------
 
     public int getCurrentHealth() {
         return currentHealth;

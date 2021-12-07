@@ -16,7 +16,7 @@ public class Combat {
 
         while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) {
             if (combatRound % 2 == 0) {
-                System.out.print("Player turn: ");
+                System.out.println("Player turn: ");
                 player.setCurrentActionPoints(player.getMaxActionPoints());
                 player.drawHand();
 
@@ -27,14 +27,12 @@ public class Combat {
                 }
 
             } else if (combatRound % 2 == 1) {
-                System.out.print("Enemy turn: ");
+                System.out.println("Enemy turn: ");
                 megaLogic(activeEnemy.takeTurn());
             }
             combatRound++;
             System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
         }
-
-        // end combat
 
     }
 
@@ -66,18 +64,14 @@ public class Combat {
                     activeEnemy.setCurrentActionPoints(activeEnemy.getCurrentActionPoints() -
                             playedCard.actionPointsCost);
                 }
-
             }
         }
 
-    }
-
+    }// megaLogic end
 
     public int modifier(String thisElement, String targetElement, int damage){
         if((thisElement == "WATER" && targetElement == "FIRE")||(thisElement=="FIRE"&& targetElement=="GRASS")||(thisElement=="GRASS" && targetElement=="WATER"))
         damage=damage*2;
-
-
 
         return damage;
     }

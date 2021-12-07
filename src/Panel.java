@@ -11,6 +11,9 @@ public class Panel extends JPanel {
         setBounds(0, 1200, 1200, 200);
         drawHand(player.playerCards);
     }
+    public Panel() {
+
+    }
 
     public ArrayList<CardLabel> drawHand(ArrayList<CombatCard> hand) {
         ArrayList<CardLabel> cards = new ArrayList<>();

@@ -24,9 +24,10 @@ public class GameController {
             combat.startCombat();
             randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
             Layer++;
+
         }
 
-        //game over high score? Layer?
+        System.out.println("Score: " + Layer);
 
     }
     public void runOverview(){
@@ -54,6 +55,5 @@ public class GameController {
 
 
     }
-
-
+    
 }
