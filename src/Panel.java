@@ -3,26 +3,38 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel extends JPanel {
-
+    static ArrayList<CardLabel> hand = new ArrayList<>();
     Player player;
 
     public Panel(Player player) {
         this.player = player;
         setBounds(0, 1200, 1200, 200);
+        Label label = new Label("this is a label");
+        add(label);
 
     }
 
-    public ArrayList<CardLabel> drawHand(ArrayList<CombatCard> hand) {
-        ArrayList<CardLabel> cards = new ArrayList<>();
+    public void drawHand() {
+
         int x = 100;
-        for (CombatCard card : hand) {
-            CardLabel cardLabel = new CardLabel(card);
-            cardLabel.setBounds(x, 0, 50, 100);
-            cards.add(cardLabel);
+        for (CardLabel card : hand) {
+            card.setBounds(x, 0, 50, 100);
             x += 50;
-            this.add(cardLabel);
+            this.add(card);
         }
-        return cards;
+        //return cards;
+    }
+
+    public void updateHand() {
+        for (CardLabel card : hand) {
+            remove(card);
+        }
+        hand.clear();
+        for (CombatCard card : player.playerHand) {
+            CardLabel tempCard = new CardLabel(card);
+            hand.add(tempCard);
+            add(tempCard);
+        }
     }
 
 }

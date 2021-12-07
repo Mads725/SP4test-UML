@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class GameController {
 
-    static Player player;
+    static final Player player = new Player(Balance.MAX_PLAYER_HEALTH,Balance.MAX_ACTION_POINTS); // Player creation;
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private int Layer = 0; //number of combats completed.
@@ -12,9 +12,11 @@ public class GameController {
 
         generateEnemies(); // Generates the enemies the player will face
 
-        player = new Player(Balance.MAX_PLAYER_HEALTH,Balance.MAX_ACTION_POINTS); // Player creation
+
         frame = new Frame(player);
 
+
+        //GamePlay loop
         while(player.getCurrentHealth() > 0) { //TODO something empty, fill it again or avoid error.
 
             Random r = new Random();
