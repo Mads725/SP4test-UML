@@ -9,7 +9,7 @@ public class Panel extends JPanel {
     public Panel(Player player) {
         this.player = player;
         setBounds(0, 1200, 1200, 200);
-        drawHand(player.playerCards);
+
     }
 
     public ArrayList<CardLabel> drawHand(ArrayList<CombatCard> hand) {

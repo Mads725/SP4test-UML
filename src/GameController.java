@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class GameController {
 
-    Player player;
+    static Player player;
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private int Layer = 0; //number of combats completed.

@@ -22,7 +22,10 @@ public class Combat {
 
                 while (player.getCurrentActionPoints()  >= 0) {
 
-                    megaLogic(player.takeTurn());
+
+                        megaLogic(player.takeTurn());
+
+
 
                 }
 

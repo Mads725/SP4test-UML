@@ -24,7 +24,7 @@ public class CardLabel extends JLabel implements MouseListener {
             setBackground(Color.green);
         if (card.getElement() == "FIRE"){
             setBackground(Color.red);}
-        setSize(50,100);
+        setSize(100,200);
         addMouseListener(this);
         setOpaque(true);
         setVisible(true);
@@ -34,9 +34,12 @@ public class CardLabel extends JLabel implements MouseListener {
     public void mouseClicked(MouseEvent e){
 
         //Do the thing
+        Player.setUsedCard(card);
+        synchronized (GameController.player){
+            GameController.player.notifyAll();
+        }
+        }
 
-
-    }
 
     @Override
     public void mousePressed(MouseEvent e) {

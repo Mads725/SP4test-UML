@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player extends CombatEntity{
+    static CombatCard usedCard;
+
 
     public Player(int Health, int maxActionPoints) {
         this.setMaxActionPoints(maxActionPoints);
@@ -18,10 +20,10 @@ public class Player extends CombatEntity{
     @Override
     public CombatCard takeTurn() {
 
-        CombatCard usedCard = null;
 
+        int counter = 0;
         System.out.println(playerHand.get(0));
-
+        usedCard = playerHand.get(0);
         CardLabel cl1 = new CardLabel(playerHand.get(0));
         GameController.frame.add(cl1);
         CardLabel cl2 = new CardLabel(playerHand.get(1));
@@ -34,12 +36,14 @@ public class Player extends CombatEntity{
         GameController.frame.add(cl5);
 
         GameController.frame.repaint();
-
-
-
-
-
-
+        synchronized(this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("e");
+            }
+        }
+        System.out.println("check");
 
 
             //Button play card 0
@@ -96,4 +100,10 @@ public class Player extends CombatEntity{
         CombatCard majorHeal = new CombatCard(10, "Major heal", "Heals 10 hp",  2);
         playerCards.add(majorHeal);
     }
+
+    public static void setUsedCard(CombatCard usedCard) {
+        Player.usedCard = usedCard;
+
+    }
+
 }
