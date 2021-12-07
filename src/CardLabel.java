@@ -5,12 +5,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class CardLabel extends JLabel implements MouseListener {
-    int sizeX = 100, sizeY = 200;;
+    int sizeX = 100, sizeY = 200;
+    ;
 
     CombatCard card;
 
     public CardLabel(CombatCard card) {
-        Border border = BorderFactory.createLineBorder(Color.BLACK,3);
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
         this.card = card;
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
@@ -22,23 +23,24 @@ public class CardLabel extends JLabel implements MouseListener {
             setBackground(Color.blue);
         if (card.getElement() == "GRASS")
             setBackground(Color.green);
-        if (card.getElement() == "FIRE"){
-            setBackground(Color.red);}
-        setSize(100,200);
+        if (card.getElement() == "FIRE") {
+            setBackground(Color.red);
+        }
+        setSize(100, 200);
         addMouseListener(this);
         setOpaque(true);
         setVisible(true);
     }
 
     @Override
-    public void mouseClicked(MouseEvent e){
+    public void mouseClicked(MouseEvent e) {
 
         //Do the thing
         Player.setUsedCard(card);
-        synchronized (GameController.player){
+        synchronized (GameController.player) {
             GameController.player.notifyAll();
         }
-        }
+    }
 
 
     @Override

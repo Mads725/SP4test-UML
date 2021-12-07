@@ -10,10 +10,10 @@ public class Frame extends JFrame {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.player = player;
-        setLayout(null);
+        this.setLayout(null);
         this.setLocationRelativeTo((Component) null);
         this.setVisible(true);
-        setResizable(false);
+        this.setResizable(false);
         this.setSize(1200, 800);
 
         panel = new Panel(player);

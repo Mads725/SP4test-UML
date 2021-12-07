@@ -24,9 +24,11 @@ public class Player extends CombatEntity{
         int counter = 0;
         System.out.println(playerHand.get(0));
         usedCard = playerHand.get(0);
+        /*
         CardLabel cl1 = new CardLabel(playerHand.get(0));
         GameController.frame.add(cl1);
         CardLabel cl2 = new CardLabel(playerHand.get(1));
+        cl2.setBounds(100,0,100,200);
         GameController.frame.add(cl2);
         CardLabel cl3 = new CardLabel(playerHand.get(2));
         GameController.frame.add(cl3);
@@ -34,7 +36,9 @@ public class Player extends CombatEntity{
         GameController.frame.add(cl4);
         CardLabel cl5 = new CardLabel(playerHand.get(4));
         GameController.frame.add(cl5);
-
+        */
+        GameController.frame.panel.updateHand();
+        GameController.frame.panel.drawHand();
         GameController.frame.repaint();
         synchronized(this) {
             try {
