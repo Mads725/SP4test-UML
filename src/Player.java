@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player extends CombatEntity{
 
     public Player(int Health, int maxActionPoints) {
-        this.maxActionPoints = maxActionPoints;
-        this.currentActionPoints = maxActionPoints;
-        this.maxHealth = Health;
-        this.currentHealth = Health;
+        this.setMaxActionPoints(maxActionPoints);
+        this.setCurrentActionPoints(maxActionPoints);
+        this.setMaxHealth(Health);
+        this.setCurrentHealth(Health);
 
         generatePlayerCards(); // Generates 14 standard cards for the player to use.
     }
@@ -17,19 +18,49 @@ public class Player extends CombatEntity{
     @Override
     public CombatCard takeTurn() {
 
-        // update GUI
+        CombatCard usedCard = null;
 
-        //Button play card 0
-        //Button play card 1
-        //Button play card 2
-        //Button play card 3
-        //Button play card 4
+        System.out.println(playerHand.get(0));
 
-        //Button next turn (sets actionPoints to 0)
+        CardLabel cl1 = new CardLabel(playerHand.get(0));
+        GameController.frame.add(cl1);
+        CardLabel cl2 = new CardLabel(playerHand.get(1));
+        GameController.frame.add(cl2);
+        CardLabel cl3 = new CardLabel(playerHand.get(2));
+        GameController.frame.add(cl3);
+        CardLabel cl4 = new CardLabel(playerHand.get(3));
+        GameController.frame.add(cl4);
+        CardLabel cl5 = new CardLabel(playerHand.get(4));
+        GameController.frame.add(cl5);
+
+        GameController.frame.repaint();
 
 
-        playerCards.add(playerHand.get(0));
-        return playerHand.get(0);
+
+
+
+
+
+
+            //Button play card 0
+            //Button play card 1
+            //Button play card 2
+            //Button play card 3
+            //Button play card 4
+
+            //Button next turn (sets actionPoints to 0)
+            //usedCard = playerHand.get(0);
+
+        
+        //playerCards.add(playerHand.get(0));
+        //playerHand.remove(0);
+        // Update GUI missing
+        //System.out.println(usedCard);
+        return usedCard;
+    }
+
+    public void shuffleDeck() {
+        Collections.shuffle(playerCards);
     }
 
     public void drawHand() {
@@ -37,6 +68,7 @@ public class Player extends CombatEntity{
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
         }
+        // Update GUI missing
     }
 
     private void generatePlayerCards() {
@@ -62,7 +94,6 @@ public class Player extends CombatEntity{
         playerCards.add(heal);
         playerCards.add(heal);
         CombatCard majorHeal = new CombatCard(10, "Major heal", "Heals 10 hp",  2);
-        playerCards.add(majorHeal);
         playerCards.add(majorHeal);
     }
 }
