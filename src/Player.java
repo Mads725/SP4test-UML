@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Player extends CombatEntity{
     static CombatCard usedCard;
 
 
     public Player(int Health, int maxActionPoints) {
+        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter name:");
+        setName(scanner.nextLine());
         this.setMaxActionPoints(maxActionPoints);
         this.setCurrentActionPoints(maxActionPoints);
         this.setMaxHealth(Health);
@@ -79,26 +83,26 @@ public class Player extends CombatEntity{
     private void generatePlayerCards() {
         //( int damage, String element, String cardName, String cardText,int actionPointsCost)
         //( int hea, String cardName, String cardText,int actionPointsCost)
-        CombatCard fireball = new CombatCard(5, "FIRE", "Fireball", "Deals 5 fire damage", 1);
+        CombatCard fireball = new CombatCard(4, "FIRE", "Fireball", "Deals 4 fire damage", 1);
         playerCards.add(fireball);
         playerCards.add(fireball);
-        CombatCard iceBlast = new CombatCard(5, "WATER", "Ice blast", "Deals 5 water damage", 1);
+        CombatCard iceBlast = new CombatCard(4, "WATER", "Ice blast", "Deals 4 water damage", 1);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
-        CombatCard overgrowth = new CombatCard(5, "GRASS", "Overgrowth", "Deals 5 grass damage", 1);
+        CombatCard overgrowth = new CombatCard(4, "GRASS", "Overgrowth", "Deals 4 grass damage", 1);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
-        CombatCard inferno = new CombatCard(12, "FIRE", "Inferno", "Deals 12 fire damage", 2);
+        CombatCard inferno = new CombatCard(10, "FIRE", "Inferno", "Deals 10 fire damage", 2);
         playerCards.add(inferno);
-        CombatCard surf = new CombatCard(12, "WATER", "Surf", "Deals 12 water damage", 2);
+        CombatCard surf = new CombatCard(10, "WATER", "Surf", "Deals 10 water damage", 2);
         playerCards.add(surf);
-        CombatCard earthquake = new CombatCard(12, "GRASS", "Earthquake", "Deals 12 grass damage", 2);
+        CombatCard earthquake = new CombatCard(10, "GRASS", "Earthquake", "Deals 10 grass damage", 2);
         playerCards.add(earthquake);
-        CombatCard heal = new CombatCard(4, "Heal", "Heals 4 hp",  1);
+        CombatCard heal = new CombatCard(3, "Heal", "Heals 3 hp",  1);
         playerCards.add(heal);
         playerCards.add(heal);
         playerCards.add(heal);
-        CombatCard majorHeal = new CombatCard(10, "Major heal", "Heals 10 hp",  2);
+        CombatCard majorHeal = new CombatCard(8, "Major heal", "Heals 8 hp",  2);
         playerCards.add(majorHeal);
     }
 
