@@ -57,8 +57,8 @@ public class Player extends CombatEntity{
             //usedCard = playerHand.get(0);
 
         
-        playerCards.add(playerHand.get(0));
-        playerHand.remove(0);
+
+
         // Update GUI missing
         //System.out.println(usedCard);
         return usedCard;
