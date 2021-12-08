@@ -45,7 +45,7 @@ public class Combat {
 
         if (playedCard.damage != 0) {
             if (combatRound%2 == 0) {
-                activeEnemy.removeHealth(playedCard.damage);
+                activeEnemy.removeHealth(modifier(playedCard.getElement(), activeEnemy.getElement(), playedCard.damage));
             } else if (combatRound%2 == 1) {
                 player.removeHealth(playedCard.damage);
             }
@@ -75,14 +75,10 @@ public class Combat {
 
     }
 
-    /*
-    public int modifier(String thisElement, String targetElement, in){
-        if(thisElement == "WATER" && Fire
+    public int modifier(String thisElement, String targetElement, int damage){
+        if((thisElement.equals("WATER") && targetElement.equals("FIRE"))||(thisElement.equals("FIRE") && targetElement.equals("GRASS"))||(thisElement.equals("GRASS") && targetElement.equals("WATER")))
+            damage=damage*2;
 
-
-
-
-        return int;
+        return damage;
     }
-    */
 }
