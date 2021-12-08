@@ -48,14 +48,11 @@ public class Player extends CombatEntity{
                 System.out.println("e");
             }
         }
-        System.out.println("check");
+
+        //Used card returns to deck
 
 
-            //Button play card 0
-            //Button play card 1
-            //Button play card 2
-            //Button play card 3
-            //Button play card 4
+
 
             //Button next turn (sets actionPoints to 0)
             //usedCard = playerHand.get(0);
@@ -112,6 +109,7 @@ public class Player extends CombatEntity{
     }
 
     public void removeCardFromHand(int index){
+        playerCards.add(playerHand.get(index));
         playerHand.remove(index);
 
 

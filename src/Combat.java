@@ -23,9 +23,9 @@ public class Combat {
                 while (player.getCurrentActionPoints()  >= 0) {
 
 
-                        megaLogic(player.takeTurn());
-
-
+                    CombatCard usedCard = player.takeTurn();
+                    if (usedCard !=null)
+                        megaLogic(usedCard);
 
                 }
 
