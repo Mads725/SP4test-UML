@@ -1,3 +1,5 @@
+package Test;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -6,7 +8,7 @@ import java.awt.event.MouseListener;
 
 public class CardLabel extends JLabel implements MouseListener {
     int sizeX = 100, sizeY = 200;
-    int index;
+    ;
 
     CombatCard card;
 
@@ -36,11 +38,10 @@ public class CardLabel extends JLabel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         //Do the thing
-        GameController.player.setUsedCard(card);
+        Player.setUsedCard(card);
         synchronized (GameController.player) {
             GameController.player.notifyAll();
         }
-        GameController.player.removeCardFromHand(index);
     }
 
 

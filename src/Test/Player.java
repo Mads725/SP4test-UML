@@ -1,7 +1,9 @@
+package Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player extends CombatEntity{
+public class Player extends CombatEntity {
     static CombatCard usedCard;
 
 
@@ -73,7 +75,7 @@ public class Player extends CombatEntity{
     }
 
     public void drawHand() {
-        while(playerHand.size()<Balance.MAX_HAND_SIZE) {
+        while(playerHand.size()< Balance.MAX_HAND_SIZE) {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
         }
@@ -106,14 +108,8 @@ public class Player extends CombatEntity{
         playerCards.add(majorHeal);
     }
 
-    public void setUsedCard(CombatCard usedCard) {
+    public static void setUsedCard(CombatCard usedCard) {
         Player.usedCard = usedCard;
-
-    }
-
-    public void removeCardFromHand(int index){
-        playerHand.remove(index);
-
 
     }
 

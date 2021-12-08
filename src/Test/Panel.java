@@ -1,5 +1,6 @@
+package Test;
+
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel extends JPanel {
@@ -28,13 +29,10 @@ public class Panel extends JPanel {
             remove(card);
         }
         hand.clear();
-        int index =0;
         for (CombatCard card : player.playerHand) {
             CardLabel tempCard = new CardLabel(card);
-            tempCard.index = index;
             hand.add(tempCard);
             add(tempCard);
-            index++;
         }
     }
 
