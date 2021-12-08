@@ -3,7 +3,8 @@ import java.util.Random;
 
 public class Enemy extends CombatEntity{
 
-    public Enemy(int Health, String element, ArrayList<CombatCard> cards) {
+    public Enemy(String name, int Health, String element, ArrayList<CombatCard> cards) {
+        this.setName(name);
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
         this.setElement(element);
@@ -16,7 +17,7 @@ public class Enemy extends CombatEntity{
     public CombatCard takeTurn() { // The enemy takes its turn by playing one card from its cards, chosen randomly.
         Random r = new Random();
         int randomNum = r.nextInt(cards.size());
-        System.out.println(cards.get(randomNum));
+       // System.out.println(cards.get(randomNum));
         return cards.get(randomNum);
     }
 

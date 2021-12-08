@@ -5,6 +5,7 @@ public abstract class CombatEntity {
     private int currentActionPoints;
     private int maxActionPoints;
     private String element;
+    private String name;
 
     abstract public CombatCard takeTurn();
 
@@ -59,6 +60,14 @@ public abstract class CombatEntity {
 
     public String getElement() {
         return element;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
