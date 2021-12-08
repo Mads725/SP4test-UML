@@ -1,25 +1,25 @@
+package Test;
+
 public abstract class CombatEntity {
 
     private int currentHealth;
     private int maxHealth;
     private int currentActionPoints;
     private int maxActionPoints;
-    private String element;
+    private String type;
 
     abstract public CombatCard takeTurn();
 
-    public void addHealth(int heal) { // Adds health when damage is healed.
+    public void addHealth(int heal) {
         currentHealth = currentHealth + heal;
         if (currentHealth > maxHealth) {
             currentHealth = maxHealth;
         }
     }
 
-    public void removeHealth(int damage) { // Removes health when damage is taken.
+    public void removeHealth(int damage) {
         currentHealth = currentHealth - damage;
     }
-
-    // -------------------------- Getters and setters ---------------------------------------
 
     public int getCurrentHealth() {
         return currentHealth;
@@ -49,16 +49,16 @@ public abstract class CombatEntity {
         this.maxActionPoints = maxActionPoints;
     }
 
-    public void setElement(String element) {
-        this.element = element;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getMaxHealth() {
         return maxHealth;
     }
 
-    public String getElement() {
-        return element;
+    public String getType() {
+        return type;
     }
 }
 

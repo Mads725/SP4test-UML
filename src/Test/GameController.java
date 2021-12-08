@@ -1,9 +1,11 @@
+package Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GameController {
 
-    static final Player player = new Player(Balance.MAX_PLAYER_HEALTH,Balance.MAX_ACTION_POINTS); // Player creation;
+    static final Player player = new Player(Balance.MAX_PLAYER_HEALTH, Balance.MAX_ACTION_POINTS); // Player creation;
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private int Layer = 0; //number of combats completed.
@@ -26,10 +28,9 @@ public class GameController {
             combat.startCombat();
             randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
             Layer++;
-
         }
 
-        System.out.println("Score: " + Layer);
+        //game over high score? Layer?
 
     }
     public void runOverview(){
@@ -57,5 +58,6 @@ public class GameController {
 
 
     }
-    
+
+
 }

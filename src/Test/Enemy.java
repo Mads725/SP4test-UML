@@ -1,12 +1,14 @@
+package Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends CombatEntity{
+public class Enemy extends CombatEntity {
 
-    public Enemy(int Health, String element, ArrayList<CombatCard> cards) {
+    public Enemy(int Health, String type, ArrayList<CombatCard> cards) {
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
-        this.setElement(element);
+        this.setType(type);
         this.cards = cards;
     }
 

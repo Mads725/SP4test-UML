@@ -1,7 +1,9 @@
+package Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player extends CombatEntity{
+public class Player extends CombatEntity {
     static CombatCard usedCard;
 
 
@@ -48,17 +50,21 @@ public class Player extends CombatEntity{
                 System.out.println("e");
             }
         }
+        System.out.println("check");
 
-        //Used card returns to deck
 
-
+            //Button play card 0
+            //Button play card 1
+            //Button play card 2
+            //Button play card 3
+            //Button play card 4
 
             //Button next turn (sets actionPoints to 0)
             //usedCard = playerHand.get(0);
 
         
-        playerCards.add(playerHand.get(0));
-        playerHand.remove(0);
+        //playerCards.add(playerHand.get(0));
+        //playerHand.remove(0);
         // Update GUI missing
         //System.out.println(usedCard);
         return usedCard;
@@ -69,7 +75,7 @@ public class Player extends CombatEntity{
     }
 
     public void drawHand() {
-        while(playerHand.size()<Balance.MAX_HAND_SIZE) {
+        while(playerHand.size()< Balance.MAX_HAND_SIZE) {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
         }
@@ -102,15 +108,8 @@ public class Player extends CombatEntity{
         playerCards.add(majorHeal);
     }
 
-    public void setUsedCard(CombatCard usedCard) {
+    public static void setUsedCard(CombatCard usedCard) {
         Player.usedCard = usedCard;
-
-    }
-
-    public void removeCardFromHand(int index){
-        playerCards.add(playerHand.get(index));
-        playerHand.remove(index);
-
 
     }
 
