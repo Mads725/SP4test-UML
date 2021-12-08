@@ -3,8 +3,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Frame extends JFrame {
-    Panel panel;
+    PlayersHandPanel panel;
     Player player;
+    CombatPanel combatPanel;
+
 
     public Frame(Player player) {
 
@@ -14,10 +16,11 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo((Component) null);
         this.setVisible(true);
         this.setResizable(false);
-        this.setSize(1200, 800);
+        this.setSize(1200, 900);
 
-        panel = new Panel(player);
-        panel.setBounds(0,getHeight()-300,getWidth(),300);
+        panel = new PlayersHandPanel(player);
+        panel.setBounds(0,getHeight()-400,getWidth(),400);
+        panel.setPreferredSize( new Dimension(1200,400));
         this.add(panel);
 
 
@@ -38,4 +41,14 @@ public class Frame extends JFrame {
         return cardLabels;
     }
 
+    public void setCombatPanel(Combat combat) {
+        combatPanel = new CombatPanel(combat);
+        //combatPanel.setBounds(0,0,getWidth(),500);
+        combatPanel.setSize(new Dimension(getWidth(),500));
+        add(combatPanel);
+
+    }
+    public void removeCombatPanel() {
+        remove(combatPanel);
+    }
 }

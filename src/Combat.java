@@ -11,7 +11,7 @@ public class Combat {
     }
 
     public void startCombat() { // Combat start and loop.
-
+        GameController.frame.setCombatPanel(this);
         player.shuffleDeck();
 
         while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) {
@@ -37,6 +37,7 @@ public class Combat {
             System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
         }
 
+        GameController.frame.removeCombatPanel();
     }
 
     private void megaLogic(CombatCard playedCard) {
@@ -83,5 +84,8 @@ public class Combat {
 
         return damage;
     }
+
+
+
 
 }

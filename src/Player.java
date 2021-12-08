@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player extends CombatEntity{
+public class Player extends CombatEntity {
     static CombatCard usedCard;
 
 
@@ -23,25 +23,14 @@ public class Player extends CombatEntity{
 
         int counter = 0;
 
-        usedCard = playerHand.get(0);
-        /*
-        CardLabel cl1 = new CardLabel(playerHand.get(0));
-        GameController.frame.add(cl1);
-        CardLabel cl2 = new CardLabel(playerHand.get(1));
-        cl2.setBounds(100,0,100,200);
-        GameController.frame.add(cl2);
-        CardLabel cl3 = new CardLabel(playerHand.get(2));
-        GameController.frame.add(cl3);
-        CardLabel cl4 = new CardLabel(playerHand.get(3));
-        GameController.frame.add(cl4);
-        CardLabel cl5 = new CardLabel(playerHand.get(4));
-        GameController.frame.add(cl5);
-        */
+        usedCard = null;
+
         GameController.frame.panel.updateHand();
         GameController.frame.panel.drawHand();
         GameController.frame.repaint();
-        System.out.println(playerHand);
-        synchronized(this) {
+        //System.out.println(playerHand);
+        //wait for player input though gui
+        synchronized (this) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
@@ -52,11 +41,8 @@ public class Player extends CombatEntity{
         //Used card returns to deck
 
 
-
-            //Button next turn (sets actionPoints to 0)
-            //usedCard = playerHand.get(0);
-
-        
+        //Button next turn (sets actionPoints to 0)
+        //usedCard = playerHand.get(0);
 
 
         // Update GUI missing
@@ -69,7 +55,7 @@ public class Player extends CombatEntity{
     }
 
     public void drawHand() {
-        while(playerHand.size()<Balance.MAX_HAND_SIZE) {
+        while (playerHand.size() < Balance.MAX_HAND_SIZE) {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
         }
@@ -94,11 +80,11 @@ public class Player extends CombatEntity{
         playerCards.add(surf);
         CombatCard earthquake = new CombatCard(12, "GRASS", "Earthquake", "Deals 12 grass damage", 2);
         playerCards.add(earthquake);
-        CombatCard heal = new CombatCard(4, "Heal", "Heals 4 hp",  1);
+        CombatCard heal = new CombatCard(4, "Heal", "Heals 4 hp", 1);
         playerCards.add(heal);
         playerCards.add(heal);
         playerCards.add(heal);
-        CombatCard majorHeal = new CombatCard(10, "Major heal", "Heals 10 hp",  2);
+        CombatCard majorHeal = new CombatCard(10, "Major heal", "Heals 10 hp", 2);
         playerCards.add(majorHeal);
     }
 
@@ -107,11 +93,17 @@ public class Player extends CombatEntity{
 
     }
 
-    public void removeCardFromHand(int index){
-        playerCards.add(playerHand.get(index));
-        playerHand.remove(index);
+    public void removeCardFromHand(int index) {
+        try {
+            playerCards.add(playerHand.get(index));
+            playerHand.remove(index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getCause());
 
-
+        }
     }
 
+
 }
+
+

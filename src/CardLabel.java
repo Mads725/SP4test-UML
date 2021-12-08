@@ -4,21 +4,24 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class CardLabel extends JLabel implements MouseListener {
+public class CardLabel extends JButton implements MouseListener {
     int sizeX = 100, sizeY = 200;
     int index;
 
     CombatCard card;
 
     public CardLabel(CombatCard card) {
+        setOpaque(true);
+        setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
+        String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
         this.card = card;
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         this.setHorizontalTextPosition(JLabel.CENTER);
 
-        this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
-
+        //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
+        setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == "WATER")
             setBackground(Color.blue);
         if (card.getElement() == "GRASS")
@@ -26,21 +29,28 @@ public class CardLabel extends JLabel implements MouseListener {
         if (card.getElement() == "FIRE") {
             setBackground(Color.red);
         }
-        setSize(200, 300);
+        this.setSize(200, 300);
+        this.setPreferredSize(new Dimension(200,300));
         addMouseListener(this);
-        setOpaque(true);
-        setVisible(true);
+
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
         //Do the thing
+
+        if( GameController.player.getCurrentActionPoints() >= card.actionPointsCost){
         GameController.player.setUsedCard(card);
         synchronized (GameController.player) {
             GameController.player.notifyAll();
         }
-        GameController.player.removeCardFromHand(index);
+        GameController.player.removeCardFromHand(index);}
+        else{
+            //todo: drawtheActionPoints
+            System.out.println("not enough action points");
+
+        }
     }
 
 
