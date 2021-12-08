@@ -19,7 +19,7 @@ public class CombatPanel extends JPanel {
 
         g2d.drawString("Action points: " + combat.player.getCurrentActionPoints(), 100,50);
 
-       // g2d.drawString(combat.activeEnemy.name);
+        g2d.drawString(combat.activeEnemy.getName(), Width-160,40);
         g2d.drawString("Element: " + combat.activeEnemy.getElement(), Width -160, 50 );
 
         //g2d.setBackground( Color.gray);
