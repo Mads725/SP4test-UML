@@ -23,17 +23,38 @@ public class GameController {
         while (player.getCurrentHealth() > 0) { //TODO something empty, fill it again or avoid error.
             Random r = new Random();
             if (layer == 5 || layer == 10) {
-
+                layer++;
             } else {
                 int randomNum = r.nextInt(randomEnemies.size());
                 System.out.println(randomEnemies.get(randomNum).getName());
                 Combat combat = new Combat(player, randomEnemies.get(randomNum));
                 combat.startCombat();
                 randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
+
+                //OnceCombatFinishes Close combat and open reward screen
+                frame.removeHandPanel();
+                frame.removeCombatPanel();
+                CombatCard[] rewards = rewardCards(generateRewardCards());
+                frame.setRewardScreen(rewards[0],rewards[1],rewards[2], this);
+                frame.repaint();
+                //wait for player input
+                synchronized (this) {
+                    try {
+                        System.out.println("lol");
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        System.out.println("e");
+
+                    }
+                }
+                frame.removeRewardScreen();
+                //open OverView
+
+
                 layer++;
             }
         }
-
+        //Lose game
         System.out.println("Score: " + layer);
 
     }
@@ -52,7 +73,7 @@ public class GameController {
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireTornado);
         enemy1Cards.add(fireIntensity);
-        Enemy enemy1 = new Enemy("Fire Lizard", 90, "FIRE", enemy1Cards);
+        Enemy enemy1 = new Enemy("Fire Lizard", 1, "FIRE", enemy1Cards);
         randomEnemies.add(enemy1);
 
         CombatCard eatBanana = new CombatCard(6, "Eat Banana", "Heals 6 hp", 1);
@@ -64,7 +85,7 @@ public class GameController {
         enemy2Cards.add(throwBanana);
         enemy2Cards.add(eatBanana);
         enemy2Cards.add(throwBananaHarder);
-        Enemy enemy2 = new Enemy("Monkey", 100, "EARTH", enemy2Cards);
+        Enemy enemy2 = new Enemy("Monkey", 1, "EARTH", enemy2Cards);
         randomEnemies.add(enemy2);
 
         CombatCard regenerate = new CombatCard(8, "Regenerate", "Heals 8 hp", 1);
@@ -76,7 +97,7 @@ public class GameController {
         enemy3Cards.add(regenerate);
         enemy3Cards.add(regenerate);
         enemy3Cards.add(drench);
-        Enemy enemy3 = new Enemy("Fish", 70, "WATER", enemy3Cards);
+        Enemy enemy3 = new Enemy("Fish", 1, "WATER", enemy3Cards);
         randomEnemies.add(enemy3);
     }
     public void generateBosses(){
@@ -88,22 +109,21 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(spores);
         bossCards.add(halloween);
-        Boss boss1 = new Boss("Pumpkin Man",140,"EARTH", bossCards,3);
+        Boss boss1 = new Boss("Pumpkin Man",1,"EARTH", bossCards,3);
         bosses.add(boss1);
     }
 
-    public void rewardCards(ArrayList<CombatCard> rewardCards) {
+    public CombatCard[] rewardCards(ArrayList<CombatCard> rewardCards) {
         Collections.shuffle(rewardCards);
         CombatCard rewardOption1=rewardCards.get(0);
         CombatCard rewardOption2=rewardCards.get(1);
         CombatCard rewardOption3=rewardCards.get(2);
+        CombatCard[] rewards = {rewardOption1, rewardOption2, rewardOption3};
+        return rewards;
 
-
-        //CombatCard rewardCard=rewardCards.get(?);
-        //player.playerCards.add(rewardCard);
     }
 
-    public void generateRewardCards() {
+    public ArrayList<CombatCard> generateRewardCards() {
         ArrayList<CombatCard> rewardCards = new ArrayList<>();
         CombatCard meteor = new CombatCard(20, "FIRE", "Meteor", "Deals 20 fire damage", 3);
         CombatCard heat = new CombatCard(7, "Heat", "Heals 7 hp, +1 actionpoint next turn", 2, -1);
@@ -131,5 +151,15 @@ public class GameController {
         rewardCards.add(rain);
         rewardCards.add(healingWater);
         rewardCards.add(boulder);
+
+        return rewardCards;
+    }
+
+
+    public void notifyGC(){
+        synchronized (this) {
+            this.notifyAll();
+        }
+
     }
 }

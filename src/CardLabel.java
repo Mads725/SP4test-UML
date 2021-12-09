@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 public class CardLabel extends JButton implements MouseListener {
     int sizeX = 100, sizeY = 200;
     int index;
-
     CombatCard card;
 
     public CardLabel(CombatCard card) {
@@ -21,7 +20,7 @@ public class CardLabel extends JButton implements MouseListener {
         this.setHorizontalTextPosition(JLabel.CENTER);
 
         //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
-        setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+        setText("<html>" + string.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == "WATER")
             setBackground(Color.blue);
         if (card.getElement() == "GRASS")
@@ -30,7 +29,7 @@ public class CardLabel extends JButton implements MouseListener {
             setBackground(Color.red);
         }
         this.setSize(200, 300);
-        this.setPreferredSize(new Dimension(200,300));
+        this.setPreferredSize(new Dimension(200, 300));
         addMouseListener(this);
 
     }
@@ -39,18 +38,20 @@ public class CardLabel extends JButton implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         //Do the thing
+        if (GameController.player.getCurrentActionPoints() >= card.actionPointsCost) {
+            GameController.player.setUsedCard(card);
+            synchronized (GameController.player) {
+                GameController.player.notifyAll();
 
-        if( GameController.player.getCurrentActionPoints() >= card.actionPointsCost){
-        GameController.player.setUsedCard(card);
-        synchronized (GameController.player) {
-            GameController.player.notifyAll();
-        }
-        GameController.player.removeCardFromHand(index);}
-        else{
+            }
+            GameController.player.removeCardFromHand(index);
+        } else {
             //todo: drawtheActionPoints
             System.out.println("not enough action points");
 
         }
+
+
     }
 
 
