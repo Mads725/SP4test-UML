@@ -168,11 +168,4 @@ public class GameController {
         return rewardCards;
     }
 
-
-    public void notifyGC(){
-        synchronized (this) {
-            this.notifyAll();
-        }
-
-    }
 }

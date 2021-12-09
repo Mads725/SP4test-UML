@@ -19,13 +19,7 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.toFront();
-        /*
-        panel = new PlayersHandPanel(player);
-        panel.setBounds(0,getHeight()-400,getWidth(),400);
-        panel.setPreferredSize( new Dimension(1200,400));
-        this.add(panel);
-
-*/
+        
     }
 
 
