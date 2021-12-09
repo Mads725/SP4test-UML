@@ -11,17 +11,17 @@ public class CombatCard {
     int dotTurns;
     int fear=0;
 
-    public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost){ // Damage card.
+    public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost){ // Damage card.
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
-        this.cardText = cardText;
+        this.cardText = "Deals " + damage + " " + element + " damage." ;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(int heal, String cardName, String cardText, int actionPointsCost){ // Healing card.
+    public CombatCard(int heal, String cardName, int actionPointsCost){ // Healing card.
         this.heal=heal;
         this.cardName = cardName;
-        this.cardText = cardText;
+        this.cardText = "Heals for " + heal + " damage.";
         this.actionPointsCost = actionPointsCost;
     }
     public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost, int slow){

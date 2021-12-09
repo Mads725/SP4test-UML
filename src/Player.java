@@ -55,28 +55,28 @@ public class Player extends CombatEntity {
     private void generatePlayerCards() {
         //( int damage, String element, String cardName, String cardText,int actionPointsCost)
         //( int hea, String cardName, String cardText,int actionPointsCost)
-        CombatCard fireball = new CombatCard(5, ElementType.FIRE, "Fireball", "Deals 4 fire damage", 1);
+        CombatCard fireball = new CombatCard(5, ElementType.FIRE, "Fireball",  1);
         playerCards.add(fireball);
         playerCards.add(fireball);
         playerCards.add(fireball);
-        CombatCard iceBlast = new CombatCard(5, ElementType.WATER, "Ice blast", "Deals 4 water damage", 1);
+        CombatCard iceBlast = new CombatCard(5, ElementType.WATER, "Ice blast",  1);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
-        CombatCard overgrowth = new CombatCard(5, ElementType.EARTH, "Overgrowth", "Deals 4 grass damage", 1);
+        CombatCard overgrowth = new CombatCard(5, ElementType.EARTH, "Overgrowth",  1);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
-        CombatCard inferno = new CombatCard(12, ElementType.FIRE, "Inferno", "Deals 10 fire damage", 2);
+        CombatCard inferno = new CombatCard(12, ElementType.FIRE, "Inferno",  2);
         playerCards.add(inferno);
-        CombatCard surf = new CombatCard(12, ElementType.WATER, "Surf", "Deals 10 water damage", 2);
+        CombatCard surf = new CombatCard(12, ElementType.WATER, "Surf",  2);
         playerCards.add(surf);
-        CombatCard earthquake = new CombatCard(12, ElementType.EARTH, "Earthquake", "Deals 10 grass damage", 2);
+        CombatCard earthquake = new CombatCard(12, ElementType.EARTH, "Earthquake",  2);
         playerCards.add(earthquake);
-        CombatCard heal = new CombatCard(3, "Heal", "Heals 3 hp",  1);
+        CombatCard heal = new CombatCard(3, "Heal",1);
         playerCards.add(heal);
         playerCards.add(heal);
-        CombatCard majorHeal = new CombatCard(9, "Major heal", "Heals 8 hp",  2);
+        CombatCard majorHeal = new CombatCard(9, "Major heal",2);
         playerCards.add(majorHeal);
     }
 
