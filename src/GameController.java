@@ -139,7 +139,7 @@ public class GameController {
     public ArrayList<CombatCard> generateRewardCards() {
         ArrayList<CombatCard> rewardCards = new ArrayList<>();
         CombatCard meteor = new CombatCard(20, ElementType.FIRE, "Meteor",  3);
-        //CombatCard heat = new CombatCard(7, "Heat", 2, -1); RECREATE
+        CombatCard heat = new CombatCard(7, "Heat","Heals 7 damage and gain an action point next turn", 2, -1);
         CombatCard rain = new CombatCard(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         CombatCard healingWater = new CombatCard(14, "Healing Water",  2);
         CombatCard boulder = new CombatCard(14, ElementType.EARTH, "Boulder",  2);
@@ -160,7 +160,7 @@ public class GameController {
         rewardCards.add(fireTornado);
         rewardCards.add(fireBlast);
         rewardCards.add(meteor);
-        //rewardCards.add(heat);
+        rewardCards.add(heat);
         rewardCards.add(rain);
         rewardCards.add(healingWater);
         rewardCards.add(boulder);

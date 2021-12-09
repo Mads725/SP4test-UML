@@ -15,13 +15,13 @@ public class CombatCard {
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
-        this.cardText = "Deals " + damage + " " + element + " damage." ;
+        this.cardText = "Deals " + damage + " " + element + " damage" ;
         this.actionPointsCost = actionPointsCost;
     }
     public CombatCard(int heal, String cardName, int actionPointsCost){ // Healing card.
         this.heal=heal;
         this.cardName = cardName;
-        this.cardText = "Heals for " + heal + " damage.";
+        this.cardText = "Heals for " + heal + " damage";
         this.actionPointsCost = actionPointsCost;
     }
     public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost, int slow){
