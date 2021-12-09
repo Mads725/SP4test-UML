@@ -40,7 +40,8 @@ public class CombatPanel extends JPanel {
         g2d.setColor(Color.DARK_GRAY);
         g2d.setStroke( new BasicStroke(5));
         g2d.drawRect(x,y,100,300);
-        g2d.drawString("" + unit.getCurrentHealth(),x + 40,y+height-20);
+        g2d.setFont(new Font("Arial", Font.BOLD, 16));
+        g2d.drawString("" + unit.getCurrentHealth() +" / "+ unit.getMaxHealth(),x + 20,y+height-20); // x variable to center text (100/100)vs 1/100
 
         // g2d.fillRect(x,y+(height-(unit.getCurrentHealth()*height)/(unit.getMaxHealth()*height)),100,300-height-(unit.getCurrentHealth()*height)/(unit.getMaxHealth()*height));
 

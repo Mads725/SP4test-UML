@@ -117,17 +117,15 @@ public class Combat {
                 if (playedCard.dot>0){
                  enemyDot=playedCard.dot;
                  enemyDotTurns=playedCard.dotTurns;
-                }
-            else {
+                } else {
                 playerDot=playedCard.dot;
                 playerDotTurns=playedCard.dotTurns;
-            }
+                }
             }else if (combatRound%2 == 1){
                 if (playedCard.dot<0){
                     enemyDot=playedCard.dot;
                     enemyDotTurns=playedCard.dotTurns;
-                }
-                else {
+                } else {
                     playerDot=playedCard.dot;
                     playerDotTurns=playedCard.dotTurns;
                 }
@@ -143,7 +141,7 @@ public class Combat {
                 } else if (combatRound % 2 == 1) {
                     playerFeared = true;
                 }
-            }else{
+            } else {
                 System.out.println("Fear failed");
             }
         }
