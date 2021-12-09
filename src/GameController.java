@@ -7,7 +7,7 @@ public class GameController {
     static final Player player = new Player(Balance.MAX_PLAYER_HEALTH, Balance.MAX_ACTION_POINTS); // Player creation.
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
-    private ArrayList<Boss> bosses = new ArrayList<>();
+    private ArrayList<Enemy> bosses = new ArrayList<>();
     private int layer = 1; // Number of combats completed. high score.
 
     public void startGame() {
@@ -48,7 +48,7 @@ public class GameController {
 
     public void generateEnemies() {
 
-        CombatCard fireIntensity = new CombatCard(4, "Intensity", "Heals 4 hp", 1);
+        CombatCard burn = new CombatCard("FIRE", "Burn", "Deals 5 fire damage for 3 turns", 1,5,3);
         CombatCard fireTornado = new CombatCard(16, "FIRE", "Fire Tornado", "Deals 16 fire damage", 1);
         CombatCard fireBlast = new CombatCard(8, "FIRE", "Fireblast", "Deals 8 fire damage", 1);
         ArrayList<CombatCard> enemy1Cards = new ArrayList<>();
@@ -56,8 +56,8 @@ public class GameController {
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireTornado);
-        enemy1Cards.add(fireIntensity);
-        Enemy enemy1 = new Enemy("Fire Lizard", 70, "FIRE", enemy1Cards);
+        enemy1Cards.add(burn);
+        Enemy enemy1 = new Enemy("Fire Lizard", 70, "FIRE", enemy1Cards,1);
         randomEnemies.add(enemy1);
 
         CombatCard eatBanana = new CombatCard(6, "Eat Banana", "Heals 6 hp", 1);
@@ -69,10 +69,10 @@ public class GameController {
         enemy2Cards.add(throwBanana);
         enemy2Cards.add(eatBanana);
         enemy2Cards.add(throwBananaHarder);
-        Enemy enemy2 = new Enemy("Monkey", 80, "EARTH", enemy2Cards);
+        Enemy enemy2 = new Enemy("Monkey", 80, "EARTH", enemy2Cards,1);
         randomEnemies.add(enemy2);
 
-        CombatCard regenerate = new CombatCard(8, "Regenerate", "Heals 8 hp", 1);
+        CombatCard regenerate = new CombatCard("WATER", "Regenerate", "Heals 4 hp for 3 turns",1, 4,3);
         CombatCard drench = new CombatCard(8, "WATER", "Drench", "Deals 8 water damage", 1, 2);
         CombatCard splash = new CombatCard(8, "WATER", "Splash", "Deals 8 water damage", 1);
         ArrayList<CombatCard> enemy3Cards = new ArrayList<>();
@@ -81,12 +81,12 @@ public class GameController {
         enemy3Cards.add(regenerate);
         enemy3Cards.add(regenerate);
         enemy3Cards.add(drench);
-        Enemy enemy3 = new Enemy("Fish", 60, "WATER", enemy3Cards);
+        Enemy enemy3 = new Enemy("Fish", 60, "WATER", enemy3Cards,1);
         randomEnemies.add(enemy3);
     }
     public void generateBosses(){
         CombatCard headbutt = new CombatCard(10, "EARTH", "Headbutt", "Deals 10 earth damage", 1);
-        CombatCard spores = new CombatCard("EARTH", "Spores", "Deals 6 damage each turn", 2, 6, 3);
+        CombatCard spores = new CombatCard("EARTH", "Spores", "Deals 6 damage each turn", 1, 6, 3);
         CombatCard halloween = new CombatCard("Halloween", "33% chance to fear", 1,1);
         ArrayList<CombatCard> bossCards = new ArrayList<>();
         bossCards.add(headbutt);
@@ -94,7 +94,7 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(spores);
         bossCards.add(halloween);
-        Boss boss1 = new Boss("Pumpkin Man",130,"EARTH", bossCards,3);
+        Enemy boss1 = new Enemy("Pumpkin Man",130,"EARTH", bossCards,3);
         bosses.add(boss1);
     }
 
