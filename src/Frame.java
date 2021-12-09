@@ -7,38 +7,22 @@ public class Frame extends JFrame {
     Player player;
     CombatPanel combatPanel;
 
-
     public Frame(Player player) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.player = player;
         this.setLayout(null);
-        this.setLocationRelativeTo((Component) null);
-        this.setVisible(true);
         this.setResizable(false);
         this.setSize(1200, 900);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.toFront();
 
         panel = new PlayersHandPanel(player);
         panel.setBounds(0,getHeight()-400,getWidth(),400);
         panel.setPreferredSize( new Dimension(1200,400));
         this.add(panel);
 
-
-    }
-
-
-    public ArrayList<CardLabel> drawHand(ArrayList<CombatCard> hand) {
-        ArrayList<CardLabel> cardLabels = new ArrayList<>();
-        int x = 100;
-        int size = 50;
-        for (CombatCard card : hand) {
-            CardLabel cardLabel = new CardLabel(card);
-            cardLabel.setBounds(x, 0, size, 100);
-            cardLabels.add(cardLabel);
-            this.add(cardLabel);
-            x += size;
-        }
-        return cardLabels;
     }
 
     public void setCombatPanel(Combat combat) {
@@ -48,6 +32,7 @@ public class Frame extends JFrame {
         add(combatPanel);
 
     }
+
     public void removeCombatPanel() {
         remove(combatPanel);
     }

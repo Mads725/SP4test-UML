@@ -9,8 +9,8 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
     Player player;
     JButton button;
 
-
     public PlayersHandPanel(Player player) {
+
         this.player = player;
         button = new JButton("end turn");
         button.setBounds(0, 300, getWidth(), 100);
@@ -19,10 +19,7 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         this.add(button);
 
-
-
     }
-
 
     public void updateHand() {
         for (CardLabel card : hand) {
@@ -60,6 +57,5 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
             }
         }
     }
-
 
 }

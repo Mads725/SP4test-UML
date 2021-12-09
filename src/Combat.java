@@ -42,15 +42,15 @@ public class Combat {
 
                 player.drawHand();
 
-                while (player.getCurrentActionPoints()  >= 0) {
-
+                while (player.getCurrentActionPoints()  >= 0 && activeEnemy.getCurrentHealth()>0) {
                     CombatCard usedCard = player.takeTurn();
+
                     if (usedCard !=null)
                         megaLogic(usedCard);
 
                 }
 
-            } else if (combatRound % 2 == 1) {
+            } else if (combatRound % 2 == 1) { // Enemy turn start.
                 System.out.println("Enemy turn: ");
                 if(enemyDotTurns>0) {
                     activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
@@ -61,7 +61,8 @@ public class Combat {
                     enemyFeared=false;
                 }
                 megaLogic(activeEnemy.takeTurn());
-            }
+            } // Enemy turn end.
+
             combatRound++;
             System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
         }
@@ -70,7 +71,6 @@ public class Combat {
     }
 
     private void megaLogic(CombatCard playedCard) {
-
 
         if (playedCard.damage != 0) {
             if (combatRound%2 == 0) {
@@ -105,6 +105,7 @@ public class Combat {
                 }
             }
         }
+
         if (playedCard.dot != 0){
             if (combatRound%2==0){
                 if (playedCard.dot>0){
@@ -126,6 +127,7 @@ public class Combat {
                 }
             }
         }
+
         if (playedCard.fear != 0) {
             Random r = new Random();
             int randomNum = r.nextInt(3);
@@ -139,6 +141,7 @@ public class Combat {
                 System.out.println("Fear failed");
             }
         }
+
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
                 player.setCurrentActionPoints( player.getCurrentActionPoints() - playedCard.actionPointsCost );
@@ -155,11 +158,9 @@ public class Combat {
 
     }// megaLogic end
 
-
-
     public int modifier(String thisElement, String targetElement, int damage){
         if((thisElement.equals("WATER") && targetElement.equals("FIRE"))||(thisElement.equals("FIRE") && targetElement.equals("EARTH"))||(thisElement.equals("EARTH") && targetElement.equals("WATER")))
-            damage=damage*2;
+            damage = damage * Balance.ELEMENT_DAMAGE_MODIFIER;
 
         return damage;
     }

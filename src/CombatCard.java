@@ -66,24 +66,12 @@ public class CombatCard {
         return element;
     }
 
-    public void setElement(String element) {
-        this.element = element;
-    }
-
     public String getCardName() {
         return cardName;
     }
 
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
-    }
-
     public String getCardText() {
         return cardText;
-    }
-
-    public void setCardText(String cardText) {
-        this.cardText = cardText;
     }
 
     @Override

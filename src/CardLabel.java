@@ -17,14 +17,15 @@ public class CardLabel extends JButton implements MouseListener {
         setBorder(border);
         String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
         this.card = card;
+        this.setFont(new Font("Arial", Font.BOLD, 16));
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         this.setHorizontalTextPosition(JLabel.CENTER);
 
         //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
         setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == "WATER")
-            setBackground(Color.blue);
-        if (card.getElement() == "GRASS")
+            setBackground(new Color(0, 110, 255));
+        if (card.getElement() == "EARTH")
             setBackground(Color.green);
         if (card.getElement() == "FIRE") {
             setBackground(Color.red);

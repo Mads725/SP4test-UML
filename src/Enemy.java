@@ -17,7 +17,6 @@ public class Enemy extends CombatEntity{
     public CombatCard takeTurn() { // The enemy takes its turn by playing one card from its cards, chosen randomly.
         Random r = new Random();
         int randomNum = r.nextInt(cards.size());
-       // System.out.println(cards.get(randomNum));
         return cards.get(randomNum);
     }
 

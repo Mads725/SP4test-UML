@@ -1,54 +1,82 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Controller
-class enemy
-class player
-class panel
-class frame
-class combat{
-ArrayList<CombatEntity> activeCombat
+class Main
+class GameController {
+Player player
+Frame frame
+ArrayList<Enemy> randomEnemies
+ArrayList Boss
+int layer
+startGame()
+generateEnemies()
+generateRewardCards
+}
+
+class Combat {
 int combatRound
+Player player
+Enemy activeEnemy
 
-void startCombat()
-
-
+startCombat()
+megaLogic()
+modifier()
 }
-
-combat *-- CombatEntity
-
-class CombatEntity {
-int hp
-max hp
-ArrayList<Cards> Deck
-ArrayList<Cards> Hand
-
-card takeTurn();
-
-
+abstract class CombatEntity {
+int health
+int maxHealth
+int actionPoints
+int maxActionPoints
+String name
+String type
+addHealth()
+removeHealth()
+abstract takeTurn()
 }
-
-
-CombatEntity<|--enemy
-CombatEntity<|--player
-CombatEntity*--Card
-
-
-
-
-abstract class Card{
-int manaCost?
-String type?
-
-
-
-
+class Player {
+CombatCard usedCard
+ArrayList<CombatCard> PlayerCards
+ArrayList<CombatCard> PlayerHand
+takeTurn()
+drawHand()
+shuffleDeck()
+removeCardFromHand()
+setUsedCard()
+generatePlayerCards()
 }
+class Enemy{
+takeTurn()
+}
+class Boss
+class CombatCard {
+getElement()
+getCardName()
+getCardText()
+}
+class Balance
+
+class Frame
+class CardLabel
+class CombatPanel
+class PlayerHandPanel
+
+Main - GameController : Starts
+GameController "1" *-- "1"Combat
+Combat "1" *-- "1" Player
+Combat "1" *-- "1" Enemy
+Combat *-- Boss
+CombatEntity <|-- Player
+CombatEntity <|-- Enemy
+CombatEntity <|-- Boss
+Player "1" *-- "many" CombatCard : contains
+Enemy "1" *-- "3-5" CombatCard : contains
+Boss "1" *-- "3-5" CombatCard : contains
 
 
-
-
-
+GameController - Frame : Starts
+Frame *-- CombatPanel
+Frame *-- PlayerHandPanel
+PlayerHandPanel "1" *-- "5" CardLabel
 
 
 @enduml

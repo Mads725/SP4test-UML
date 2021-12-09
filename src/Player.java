@@ -3,13 +3,12 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Player extends CombatEntity {
-    static CombatCard usedCard;
-
 
     public Player(int Health, int maxActionPoints) {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter name:");
-        setName(scanner.nextLine());
+        //Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+        //System.out.println("Enter name:");
+        //setName(scanner.nextLine());
+        setName("TestPlayer123");
         this.setMaxActionPoints(maxActionPoints);
         this.setCurrentActionPoints(maxActionPoints);
         this.setMaxHealth(Health);
@@ -18,22 +17,19 @@ public class Player extends CombatEntity {
         generatePlayerCards(); // Generates 14 standard cards for the player to use.
     }
 
+    static CombatCard usedCard;
     public ArrayList<CombatCard> playerCards = new ArrayList<>();
     public ArrayList<CombatCard> playerHand = new ArrayList<>();
 
     @Override
     public CombatCard takeTurn() {
 
-
-        int counter = 0;
-
         usedCard = null;
 
         GameController.frame.panel.updateHand();
         GameController.frame.panel.drawHand();
         GameController.frame.repaint();
-        //System.out.println(playerHand);
-        //wait for player input though gui
+
         synchronized (this) {
             try {
                 this.wait();
@@ -42,15 +38,6 @@ public class Player extends CombatEntity {
             }
         }
 
-        //Used card returns to deck
-
-
-        //Button next turn (sets actionPoints to 0)
-        //usedCard = playerHand.get(0);
-
-
-        // Update GUI missing
-        //System.out.println(usedCard);
         return usedCard;
     }
 
@@ -63,34 +50,33 @@ public class Player extends CombatEntity {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
         }
-        // Update GUI missing
     }
 
     private void generatePlayerCards() {
         //( int damage, String element, String cardName, String cardText,int actionPointsCost)
         //( int hea, String cardName, String cardText,int actionPointsCost)
-        CombatCard fireball = new CombatCard(4, "FIRE", "Fireball", "Deals 4 fire damage", 1);
+        CombatCard fireball = new CombatCard(5, "FIRE", "Fireball", "Deals 4 fire damage", 1);
         playerCards.add(fireball);
         playerCards.add(fireball);
-        CombatCard iceBlast = new CombatCard(4, "WATER", "Ice blast", "Deals 4 water damage", 1);
+        playerCards.add(fireball);
+        CombatCard iceBlast = new CombatCard(5, "WATER", "Ice blast", "Deals 4 water damage", 1);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
-        CombatCard overgrowth = new CombatCard(4, "GRASS", "Overgrowth", "Deals 4 grass damage", 1);
+        playerCards.add(iceBlast);
+        CombatCard overgrowth = new CombatCard(5, "EARTH", "Overgrowth", "Deals 4 grass damage", 1);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
-        CombatCard inferno = new CombatCard(10, "FIRE", "Inferno", "Deals 10 fire damage", 2);
+        playerCards.add(overgrowth);
+        CombatCard inferno = new CombatCard(12, "FIRE", "Inferno", "Deals 10 fire damage", 2);
         playerCards.add(inferno);
-        CombatCard surf = new CombatCard(10, "WATER", "Surf", "Deals 10 water damage", 2);
+        CombatCard surf = new CombatCard(12, "WATER", "Surf", "Deals 10 water damage", 2);
         playerCards.add(surf);
-        CombatCard earthquake = new CombatCard(10, "GRASS", "Earthquake", "Deals 10 grass damage", 2);
+        CombatCard earthquake = new CombatCard(12, "EARTH", "Earthquake", "Deals 10 grass damage", 2);
         playerCards.add(earthquake);
-
         CombatCard heal = new CombatCard(3, "Heal", "Heals 3 hp",  1);
         playerCards.add(heal);
         playerCards.add(heal);
-        playerCards.add(heal);
-        CombatCard majorHeal = new CombatCard(8, "Major heal", "Heals 8 hp",  2);
-
+        CombatCard majorHeal = new CombatCard(9, "Major heal", "Heals 8 hp",  2);
         playerCards.add(majorHeal);
     }
 
