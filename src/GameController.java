@@ -8,7 +8,7 @@ public class GameController {
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> bosses = new ArrayList<>();
-    private int layer = 5; // Number of combats completed. high score.
+    private int layer = 1; // Number of combats completed. high score.
 
     public void startGame() {
 
