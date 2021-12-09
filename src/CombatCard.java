@@ -2,7 +2,7 @@ public class CombatCard {
 
     int damage;
     int heal;
-    private String element;
+    private ElementType element;
     private String cardName;
     private String cardText;
     int actionPointsCost;
@@ -11,7 +11,7 @@ public class CombatCard {
     int dotTurns;
     int fear=0;
 
-    public CombatCard(int damage, String element, String cardName, String cardText, int actionPointsCost){ // Damage card.
+    public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost){ // Damage card.
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
@@ -24,7 +24,7 @@ public class CombatCard {
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(int damage, String element, String cardName, String cardText, int actionPointsCost, int slow){
+    public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost, int slow){
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
@@ -39,7 +39,7 @@ public class CombatCard {
         this.actionPointsCost = actionPointsCost;
         this.slow=slow;
     }
-    public CombatCard(int damage,int heal,String element, String cardName, String cardText, int actionPointsCost){
+    public CombatCard(int damage,int heal,ElementType element, String cardName, String cardText, int actionPointsCost){
         this.damage=damage;
         this.element=element;
         this.heal=heal;
@@ -47,7 +47,7 @@ public class CombatCard {
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(String element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns){
+    public CombatCard(ElementType element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns){
         this.element=element;
         this.cardName = cardName;
         this.cardText = cardText;
@@ -62,7 +62,7 @@ public class CombatCard {
         this.fear=fear;
     }
 
-    public String getElement() {
+    public ElementType getElement() {
         return element;
     }
 

@@ -55,23 +55,23 @@ public class Player extends CombatEntity {
     private void generatePlayerCards() {
         //( int damage, String element, String cardName, String cardText,int actionPointsCost)
         //( int hea, String cardName, String cardText,int actionPointsCost)
-        CombatCard fireball = new CombatCard(5, "FIRE", "Fireball", "Deals 4 fire damage", 1);
+        CombatCard fireball = new CombatCard(5, ElementType.FIRE, "Fireball", "Deals 4 fire damage", 1);
         playerCards.add(fireball);
         playerCards.add(fireball);
         playerCards.add(fireball);
-        CombatCard iceBlast = new CombatCard(5, "WATER", "Ice blast", "Deals 4 water damage", 1);
+        CombatCard iceBlast = new CombatCard(5, ElementType.WATER, "Ice blast", "Deals 4 water damage", 1);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
-        CombatCard overgrowth = new CombatCard(5, "EARTH", "Overgrowth", "Deals 4 grass damage", 1);
+        CombatCard overgrowth = new CombatCard(5, ElementType.EARTH, "Overgrowth", "Deals 4 grass damage", 1);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
-        CombatCard inferno = new CombatCard(12, "FIRE", "Inferno", "Deals 10 fire damage", 2);
+        CombatCard inferno = new CombatCard(12, ElementType.FIRE, "Inferno", "Deals 10 fire damage", 2);
         playerCards.add(inferno);
-        CombatCard surf = new CombatCard(12, "WATER", "Surf", "Deals 10 water damage", 2);
+        CombatCard surf = new CombatCard(12, ElementType.WATER, "Surf", "Deals 10 water damage", 2);
         playerCards.add(surf);
-        CombatCard earthquake = new CombatCard(12, "EARTH", "Earthquake", "Deals 10 grass damage", 2);
+        CombatCard earthquake = new CombatCard(12, ElementType.EARTH, "Earthquake", "Deals 10 grass damage", 2);
         playerCards.add(earthquake);
         CombatCard heal = new CombatCard(3, "Heal", "Heals 3 hp",  1);
         playerCards.add(heal);

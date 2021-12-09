@@ -23,11 +23,11 @@ public class CardLabel extends JButton implements MouseListener {
 
         //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
         setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
-        if (card.getElement() == "WATER")
-            setBackground(new Color(0, 110, 255));
-        if (card.getElement() == "EARTH")
+        if (card.getElement() == ElementType.WATER)
+            setBackground(new Color(0, 130, 255)); // Light blue
+        if (card.getElement() == ElementType.EARTH)
             setBackground(Color.green);
-        if (card.getElement() == "FIRE") {
+        if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }
         this.setSize(200, 300);

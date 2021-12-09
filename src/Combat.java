@@ -158,8 +158,10 @@ public class Combat {
 
     }// megaLogic end
 
-    public int modifier(String thisElement, String targetElement, int damage){
-        if((thisElement.equals("WATER") && targetElement.equals("FIRE"))||(thisElement.equals("FIRE") && targetElement.equals("EARTH"))||(thisElement.equals("EARTH") && targetElement.equals("WATER")))
+    public int modifier(ElementType thisElement, ElementType targetElement, int damage){
+        if((thisElement.equals(ElementType.WATER) && targetElement.equals(ElementType.FIRE)||
+                (thisElement.equals(ElementType.FIRE) && targetElement.equals(ElementType.EARTH))||
+                (thisElement.equals(ElementType.EARTH) && targetElement.equals(ElementType.WATER))))
             damage = damage * Balance.ELEMENT_DAMAGE_MODIFIER;
 
         return damage;

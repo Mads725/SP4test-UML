@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Enemy extends CombatEntity{
 
-    public Enemy(String name, int Health, String element, ArrayList<CombatCard> cards) {
+    public Enemy(String name, int Health, ElementType element, ArrayList<CombatCard> cards) {
         this.setName(name);
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);

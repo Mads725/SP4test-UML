@@ -4,7 +4,7 @@ public abstract class CombatEntity {
     private int maxHealth;
     private int currentActionPoints;
     private int maxActionPoints;
-    private String element;
+    private ElementType element;
     private String name;
 
     abstract public CombatCard takeTurn();
@@ -50,7 +50,7 @@ public abstract class CombatEntity {
         this.maxActionPoints = maxActionPoints;
     }
 
-    public void setElement(String element) {
+    public void setElement(ElementType element) {
         this.element = element;
     }
 
@@ -58,7 +58,7 @@ public abstract class CombatEntity {
         return maxHealth;
     }
 
-    public String getElement() {
+    public ElementType getElement() {
         return element;
     }
 

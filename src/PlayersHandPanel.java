@@ -12,10 +12,11 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
     public PlayersHandPanel(Player player) {
 
         this.player = player;
-        button = new JButton("end turn");
-        button.setBounds(0, 300, getWidth(), 100);
-        button.setSize(1000, 100);
-        button.setPreferredSize(new Dimension(1000, 100));
+        button = new JButton("End Turn");
+        button.setFont(new Font("Arial", Font.BOLD, 24));
+        button.setBounds(0, 300, getWidth(), 50);
+        button.setSize(1000, 50);
+        button.setPreferredSize(new Dimension(1000, 50));
         button.addActionListener(this);
         this.add(button);
 

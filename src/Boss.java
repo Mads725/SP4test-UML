@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Boss extends CombatEntity {
 
-    public Boss(String name, int Health, String element, ArrayList<CombatCard> bossCards, int actionPoints) {
+    public Boss(String name, int Health, ElementType element, ArrayList<CombatCard> bossCards, int actionPoints) {
         this.setName(name);
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
