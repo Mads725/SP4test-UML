@@ -164,6 +164,7 @@ public class Combat {
             playerDotTurns--;
         }
         if(playerFeared==true){
+            System.out.println("Player is feared");
             player.setCurrentActionPoints(0);
             playerFeared=false;
         }
@@ -176,6 +177,7 @@ public class Combat {
             enemyDotTurns--;
         }
         if(enemyFeared==true){
+            System.out.println("Enemy is feared");
             activeEnemy.setCurrentActionPoints(0);
             enemyFeared=false;
         }
