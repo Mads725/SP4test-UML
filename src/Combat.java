@@ -21,7 +21,10 @@ public class Combat {
     }
 
     public void startCombat() { // Combat start and loop.
+        //Initialise Combat Panel
         GameController.frame.setCombatPanel(this);
+        GameController.frame.setHandPanel();
+
         player.shuffleDeck();
 
         while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) {

@@ -34,11 +34,32 @@ public class GameController {
                 Combat combat = new Combat(player, randomEnemies.get(randomNum));
                 combat.startCombat();
                 randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
+
+                //OnceCombatFinishes Close combat and open reward screen
+                frame.removeHandPanel();
+                frame.removeCombatPanel();
+                CombatCard[] rewards = rewardCards(generateRewardCards());
+                frame.setRewardScreen(rewards[0],rewards[1],rewards[2], this);
+                frame.repaint();
+                //wait for player input
+                synchronized (this) {
+                    try {
+                        System.out.println("lol");
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        System.out.println("e");
+
+                    }
+                }
+                frame.removeRewardScreen();
+                //open OverView
+
+
                 layer++;
             }
 
         }
-
+        //Lose game
         System.out.println("Score: " + layer);
 
     }
@@ -59,6 +80,7 @@ public class GameController {
         enemy1Cards.add(fireTornado);
         enemy1Cards.add(burn);
         Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1);
+
         randomEnemies.add(enemy1);
 
         CombatCard eatBanana = new CombatCard(6, "Eat Banana",  1);
@@ -71,6 +93,7 @@ public class GameController {
         enemy2Cards.add(eatBanana);
         enemy2Cards.add(throwBananaHarder);
         Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards,1);
+
         randomEnemies.add(enemy2);
 
         CombatCard splash = new CombatCard(8, ElementType.WATER, "Splash",  1);
@@ -83,6 +106,7 @@ public class GameController {
         enemy3Cards.add(regenerate);
         enemy3Cards.add(drench);
         Enemy enemy3 = new Enemy("Fish", 60, ElementType.WATER, enemy3Cards, 1);
+
         randomEnemies.add(enemy3);
 
     }
@@ -98,21 +122,21 @@ public class GameController {
         bossCards.add(spores);
         bossCards.add(halloween);
         Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
+
         bosses.add(boss1);
     }
 
-    public void rewardCards(ArrayList<CombatCard> rewardCards) {
+    public CombatCard[] rewardCards(ArrayList<CombatCard> rewardCards) {
         Collections.shuffle(rewardCards);
         CombatCard rewardOption1=rewardCards.get(0);
         CombatCard rewardOption2=rewardCards.get(1);
         CombatCard rewardOption3=rewardCards.get(2);
+        CombatCard[] rewards = {rewardOption1, rewardOption2, rewardOption3};
+        return rewards;
 
-
-        //CombatCard rewardCard=rewardCards.get(?);
-        //player.playerCards.add(rewardCard);
     }
 
-    public void generateRewardCards() {
+    public ArrayList<CombatCard> generateRewardCards() {
         ArrayList<CombatCard> rewardCards = new ArrayList<>();
         CombatCard meteor = new CombatCard(20, ElementType.FIRE, "Meteor",  3);
         //CombatCard heat = new CombatCard(7, "Heat", 2, -1); RECREATE
@@ -140,5 +164,15 @@ public class GameController {
         rewardCards.add(rain);
         rewardCards.add(healingWater);
         rewardCards.add(boulder);
+
+        return rewardCards;
+    }
+
+
+    public void notifyGC(){
+        synchronized (this) {
+            this.notifyAll();
+        }
+
     }
 }

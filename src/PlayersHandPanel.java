@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class PlayersHandPanel extends JPanel implements ActionListener {
-    static ArrayList<CardLabel> hand = new ArrayList<>();
-    Player player;
-    JButton button;
+    private static ArrayList<CardLabel> hand = new ArrayList<>();
+    private Player player;
+    private JButton button;
 
     public PlayersHandPanel(Player player) {
 

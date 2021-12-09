@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 public class CardLabel extends JButton implements MouseListener {
     int sizeX = 100, sizeY = 200;
     int index;
-
     CombatCard card;
 
     public CardLabel(CombatCard card) {
@@ -32,12 +31,13 @@ public class CardLabel extends JButton implements MouseListener {
         if (card.getElement() == ElementType.WATER)
             setBackground(new Color(0, 130, 255)); // Light blue
         if (card.getElement() == ElementType.EARTH)
+
             setBackground(Color.green);
         if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }
         this.setSize(200, 300);
-        this.setPreferredSize(new Dimension(200,300));
+        this.setPreferredSize(new Dimension(200, 300));
         addMouseListener(this);
 
     }
@@ -46,18 +46,20 @@ public class CardLabel extends JButton implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         //Do the thing
+        if (GameController.player.getCurrentActionPoints() >= card.actionPointsCost) {
+            GameController.player.setUsedCard(card);
+            synchronized (GameController.player) {
+                GameController.player.notifyAll();
 
-        if( GameController.player.getCurrentActionPoints() >= card.actionPointsCost){
-        GameController.player.setUsedCard(card);
-        synchronized (GameController.player) {
-            GameController.player.notifyAll();
-        }
-        GameController.player.removeCardFromHand(index);}
-        else{
+            }
+            GameController.player.removeCardFromHand(index);
+        } else {
             //todo: drawtheActionPoints
             System.out.println("not enough action points");
 
         }
+
+
     }
 
 
