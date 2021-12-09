@@ -11,8 +11,12 @@ public class Combat {
     private int enemyDot=0;
     private int playerDotTurns=0;
     private int enemyDotTurns=0;
+    private int playerBlindedTurns=0;
+    private int enemyBlindedTurns=0;
     private boolean playerFeared=false;
     private boolean enemyFeared=false;
+    private boolean playerBlinded=false;
+    private boolean enemyBlinded=false;
 
     public Combat(Player activePlayer, Enemy activeEnemy) {
         this.player = activePlayer;
@@ -42,9 +46,10 @@ public class Combat {
                 while (player.getCurrentActionPoints()  >= 0 && activeEnemy.getCurrentHealth()>0) {
                     CombatCard usedCard = player.takeTurn();
 
-                    if (usedCard !=null)
-                        megaLogic(usedCard);
 
+                    if (usedCard !=null) {
+                        megaLogic(usedCard);
+                    }
                 }
 
             } else if (combatRound % 2 == 1) { // Enemy turn start.
@@ -66,33 +71,53 @@ public class Combat {
     }
 
     private void megaLogic(CombatCard playedCard) {
-
+        playerBlinded=false;
+        enemyBlinded=false;
+        if (combatRound%2 == 0) {
+            if (playerBlindedTurns > 0) {
+                Random r = new Random();
+                int randomNum = r.nextInt(3);
+                if (randomNum == 0) {
+                    playerBlinded = true;
+                    System.out.println(player.getName() + "is blinded and missed");
+                }
+            }
+        } else if (combatRound%2 == 1) {
+            if (enemyBlindedTurns > 0) {
+                Random r = new Random();
+                int randomNum = r.nextInt(3);
+                if (randomNum == 0) {
+                    enemyBlinded = true;
+                    System.out.println(activeEnemy.getName() + "is blinded and missed");
+                }
+            }
+        }
         if (playedCard.damage != 0) {
-            if (combatRound%2 == 0) {
+            if (combatRound%2 == 0 && !playerBlinded) {
 
                 activeEnemy.removeHealth(modifier(playedCard.getElement(), activeEnemy.getElement(), playedCard.damage));
 
-            } else if (combatRound%2 == 1) {
+            } else if (combatRound%2 == 1 && !enemyBlinded) {
                 player.removeHealth(playedCard.damage);
             }
         }
 
         if (playedCard.heal != 0) {
-            if (combatRound%2 == 0) {
+            if (combatRound%2 == 0 && !playerBlinded) {
                 player.addHealth(playedCard.heal);
-            } else if (combatRound%2 == 1) {
+            } else if (combatRound%2 == 1 && !enemyBlinded) {
                 activeEnemy.addHealth(playedCard.heal);
             }
         }
 
         if (playedCard.slow != 0){
-            if (combatRound%2==0){
-                if (playedCard.slow >0) {
+            if (combatRound%2 == 0 && !playerBlinded){
+                if (playedCard.slow > 0) {
                     enemySlow = playedCard.slow;
                 }else {
                     playerSlow=playedCard.slow;
                 }
-            }else if (combatRound%2 == 1){
+            }else if (combatRound%2 == 1 && !enemyBlinded){
                 if (playedCard.slow <0) {
                     enemySlow = playedCard.slow;
                 }else {
@@ -102,7 +127,7 @@ public class Combat {
         }
 
         if (playedCard.dot != 0){
-            if (combatRound%2==0){
+            if (combatRound%2==0 && !playerBlinded){
                 if (playedCard.dot>0){
                  enemyDot=playedCard.dot;
                  enemyDotTurns=playedCard.dotTurns;
@@ -110,7 +135,7 @@ public class Combat {
                 playerDot=playedCard.dot;
                 playerDotTurns=playedCard.dotTurns;
                 }
-            }else if (combatRound%2 == 1){
+            }else if (combatRound%2 == 1 && !enemyBlinded){
                 if (playedCard.dot<0){
                     enemyDot=playedCard.dot;
                     enemyDotTurns=playedCard.dotTurns;
@@ -125,15 +150,24 @@ public class Combat {
             Random r = new Random();
             int randomNum = r.nextInt(3);
             if (randomNum == 0) {
-                if (combatRound % 2 == 0) {
+                if (combatRound % 2 == 0 && !playerBlinded) {
                     enemyFeared = true;
-                } else if (combatRound % 2 == 1) {
+                } else if (combatRound % 2 == 1 && !enemyBlinded) {
                     playerFeared = true;
                 }
             } else {
                 System.out.println("Fear failed");
             }
         }
+
+        if (playedCard.blind != 0) {
+                if (combatRound % 2 == 0 && !playerBlinded) {
+                    enemyBlindedTurns=playedCard.blindTurns;
+                } else if (combatRound % 2 == 1 && !enemyBlinded) {
+                    playerBlindedTurns=playedCard.blindTurns;
+                }
+            }
+
 
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
@@ -146,6 +180,7 @@ public class Combat {
                 }
             }
         }
+
         System.out.println(playedCard);
 
     }// megaLogic end
@@ -183,7 +218,8 @@ public class Combat {
             activeEnemy.setCurrentActionPoints(0);
             enemyFeared=false;
         }
+        if(playerBlindedTurns>0){
+            playerBlindedTurns--;
+        }
     }
-
-
 }
