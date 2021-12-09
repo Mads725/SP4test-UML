@@ -15,7 +15,13 @@ public class CardLabel extends JButton implements MouseListener {
         setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
-        String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
+        String string="";
+        if(card.getElement()!=null) {
+            string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
+        } else{
+            string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.actionPointsCost;
+
+        }
         this.card = card;
         this.setFont(new Font("Arial", Font.BOLD, 16));
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon

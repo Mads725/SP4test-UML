@@ -8,7 +8,7 @@ public class GameController {
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> bosses = new ArrayList<>();
-    private int layer = 1; // Number of combats completed. high score.
+    private int layer = 5; // Number of combats completed. high score.
 
     public void startGame() {
 
@@ -21,13 +21,13 @@ public class GameController {
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
             Random r = new Random();
-            if (layer % Balance.BOSS_LAYER == 5 ) {
-                /*int randomNum = r.nextInt(bosses.size());
+            if (layer % Balance.BOSS_LAYER == 0 ) {
+                int randomNum = r.nextInt(bosses.size());
                 System.out.println(bosses.get(randomNum).getName());
                 Combat combat = new Combat(player, bosses.get(randomNum));
                 combat.startCombat();
                 bosses.get(randomNum).setCurrentHealth(bosses.get(randomNum).getMaxHealth());
-                */
+                layer++;
                 } else {
                 int randomNum = r.nextInt(randomEnemies.size());
                 System.out.println(randomEnemies.get(randomNum).getName());
@@ -36,6 +36,7 @@ public class GameController {
                 randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
                 layer++;
             }
+
         }
 
         System.out.println("Score: " + layer);
@@ -48,7 +49,7 @@ public class GameController {
 
     public void generateEnemies() {
 
-        CombatCard burn = new CombatCard("FIRE", "Burn", "Deals 5 fire damage for 3 turns", 1,5,3);
+        CombatCard burn = new CombatCard("FIRE", "Burn", "Deals 6 fire damage for 3 turns", 1,6,3);
         CombatCard fireTornado = new CombatCard(16, "FIRE", "Fire Tornado", "Deals 16 fire damage", 1);
         CombatCard fireBlast = new CombatCard(8, "FIRE", "Fireblast", "Deals 8 fire damage", 1);
         ArrayList<CombatCard> enemy1Cards = new ArrayList<>();
@@ -94,7 +95,7 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(spores);
         bossCards.add(halloween);
-        Enemy boss1 = new Enemy("Pumpkin Man",130,"EARTH", bossCards,3);
+        Enemy boss1 = new Enemy("Pumpkin Man",130,"EARTH", bossCards,2);
         bosses.add(boss1);
     }
 
