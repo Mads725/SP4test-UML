@@ -32,15 +32,8 @@ public class Combat {
                 System.out.println("Player turn: ");
 
                 player.setCurrentActionPoints(player.getMaxActionPoints()-playerSlow);
-                playerSlow=0;
-                if(playerDotTurns>0) {
-                    player.setCurrentHealth(player.getCurrentHealth() - playerDot);
-                    playerDotTurns--;
-                }
-                if(playerFeared==true){
-                    player.setCurrentActionPoints(0);
-                    playerFeared=false;
-                }
+
+                statusEffectsPlayer();
 
                 player.drawHand();
 
@@ -55,15 +48,9 @@ public class Combat {
             } else if (combatRound % 2 == 1) { // Enemy turn start.
                 System.out.println("Enemy turn: ");
                 activeEnemy.setCurrentActionPoints(activeEnemy.getMaxActionPoints()-enemySlow);
-                enemySlow=0;
-                if(enemyDotTurns>0) {
-                    activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
-                    enemyDotTurns--;
-                }
-                if(enemyFeared==true){
-                    activeEnemy.setCurrentActionPoints(0);
-                    enemyFeared=false;
-                }
+
+                statusEffectsEnemy();
+
                 while (activeEnemy.getCurrentActionPoints()  >= 0) {
                     megaLogic(activeEnemy.takeTurn());
                 }
@@ -150,8 +137,7 @@ public class Combat {
             if (combatRound%2 == 0) {
                 player.setCurrentActionPoints( player.getCurrentActionPoints() - playedCard.actionPointsCost );
             } else if (combatRound%2 == 1) {
-                // Maybe boss actionPoints?
-
+                activeEnemy.setCurrentActionPoints( activeEnemy.getCurrentActionPoints() - playedCard.actionPointsCost );
                 if (!playedCard.getCardName().equals("Shuffle")) {
                     activeEnemy.setCurrentActionPoints(activeEnemy.getCurrentActionPoints() -
                             playedCard.actionPointsCost);
@@ -171,7 +157,29 @@ public class Combat {
         return damage;
     }
 
+    public void statusEffectsPlayer(){
+        playerSlow=0;
+        if(playerDotTurns>0) {
+            player.setCurrentHealth(player.getCurrentHealth() - playerDot);
+            playerDotTurns--;
+        }
+        if(playerFeared==true){
+            player.setCurrentActionPoints(0);
+            playerFeared=false;
+        }
+    }
 
+    public void statusEffectsEnemy(){
+        enemySlow=0;
+        if(enemyDotTurns>0) {
+            activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
+            enemyDotTurns--;
+        }
+        if(enemyFeared==true){
+            activeEnemy.setCurrentActionPoints(0);
+            enemyFeared=false;
+        }
+    }
 
 
 }
