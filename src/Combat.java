@@ -29,7 +29,6 @@ public class Combat {
                 System.out.println("Player turn: ");
 
                 player.setCurrentActionPoints(player.getMaxActionPoints()-playerSlow);
-                System.out.println(player.getCurrentActionPoints());
                 playerSlow=0;
                 if(playerDotTurns>0) {
                     player.setCurrentHealth(player.getCurrentHealth() - playerDot);
@@ -52,6 +51,8 @@ public class Combat {
 
             } else if (combatRound % 2 == 1) { // Enemy turn start.
                 System.out.println("Enemy turn: ");
+                activeEnemy.setCurrentActionPoints(activeEnemy.getMaxActionPoints()-enemySlow);
+                enemySlow=0;
                 if(enemyDotTurns>0) {
                     activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
                     enemyDotTurns--;
@@ -60,7 +61,9 @@ public class Combat {
                     activeEnemy.setCurrentActionPoints(0);
                     enemyFeared=false;
                 }
-                megaLogic(activeEnemy.takeTurn());
+                while (activeEnemy.getCurrentActionPoints()  >= 0) {
+                    megaLogic(activeEnemy.takeTurn());
+                }
             } // Enemy turn end.
 
             combatRound++;
