@@ -14,7 +14,7 @@ public class Main {
 
 //  TODO list
 /*
-    Class diagram
-    Enum elemental type
-    Overview/Rewards class
+    Show cards played by the enemy
+    Overview/Rewards class screen
+    (fun) Working with an .exe maybe.
  */
