@@ -34,6 +34,8 @@ public class Combat {
                 player.setCurrentActionPoints(player.getMaxActionPoints()-playerSlow);
 
                 statusEffectsPlayer();
+                
+                System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
 
                 player.drawHand();
 
@@ -57,7 +59,7 @@ public class Combat {
             } // Enemy turn end.
 
             combatRound++;
-            System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
+            //System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
         }
 
         GameController.frame.removeCombatPanel();
