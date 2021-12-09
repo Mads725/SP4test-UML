@@ -9,11 +9,12 @@ public class GameController {
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private int layer = 1; // Number of combats completed. high score.
+    private ArrayList<CombatCard> rewardCards = new ArrayList<>();
 
     public void startGame() {
 
         generateEnemies(); // Generates the enemies the player will face
-        generateRewardCards();
+        rewardCards = generateRewardCards();
         generateBosses();
 
         frame = new Frame(player);
@@ -38,7 +39,7 @@ public class GameController {
                 //OnceCombatFinishes Close combat and open reward screen
                 frame.removeHandPanel();
                 frame.removeCombatPanel();
-                CombatCard[] rewards = rewardCards(generateRewardCards());
+                CombatCard[] rewards = rewardCards(rewardCards);
                 frame.setRewardScreen(rewards[0],rewards[1],rewards[2], this);
                 frame.repaint();
                 //wait for player input
@@ -53,7 +54,6 @@ public class GameController {
                 }
                 frame.removeRewardScreen();
                 //open OverView
-
 
                 layer++;
             }
@@ -97,7 +97,7 @@ public class GameController {
         randomEnemies.add(enemy2);
 
         CombatCard splash = new CombatCard(8, ElementType.WATER, "Splash",  1);
-        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, 4,3);
+        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, 4,-3);
         CombatCard drench = new CombatCard(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
         ArrayList<CombatCard> enemy3Cards = new ArrayList<>();
         enemy3Cards.add(splash);
