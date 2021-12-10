@@ -9,6 +9,7 @@ public class Frame extends JFrame {
     RewardScreen rewardScreen;
     NewGamePanel newGameScreen;
 
+
     public Frame(Player player) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -23,24 +24,10 @@ public class Frame extends JFrame {
     }
 
 
-    public ArrayList<CardLabel> drawHand(ArrayList<CombatCard> hand) {
-        ArrayList<CardLabel> cardLabels = new ArrayList<>();
-        int x = 100;
-        int size = 50;
-        for (CombatCard card : hand) {
-            CardLabel cardLabel = new CardLabel(card);
-            cardLabel.setBounds(x, 0, size, 100);
-            cardLabels.add(cardLabel);
-            this.add(cardLabel);
-            x += size;
-        }
-        return cardLabels;
 
-
-    }
 
     public void setHandPanel() {
-        panel = new PlayersHandPanel(player);
+        panel = new PlayersHandPanel(GameController.player);
         panel.setBounds(0, getHeight() - 400, getWidth(), 400);
         panel.setPreferredSize(new Dimension(1200, 400));
         this.add(panel);
@@ -70,7 +57,7 @@ public class Frame extends JFrame {
         newGameScreen = new NewGamePanel(gc);
         newGameScreen.setSize(new Dimension(getWidth(),getHeight()));
         add(newGameScreen);
-
+        this.repaint();
     }
 
     public void removeCombatPanel() {
@@ -84,5 +71,6 @@ public class Frame extends JFrame {
     public void removeRewardScreen(){
         remove(rewardScreen);
     }
+
 
 }

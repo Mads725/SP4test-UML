@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class Player extends CombatEntity {
 
+    static CombatCard usedCard;
+    public ArrayList<CombatCard> playerCards ;
+    public ArrayList<CombatCard> playerHand ;
+    public ArrayList<CombatCard> inventory ;
+
     public Player(int Health, int maxActionPoints) {
         //Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         //System.out.println("Enter name:");
@@ -14,13 +19,13 @@ public class Player extends CombatEntity {
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
 
+        playerCards = new ArrayList<>();
+        playerHand = new ArrayList<>();
+        inventory = new ArrayList<>();
+
+
         generatePlayerCards(); // Generates 14 standard cards for the player to use.
     }
-
-    static CombatCard usedCard;
-    public ArrayList<CombatCard> playerCards = new ArrayList<>();
-    public ArrayList<CombatCard> playerHand = new ArrayList<>();
-    public ArrayList<CombatCard> inventory = new ArrayList<>();
 
     @Override
     public CombatCard takeTurn() {
