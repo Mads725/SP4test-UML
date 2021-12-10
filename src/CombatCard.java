@@ -75,6 +75,14 @@ public class CombatCard {
         this.cardText=cardText;
         this.actionPointsCost=actionPointsCost;
     }
+    public CombatCard(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns, int slow){
+        this.cardName = cardName;
+        this.cardText = cardText;
+        this.actionPointsCost = actionPointsCost;
+        this.blind=blind;
+        this.blindTurns=blindTurns;
+        this.slow=slow;
+    }
 
     public ElementType getElement() {
         return element;

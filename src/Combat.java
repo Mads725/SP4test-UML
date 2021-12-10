@@ -79,7 +79,7 @@ public class Combat {
                 int randomNum = r.nextInt(3);
                 if (randomNum == 0) {
                     playerBlinded = true;
-                    System.out.println(player.getName() + "is blinded and missed");
+                    System.out.println(player.getName() + " missed");
                 }
             }
         } else if (combatRound%2 == 1) {

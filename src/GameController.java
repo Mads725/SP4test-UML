@@ -6,7 +6,8 @@ public class GameController {
 
     static final Player player = new Player(Balance.MAX_PLAYER_HEALTH, Balance.MAX_ACTION_POINTS); // Player creation.
     static Frame frame;
-    private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
+    private ArrayList<Enemy> randomEnemies1 = new ArrayList<>(); // List of enemies the player can face.
+    private ArrayList<Enemy> randomEnemies2 = new ArrayList<>();
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
     private CombatCard[] bossRewards1;
@@ -37,7 +38,7 @@ public class GameController {
                 player.setCurrentHealth(player.getMaxHealth());
                 layer++;
                 } else {
-                initializeCombat();
+                initializeCombat(randomEnemies1);
 
                 CombatCard[] rewards = rewardCards(rewardCards);
                 //OnceCombatFinishes Close combat and open reward screen
@@ -82,7 +83,7 @@ public class GameController {
         enemy1Cards.add(burn);
         Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1);
 
-        randomEnemies.add(enemy1);
+        randomEnemies1.add(enemy1);
 
         CombatCard eatBanana = new CombatCard(7, "Eat Banana",  1);
         CombatCard throwBanana = new CombatCard(7, ElementType.EARTH, "Throw Banana",  1);
@@ -95,10 +96,10 @@ public class GameController {
         enemy2Cards.add(throwBananaHarder);
         Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards,1);
 
-        randomEnemies.add(enemy2);
+        randomEnemies1.add(enemy2);
 
         CombatCard splash = new CombatCard(8, ElementType.WATER, "Splash",  1);
-        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, 4,-3);
+        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, -4,3);
         CombatCard drench = new CombatCard(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
         ArrayList<CombatCard> enemy3Cards = new ArrayList<>();
         enemy3Cards.add(splash);
@@ -107,7 +108,21 @@ public class GameController {
         enemy3Cards.add(drench);
         Enemy enemy3 = new Enemy("Fish", 60, ElementType.WATER, enemy3Cards, 1);
 
-        randomEnemies.add(enemy3);
+        randomEnemies1.add(enemy3);
+
+
+        CombatCard bite = new CombatCard(12, ElementType.EARTH, "Bite", 1);
+        CombatCard camouflage = new CombatCard("camouflage","Becomes harder to hit and gains an extra actionpoint next turn", 1, 1,1,-1);
+        CombatCard venom = new CombatCard(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2);
+        ArrayList<CombatCard> enemy4Cards = new ArrayList<>();
+        enemy4Cards.add(bite);
+        enemy4Cards.add(bite);
+        enemy4Cards.add(camouflage);
+        enemy4Cards.add(venom);
+        Enemy enemy4 = new Enemy("Venomous Snake", 60,ElementType.EARTH,enemy4Cards,1);
+
+        randomEnemies2.add(enemy4);
+
 
     }
 
@@ -192,7 +207,7 @@ public class GameController {
 
 
     }
-    public void initializeCombat(){
+    public void initializeCombat(ArrayList<Enemy> randomEnemies){
         Random r = new Random();
         int randomNum = r.nextInt(randomEnemies.size());
         System.out.println(randomEnemies.get(randomNum).getName());
