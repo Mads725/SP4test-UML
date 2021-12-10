@@ -10,11 +10,18 @@ public class GameController {
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
     private CombatCard[] bossRewards1;
-    private int layer = 1; // Number of combats completed. high score.
+    private int layer ; // Number of combats completed. high score.
     private int bossCounter=0;
 
-    public void startGame() {
+
+    
+    public GameController() {
         frame = new Frame(player);
+        layer = 1;
+    }
+
+    public void startGame() {
+
         //New Game
         newGameScreen();
 
