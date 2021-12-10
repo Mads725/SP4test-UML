@@ -10,7 +10,7 @@ public class GameController {
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
     private CombatCard[] bossRewards1;
-    private int layer = 5; // Number of combats completed. high score.
+    private int layer = 1; // Number of combats completed. high score.
     private int bossCounter=0;
 
     public void startGame() {
@@ -127,7 +127,7 @@ public class GameController {
         bossCards.add(spores);
         bossCards.add(halloween);
 
-        Enemy boss1 = new Enemy("Pumpkin Man",10,ElementType.EARTH, bossCards,2);
+        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
 
         bosses.add(boss1);
 
