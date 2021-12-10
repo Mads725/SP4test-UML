@@ -17,9 +17,10 @@ public class CardLabel extends JButton implements MouseListener {
         String string="";
         if(card.getElement()!=null) {
             string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
-        } else{
+        } else if (card.actionPointsCost>=0) {
             string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.actionPointsCost;
-
+        }else{
+            string = card.getCardName() + "\n" + card.getCardText();
         }
         this.card = card;
         this.setFont(new Font("Arial", Font.BOLD, 16));

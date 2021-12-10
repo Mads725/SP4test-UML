@@ -9,7 +9,9 @@ public class CombatCard {
     int slow;
     int dot;
     int dotTurns;
-    int fear=0;
+    int fear;
+    int blind;
+    int blindTurns;
 
     public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost){ // Damage card.
         this.damage=damage;
@@ -60,6 +62,18 @@ public class CombatCard {
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
         this.fear=fear;
+    }
+    public CombatCard(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns){
+        this.cardName = cardName;
+        this.cardText = cardText;
+        this.actionPointsCost = actionPointsCost;
+        this.blind=blind;
+        this.blindTurns=blindTurns;
+    }
+    public CombatCard(String cardName, String cardText, int actionPointsCost){
+        this.cardName=cardName;
+        this.cardText=cardText;
+        this.actionPointsCost=actionPointsCost;
     }
 
     public ElementType getElement() {

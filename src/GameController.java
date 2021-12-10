@@ -8,8 +8,10 @@ public class GameController {
     static Frame frame;
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> bosses = new ArrayList<>();
-    private int layer = 1; // Number of combats completed. high score.
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
+    private CombatCard[] bossRewards1;
+    private int layer = 5; // Number of combats completed. high score.
+    private int bossCounter=0;
 
     public void startGame() {
         frame = new Frame(player);
@@ -20,42 +22,31 @@ public class GameController {
         generateEnemies(); // Generates the enemies the player will face
         rewardCards = generateRewardCards();
         generateBosses();
+        generateBossRewards();
+
 
 
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
-            Random r = new Random();
-            if (layer % Balance.BOSS_LAYER == 0 ) {
-                int randomNum = r.nextInt(bosses.size());
-                System.out.println(bosses.get(randomNum).getName());
-                Combat combat = new Combat(player, bosses.get(randomNum));
-                combat.startCombat();
-                bosses.get(randomNum).setCurrentHealth(bosses.get(randomNum).getMaxHealth());
-                layer++;
-                } else {
-                int randomNum = r.nextInt(randomEnemies.size());
-                System.out.println(randomEnemies.get(randomNum).getName());
-                Combat combat = new Combat(player, randomEnemies.get(randomNum));
-                combat.startCombat();
-                randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
-
-                //OnceCombatFinishes Close combat and open reward screen
-                frame.removeHandPanel();
-                frame.removeCombatPanel();
-                CombatCard[] rewards = rewardCards(rewardCards);
-                frame.setRewardScreen(rewards[0],rewards[1],rewards[2], this);
-                frame.repaint();
-                //wait for player input
-                synchronized (this) {
-                    try {
-                        System.out.println("lol");
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        System.out.println("e");
-
+            if (player.inventory.size()!=0) {
+                for (int i = 0; i < player.inventory.size(); i++) {
+                    if (player.inventory.get(i).getCardName().equals("Armour")) {
+                        player.setMaxHealth(130);
+                        player.setCurrentHealth(player.getMaxHealth());
+                        player.inventory.remove(i);
                     }
                 }
-                frame.removeRewardScreen();
+            }
+            if (layer % Balance.BOSS_LAYER == 0 ) {
+                initializeBossCombat();
+                rewardScreen(bossRewards1[0],bossRewards1[1], bossRewards1[2]);
+                layer++;
+                } else {
+                initializeCombat();
+
+                CombatCard[] rewards = rewardCards(rewardCards);
+                //OnceCombatFinishes Close combat and open reward screen
+                rewardScreen(rewards[0],rewards[1],rewards[2]);
                 //open OverView
 
                 layer++;
@@ -135,9 +126,26 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(spores);
         bossCards.add(halloween);
-        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
+
+        Enemy boss1 = new Enemy("Pumpkin Man",10,ElementType.EARTH, bossCards,2);
 
         bosses.add(boss1);
+
+        CombatCard ink = new CombatCard("Ink", "Blinds enemy for 2 turns",1,1,2);
+        CombatCard devour = new CombatCard(16,ElementType.WATER,"Devour",1);
+        CombatCard dive = new CombatCard(12,"Dive",1);
+        CombatCard flail = new CombatCard(5,ElementType.WATER,"Flail",1);
+        ArrayList<CombatCard> bossCards2 = new ArrayList<>();
+        bossCards2.add(flail);
+        bossCards2.add(flail);
+        bossCards2.add(flail);
+        bossCards2.add(flail);
+        bossCards2.add(dive);
+        bossCards2.add(devour);
+        bossCards2.add(ink);
+
+        Enemy boss2 = new Enemy("Kraken", 170, ElementType.WATER,bossCards2,2);
+        bosses.add(boss2);
     }
 
     public CombatCard[] rewardCards(ArrayList<CombatCard> rewardCards) {
@@ -165,7 +173,6 @@ public class GameController {
         CombatCard sprinkle = new CombatCard(3, ElementType.WATER, "Sprinkle",  0);
         CombatCard glassOfWater = new CombatCard(3, "Glass of Water",  0);
 
-
         rewardCards.add(sprinkle);
         rewardCards.add(glassOfWater);
         rewardCards.add(regenerate);
@@ -182,4 +189,50 @@ public class GameController {
         return rewardCards;
     }
 
+    public void generateBossRewards(){
+        CombatCard armour = new CombatCard("Armour", "Raises Max hp by 30",-1);
+        CombatCard boots = new CombatCard("Boots","Grants an extra Max Actionpoint",-1);
+        CombatCard bandages = new CombatCard("Bandages", "Recovers 10 hp after each combat",-1);
+        bossRewards1=new CombatCard[]{armour,boots,bandages};
+
+
+    }
+    public void initializeCombat(){
+        Random r = new Random();
+        int randomNum = r.nextInt(randomEnemies.size());
+        System.out.println(randomEnemies.get(randomNum).getName());
+        Combat combat = new Combat(player, randomEnemies.get(randomNum));
+        combat.startCombat();
+        randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
+    }
+    public void initializeBossCombat(){
+        System.out.println(bosses.get(bossCounter).getName());
+        Combat combat = new Combat(player, bosses.get(bossCounter));
+        combat.startCombat();
+        bosses.get(bossCounter).setCurrentHealth(bosses.get(bossCounter).getMaxHealth());
+        bossCounter++;
+    }
+    public void rewardScreen(CombatCard combatCard1, CombatCard combatCard2, CombatCard combatCard3){
+        frame.removeHandPanel();
+        frame.removeCombatPanel();
+
+        frame.setRewardScreen(combatCard1,combatCard2,combatCard3, this);
+        frame.repaint();
+        //wait for player input
+        synchronized (this) {
+            try {
+                System.out.println("lol");
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("e");
+
+            }
+        }
+        frame.removeRewardScreen();
+    }
+
+
+    public int getLayer(){
+        return layer;
+    }
 }
