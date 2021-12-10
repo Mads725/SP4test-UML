@@ -28,15 +28,9 @@ public class GameController {
 
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
-            if (player.inventory.size()!=0) {
-                for (int i = 0; i < player.inventory.size(); i++) {
-                    if (player.inventory.get(i).getCardName().equals("Armour")) {
-                        player.setMaxHealth(130);
-                        player.setCurrentHealth(player.getMaxHealth());
-                        player.inventory.remove(i);
-                    }
-                }
-            }
+
+            checkInventory();
+
             if (layer % Balance.BOSS_LAYER == 0 ) {
                 initializeBossCombat();
                 rewardScreen(bossRewards1[0],bossRewards1[1], bossRewards1[2]);
@@ -229,6 +223,17 @@ public class GameController {
             }
         }
         frame.removeRewardScreen();
+    }
+    public void checkInventory(){
+        if (player.inventory.size()!=0) {
+            for (int i = 0; i < player.inventory.size(); i++) {
+                if (player.inventory.get(i).getCardName().equals("Armour")) {
+                    player.setMaxHealth(130);
+                    player.setCurrentHealth(player.getMaxHealth());
+                    player.inventory.remove(i);
+                }
+            }
+        }
     }
 
 
