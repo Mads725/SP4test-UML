@@ -215,7 +215,6 @@ public class GameController {
         //wait for player input
         synchronized (this) {
             try {
-                System.out.println("lol");
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
