@@ -6,6 +6,7 @@ public abstract class CombatEntity {
     private int maxActionPoints;
     private ElementType element;
     private String name;
+    private int heal=0;
 
     abstract public CombatCard takeTurn();
 
@@ -68,6 +69,14 @@ public abstract class CombatEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getHeal() {
+        return heal;
+    }
+
+    public void setHeal(int heal) {
+        this.heal = heal;
     }
 }
 

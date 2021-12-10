@@ -34,6 +34,7 @@ public class GameController {
             if (layer % Balance.BOSS_LAYER == 0 ) {
                 initializeBossCombat();
                 rewardScreen(bossRewards1[0],bossRewards1[1], bossRewards1[2]);
+                player.setCurrentHealth(player.getMaxHealth());
                 layer++;
                 } else {
                 initializeCombat();
@@ -231,8 +232,16 @@ public class GameController {
                     player.setCurrentHealth(player.getMaxHealth());
                     player.inventory.remove(i);
                 }
+                else if (player.inventory.get(i).getCardName().equals("Boots")){
+                    player.setMaxActionPoints(4);
+                    player.inventory.remove(i);
+                }else if(player.inventory.get(i).getCardName().equals("Bandages")){
+                    player.setHeal(10);
+                    player.inventory.remove(i);
+                }
             }
         }
+        player.addHealth(player.getHeal());
     }
 
 
