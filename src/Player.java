@@ -20,6 +20,7 @@ public class Player extends CombatEntity {
     static CombatCard usedCard;
     public ArrayList<CombatCard> playerCards = new ArrayList<>();
     public ArrayList<CombatCard> playerHand = new ArrayList<>();
+    public ArrayList<CombatCard> inventory = new ArrayList<>();
 
     @Override
     public CombatCard takeTurn() {

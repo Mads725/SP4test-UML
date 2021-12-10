@@ -23,7 +23,11 @@ public class RewardCardLabel extends CardLabel {
             gc.notifyAll();
 
         }
-        gc.player.playerCards.add(this.card);
+        if (gc.getLayer() % 5 == 0){
+            gc.player.inventory.add(this.card);
+        }else {
+            gc.player.playerCards.add(this.card);
+        }
     }
 
 }

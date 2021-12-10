@@ -70,6 +70,11 @@ public class CombatCard {
         this.blind=blind;
         this.blindTurns=blindTurns;
     }
+    public CombatCard(String cardName, String cardText, int actionPointsCost){
+        this.cardName=cardName;
+        this.cardText=cardText;
+        this.actionPointsCost=actionPointsCost;
+    }
 
     public ElementType getElement() {
         return element;

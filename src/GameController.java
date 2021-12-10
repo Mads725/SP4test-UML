@@ -9,43 +9,41 @@ public class GameController {
     private ArrayList<Enemy> randomEnemies = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
+    private CombatCard[] bossRewards1;
     private int layer = 5; // Number of combats completed. high score.
-    private int bossCounter=1;
+    private int bossCounter=0;
 
     public void startGame() {
 
         generateEnemies(); // Generates the enemies the player will face
         rewardCards = generateRewardCards();
         generateBosses();
+        generateBossRewards();
+
 
         frame = new Frame(player);
 
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
-
+            if (player.inventory.size()!=0) {
+                for (int i = 0; i < player.inventory.size(); i++) {
+                    if (player.inventory.get(i).getCardName().equals("Armour")) {
+                        player.setMaxHealth(130);
+                        player.setCurrentHealth(player.getMaxHealth());
+                        player.inventory.remove(i);
+                    }
+                }
+            }
             if (layer % Balance.BOSS_LAYER == 0 ) {
                 initializeBossCombat();
+                rewardScreen(bossRewards1[0],bossRewards1[1], bossRewards1[2]);
                 layer++;
                 } else {
                 initializeCombat();
 
-                //OnceCombatFinishes Close combat and open reward screen
-                frame.removeHandPanel();
-                frame.removeCombatPanel();
                 CombatCard[] rewards = rewardCards(rewardCards);
-                frame.setRewardScreen(rewards[0],rewards[1],rewards[2], this);
-                frame.repaint();
-                //wait for player input
-                synchronized (this) {
-                    try {
-                        System.out.println("lol");
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        System.out.println("e");
-
-                    }
-                }
-                frame.removeRewardScreen();
+                //OnceCombatFinishes Close combat and open reward screen
+                rewardScreen(rewards[0],rewards[1],rewards[2]);
                 //open OverView
 
                 layer++;
@@ -114,7 +112,7 @@ public class GameController {
         bossCards.add(spores);
         bossCards.add(halloween);
 
-        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
+        Enemy boss1 = new Enemy("Pumpkin Man",10,ElementType.EARTH, bossCards,2);
 
         bosses.add(boss1);
 
@@ -176,6 +174,14 @@ public class GameController {
         return rewardCards;
     }
 
+    public void generateBossRewards(){
+        CombatCard armour = new CombatCard("Armour", "Raises Max hp by 30",-1);
+        CombatCard boots = new CombatCard("Boots","Grants an extra Max Actionpoint",-1);
+        CombatCard bandages = new CombatCard("Bandages", "Recovers 10 hp after each combat",-1);
+        bossRewards1=new CombatCard[]{armour,boots,bandages};
+
+
+    }
     public void initializeCombat(){
         Random r = new Random();
         int randomNum = r.nextInt(randomEnemies.size());
@@ -190,5 +196,28 @@ public class GameController {
         combat.startCombat();
         bosses.get(bossCounter).setCurrentHealth(bosses.get(bossCounter).getMaxHealth());
         bossCounter++;
+    }
+    public void rewardScreen(CombatCard combatCard1, CombatCard combatCard2, CombatCard combatCard3){
+        frame.removeHandPanel();
+        frame.removeCombatPanel();
+
+        frame.setRewardScreen(combatCard1,combatCard2,combatCard3, this);
+        frame.repaint();
+        //wait for player input
+        synchronized (this) {
+            try {
+                System.out.println("lol");
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("e");
+
+            }
+        }
+        frame.removeRewardScreen();
+    }
+
+
+    public int getLayer(){
+        return layer;
     }
 }
