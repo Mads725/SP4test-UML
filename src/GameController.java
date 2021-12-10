@@ -12,12 +12,15 @@ public class GameController {
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
 
     public void startGame() {
+        frame = new Frame(player);
+        //New Game
+        newGameScreen();
+
 
         generateEnemies(); // Generates the enemies the player will face
         rewardCards = generateRewardCards();
         generateBosses();
 
-        frame = new Frame(player);
 
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
@@ -62,6 +65,18 @@ public class GameController {
         //Lose game
         System.out.println("Score: " + layer);
 
+    }
+
+    private void newGameScreen() {
+        synchronized (this){
+            try {
+                frame.setNewGameScreen(this);
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("e");
+
+            }
+        }
     }
 
     public void runOverview() {

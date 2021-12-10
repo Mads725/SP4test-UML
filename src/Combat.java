@@ -134,7 +134,7 @@ public class Combat {
                 System.out.println("Fear failed");
             }
         }
-
+        //reduceAction Points
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
                 player.setCurrentActionPoints( player.getCurrentActionPoints() - playedCard.actionPointsCost );

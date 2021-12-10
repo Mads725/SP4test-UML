@@ -7,7 +7,7 @@ public class Frame extends JFrame {
     Player player;
     CombatPanel combatPanel;
     RewardScreen rewardScreen;
-
+    NewGamePanel newGameScreen;
 
     public Frame(Player player) {
 
@@ -63,6 +63,13 @@ public class Frame extends JFrame {
         //combatPanel.setBounds(0,0,getWidth(),500);
         combatPanel.setSize(new Dimension(getWidth(), 500));
         add(combatPanel);
+
+    }
+
+    public void setNewGameScreen(GameController gc){
+        newGameScreen = new NewGamePanel(gc);
+        newGameScreen.setSize(new Dimension(getWidth(),getHeight()));
+        add(newGameScreen);
 
     }
 
