@@ -17,6 +17,9 @@ public class Combat {
     private boolean enemyFeared=false;
     private boolean playerBlinded=false;
     private boolean enemyBlinded=false;
+    private boolean dontPlayThisTurn=false;
+    private boolean dontPlayNextTurn=false;
+    private boolean wasPlayedLastTurn=false;
 
     public Combat(Player activePlayer, Enemy activeEnemy) {
         this.player = activePlayer;
@@ -48,6 +51,7 @@ public class Combat {
 
 
                     if (usedCard !=null) {
+
                         megaLogic(usedCard);
                     }
                 }
@@ -59,7 +63,9 @@ public class Combat {
                 statusEffectsEnemy();
 
                 while (activeEnemy.getCurrentActionPoints()  >= 0) {
-                    megaLogic(activeEnemy.takeTurn());
+                    CombatCard usedEnemyCard = activeEnemy.takeTurn();
+                    usedEnemyCard=checkCard(usedEnemyCard);
+                    megaLogic(usedEnemyCard);
                 }
             } // Enemy turn end.
 
@@ -168,8 +174,12 @@ public class Combat {
                 }
             }
 
-
-
+        if (playedCard.hasBeenPlayedLastTurn){
+            wasPlayedLastTurn=true;
+        }
+        if (playedCard.hasBeenPlayedThisTurn){
+            dontPlayThisTurn=true;
+        }
         //reduceAction Points
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
@@ -199,7 +209,7 @@ public class Combat {
     public void statusEffectsPlayer(){
         playerSlow=0;
         if(playerDotTurns>0) {
-            player.addHealth(player.getCurrentHealth() - playerDot);
+            player.addHealth(-playerDot);
             playerDotTurns--;
         }
         if(playerFeared==true){
@@ -211,8 +221,13 @@ public class Combat {
 
     public void statusEffectsEnemy(){
         enemySlow=0;
+        if(dontPlayNextTurn){
+            wasPlayedLastTurn=false;
+        }
+        dontPlayNextTurn=false;
+        dontPlayThisTurn=false;
         if(enemyDotTurns>0) {
-            activeEnemy.addHealth(activeEnemy.getCurrentHealth() - enemyDot);
+            activeEnemy.addHealth(-enemyDot);
             enemyDotTurns--;
         }
         if(enemyFeared==true){
@@ -223,5 +238,17 @@ public class Combat {
         if(playerBlindedTurns>0){
             playerBlindedTurns--;
         }
+        if(wasPlayedLastTurn){
+            dontPlayNextTurn=true;
+        }
+    }
+    public CombatCard checkCard(CombatCard checkedCard){
+        while(checkedCard.hasBeenPlayedLastTurn && dontPlayNextTurn){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        while (checkedCard.hasBeenPlayedThisTurn && dontPlayThisTurn){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        return checkedCard;
     }
 }

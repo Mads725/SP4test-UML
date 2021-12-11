@@ -12,6 +12,8 @@ public class CombatCard {
     int fear;
     int blind;
     int blindTurns;
+    boolean hasBeenPlayedThisTurn=false;
+    boolean hasBeenPlayedLastTurn=false;
 
     public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost){ // Damage card.
         this.damage=damage;
@@ -56,12 +58,14 @@ public class CombatCard {
         this.actionPointsCost = actionPointsCost;
         this.dot=dot;
         this.dotTurns=dotTurns;
+        hasBeenPlayedLastTurn=true;
     }
     public CombatCard(String cardName, String cardText,int fear, int actionPointsCost){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
         this.fear=fear;
+        this.hasBeenPlayedThisTurn=true;
     }
     public CombatCard(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns){
         this.cardName = cardName;
@@ -69,6 +73,7 @@ public class CombatCard {
         this.actionPointsCost = actionPointsCost;
         this.blind=blind;
         this.blindTurns=blindTurns;
+        this.hasBeenPlayedThisTurn=true;
     }
     public CombatCard(String cardName, String cardText, int actionPointsCost){
         this.cardName=cardName;
@@ -82,6 +87,7 @@ public class CombatCard {
         this.blind=blind;
         this.blindTurns=blindTurns;
         this.slow=slow;
+        this.hasBeenPlayedLastTurn=true;
     }
 
     public ElementType getElement() {

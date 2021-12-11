@@ -42,8 +42,11 @@ public class GameController {
                     layer++;
                 }
             }else {
-                initializeCombat(randomEnemies1);
-
+                if(bossCounter==0) {
+                    initializeCombat(randomEnemies1);
+                }else if (bossCounter==1){
+                    initializeCombat(randomEnemies2);
+                }
                 CombatCard[] rewards = rewardCards(rewardCards);
                 //OnceCombatFinishes Close combat and open reward screen
                 rewardScreen(rewards[0],rewards[1],rewards[2]);
@@ -119,11 +122,11 @@ public class GameController {
         CombatCard camouflage = new CombatCard("camouflage","Becomes harder to hit and gains an extra actionpoint next turn", 1, 1,1,-1);
         CombatCard venom = new CombatCard(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2);
         ArrayList<CombatCard> enemy4Cards = new ArrayList<>();
-        enemy4Cards.add(bite);
-        enemy4Cards.add(bite);
+        //enemy4Cards.add(bite);
+        //enemy4Cards.add(bite);
         enemy4Cards.add(camouflage);
         enemy4Cards.add(venom);
-        Enemy enemy4 = new Enemy("Venomous Snake", 60,ElementType.EARTH,enemy4Cards,1);
+        Enemy enemy4 = new Enemy("Venomous Snake", 70,ElementType.EARTH,enemy4Cards,1);
 
         randomEnemies2.add(enemy4);
 
@@ -138,6 +141,7 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(headbutt);
         bossCards.add(headbutt);
+        bossCards.add(spores);
         bossCards.add(spores);
         bossCards.add(halloween);
 
