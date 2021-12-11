@@ -10,7 +10,7 @@ public class Frame extends JFrame {
     NewGamePanel newGameScreen;
 
 
-    public Frame(Player player) {
+    public Frame(Player player,GameController gc) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.player = player;
@@ -20,7 +20,7 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.toFront();
-        
+        newGameScreen = new NewGamePanel(gc);
     }
 
 
@@ -54,7 +54,7 @@ public class Frame extends JFrame {
     }
 
     public void setNewGameScreen(GameController gc){
-        newGameScreen = new NewGamePanel(gc);
+
         newGameScreen.setSize(new Dimension(getWidth(),getHeight()));
         add(newGameScreen);
         this.repaint();

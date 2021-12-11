@@ -5,7 +5,7 @@ public class Main {
         GameController gc = new GameController();
         while(true) {
             gc.startGame();
-            gc.initialiseGC();
+
 
         }
 

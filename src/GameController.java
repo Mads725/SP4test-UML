@@ -15,21 +15,15 @@ public class GameController {
 
     public GameController() {
        initialiseGC();
-        frame = new Frame(player);
+        frame = new Frame(player,this);
 
     }
 
     public void startGame() {
         //New Game
         newGameScreen();
-
-
-//        generateEnemies(); // Generates the enemies the player will face
-//        rewardCards = generateRewardCards();
-//        generateBosses();
-//        generateBossRewards();
-
-
+        initialiseGC();
+        
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
 
