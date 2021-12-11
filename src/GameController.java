@@ -34,10 +34,14 @@ public class GameController {
 
             if (layer % Balance.BOSS_LAYER == 0 ) {
                 initializeBossCombat();
-                rewardScreen(bossRewards1[0],bossRewards1[1], bossRewards1[2]);
-                player.setCurrentHealth(player.getMaxHealth());
-                layer++;
-                } else {
+                if (player.getCurrentHealth() > 0) {
+                    if (bossCounter==0) {
+                        rewardScreen(bossRewards1[0], bossRewards1[1], bossRewards1[2]);
+                    }
+                    player.setCurrentHealth(player.getMaxHealth());
+                    layer++;
+                }
+            }else {
                 initializeCombat(randomEnemies1);
 
                 CombatCard[] rewards = rewardCards(rewardCards);
@@ -73,8 +77,8 @@ public class GameController {
     public void generateEnemies() {
 
         CombatCard burn = new CombatCard(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1,6,3);
-        CombatCard fireTornado = new CombatCard(16, ElementType.FIRE, "Fire Tornado",  1);
-        CombatCard fireBlast = new CombatCard(8, ElementType.FIRE, "Fireblast",  1);
+        CombatCard fireTornado = new CombatCard(14, ElementType.FIRE, "Fire Tornado",  1);
+        CombatCard fireBlast = new CombatCard(7, ElementType.FIRE, "Fireblast",  1);
         ArrayList<CombatCard> enemy1Cards = new ArrayList<>();
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireBlast);
@@ -86,8 +90,8 @@ public class GameController {
         randomEnemies1.add(enemy1);
 
         CombatCard eatBanana = new CombatCard(7, "Eat Banana",  1);
-        CombatCard throwBanana = new CombatCard(7, ElementType.EARTH, "Throw Banana",  1);
-        CombatCard throwBananaHarder = new CombatCard(14, ElementType.EARTH, "Throw Banana Harder",  1);
+        CombatCard throwBanana = new CombatCard(6, ElementType.EARTH, "Throw Banana",  1);
+        CombatCard throwBananaHarder = new CombatCard(12, ElementType.EARTH, "Throw Banana Harder",  1);
         ArrayList<CombatCard> enemy2Cards = new ArrayList<>();
         enemy2Cards.add(throwBanana);
         enemy2Cards.add(throwBanana);
@@ -98,7 +102,7 @@ public class GameController {
 
         randomEnemies1.add(enemy2);
 
-        CombatCard splash = new CombatCard(8, ElementType.WATER, "Splash",  1);
+        CombatCard splash = new CombatCard(7, ElementType.WATER, "Splash",  1);
         CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, -4,3);
         CombatCard drench = new CombatCard(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
         ArrayList<CombatCard> enemy3Cards = new ArrayList<>();
@@ -170,15 +174,15 @@ public class GameController {
 
     public ArrayList<CombatCard> generateRewardCards() {
         ArrayList<CombatCard> rewardCards = new ArrayList<>();
-        CombatCard meteor = new CombatCard(20, ElementType.FIRE, "Meteor",  3);
+        CombatCard meteor = new CombatCard(24, ElementType.FIRE, "Meteor",  3);
         CombatCard heat = new CombatCard(7, "Heat","Heals 7 damage and gain an action point next turn", 2, -1);
         CombatCard rain = new CombatCard(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         CombatCard healingWater = new CombatCard(14, "Healing Water",  2);
         CombatCard boulder = new CombatCard(14, ElementType.EARTH, "Boulder",  2);
-        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, 4,3);
+        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns",1, -4,3);
         CombatCard splash = new CombatCard(6, ElementType.WATER, "Splash",  1);
         CombatCard burn = new CombatCard(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1,6,3);
-        CombatCard fireTornado = new CombatCard(10, ElementType.FIRE, "Fire Tornado",  2);
+        CombatCard fireTornado = new CombatCard(14, ElementType.FIRE, "Fire Tornado",  2);
         CombatCard fireBlast = new CombatCard(6, ElementType.FIRE, "Fireblast",  1);
         CombatCard sprinkle = new CombatCard(3, ElementType.WATER, "Sprinkle",  0);
         CombatCard glassOfWater = new CombatCard(3, "Glass of Water",  0);

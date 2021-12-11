@@ -199,7 +199,7 @@ public class Combat {
     public void statusEffectsPlayer(){
         playerSlow=0;
         if(playerDotTurns>0) {
-            player.setCurrentHealth(player.getCurrentHealth() - playerDot);
+            player.addHealth(player.getCurrentHealth() - playerDot);
             playerDotTurns--;
         }
         if(playerFeared==true){
@@ -212,7 +212,7 @@ public class Combat {
     public void statusEffectsEnemy(){
         enemySlow=0;
         if(enemyDotTurns>0) {
-            activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
+            activeEnemy.addHealth(activeEnemy.getCurrentHealth() - enemyDot);
             enemyDotTurns--;
         }
         if(enemyFeared==true){
