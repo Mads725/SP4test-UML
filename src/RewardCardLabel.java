@@ -16,9 +16,7 @@ public class RewardCardLabel extends CardLabel {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-//        synchronized (Main.gc) {
-//            Main.gc.notifyAll();
-//        }
+
         synchronized (gc) {
             gc.notifyAll();
 

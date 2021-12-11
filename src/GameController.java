@@ -17,7 +17,7 @@ public class GameController {
     
     public GameController() {
         frame = new Frame(player);
-        layer = 1;
+        layer = 5   ;
     }
 
     public void startGame() {
@@ -92,7 +92,7 @@ public class GameController {
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireTornado);
         enemy1Cards.add(burn);
-        Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1);
+        Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1,"/resources/firelizard.png");
 
         randomEnemies.add(enemy1);
 
@@ -133,8 +133,8 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(spores);
         bossCards.add(halloween);
-
-        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
+        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2,"/resources/p1.png");
+//        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2,"/resources/pumpkinman.png");
 
         bosses.add(boss1);
 
@@ -228,11 +228,9 @@ public class GameController {
         //wait for player input
         synchronized (this) {
             try {
-                System.out.println("lol");
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
-
             }
         }
         frame.removeRewardScreen();
