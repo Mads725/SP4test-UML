@@ -8,11 +8,12 @@ public class GameController {
     static Frame frame;
     private ArrayList<Enemy> randomEnemies1 = new ArrayList<>(); // List of enemies the player can face.
     private ArrayList<Enemy> randomEnemies2 = new ArrayList<>();
+    private ArrayList<Enemy> randomEnemies3 = new ArrayList<>();
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
     private CombatCard[] bossRewards1;
     private int layer = 1; // Number of combats completed. high score.
-    private int bossCounter=1;
+    private int bossCounter=0;
 
     public void startGame() {
         frame = new Frame(player);
@@ -46,6 +47,8 @@ public class GameController {
                     initializeCombat(randomEnemies1);
                 }else if (bossCounter==1){
                     initializeCombat(randomEnemies2);
+                }else if (bossCounter==2){
+                    initializeCombat(randomEnemies3);
                 }
                 CombatCard[] rewards = rewardCards(rewardCards);
                 //OnceCombatFinishes Close combat and open reward screen
@@ -144,19 +147,40 @@ public class GameController {
 
         randomEnemies2.add(enemy5);
 
+        CombatCard pinch = new CombatCard(9, ElementType.WATER, "Pinch", 1);
+        CombatCard regrow = new CombatCard(24, "Regrow", "gives one less actionpoint next turn", 1,1,3);
+        CombatCard
+        ArrayList<CombatCard> enemy6Cards = new ArrayList<>();
 
+        Enemy enemy6 = new Enemy("Giant Crab", 120, ElementType.WATER, enemy6Cards, 1);
+
+        randomEnemies2.add(enemy6);
+
+        CombatCard lash = new CombatCard(10, ElementType.WATER, "Lash", 1);
+        CombatCard electrocute = new CombatCard(8, ElementType.WATER, "Electrocute", 1, 2);
+        CombatCard charge= new CombatCard("Charge", "Increases damage from attacks by 40% for 5 turns", 1, 1.40f,5, 6);
+        ArrayList<CombatCard> enemy9Cards = new ArrayList<>();
+        enemy9Cards.add(lash);
+        enemy9Cards.add(lash);
+        enemy9Cards.add(electrocute);
+        enemy9Cards.add(charge);
+        enemy9Cards.add(charge);
+
+        Enemy enemy9 = new Enemy("Electric Eel", 110, ElementType.WATER, enemy9Cards, 1);
+
+        randomEnemies3.add(enemy9);
     }
 
     public void generateBosses(){
         CombatCard headbutt = new CombatCard(10, ElementType.EARTH, "Headbutt",  1);
-        CombatCard spores = new CombatCard(ElementType.EARTH, "Spores", "Deals 6 damage each turn", 1, 6, 3);
-        CombatCard halloween = new CombatCard("Halloween", "33% chance to fear", 1,1);
+        CombatCard haunt = new CombatCard(ElementType.EARTH, "Haunt", "Deals 6 damage for 3 turns", 1, 6, 3);
+        CombatCard halloween = new CombatCard("Halloween", "33% chance to fear", 3,1);
         ArrayList<CombatCard> bossCards = new ArrayList<>();
         bossCards.add(headbutt);
         bossCards.add(headbutt);
         bossCards.add(headbutt);
-        bossCards.add(spores);
-        bossCards.add(spores);
+        bossCards.add(haunt);
+        bossCards.add(haunt);
         bossCards.add(halloween);
 
         Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2);
@@ -208,7 +232,7 @@ public class GameController {
     public ArrayList<CombatCard> generateRewardCards() {
         ArrayList<CombatCard> rewardCards = new ArrayList<>();
         CombatCard meteor = new CombatCard(24, ElementType.FIRE, "Meteor",  3);
-        CombatCard heat = new CombatCard(7, "Heat","Heals 7 damage and gain an action point next turn", 2, -1);
+        CombatCard heat = new CombatCard(7, "Heat","Heals 7 damage and gain an action point next turn", 2, -1, 0);
         CombatCard rain = new CombatCard(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         CombatCard healingWater = new CombatCard(14, "Healing Water",  2);
         CombatCard boulder = new CombatCard(14, ElementType.EARTH, "Boulder",  2);
