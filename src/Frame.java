@@ -20,7 +20,8 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.toFront();
-        newGameScreen = new NewGamePanel(gc);
+        newGameScreen = new NewGamePanel(gc,this);
+        add(newGameScreen);
     }
 
 
@@ -47,16 +48,18 @@ public class Frame extends JFrame {
 
     public void setCombatPanel(Combat combat) {
         combatPanel = new CombatPanel(combat);
+
         //combatPanel.setBounds(0,0,getWidth(),500);
         combatPanel.setSize(new Dimension(getWidth(), 500));
         add(combatPanel);
 
+
     }
 
-    public void setNewGameScreen(GameController gc){
+    public void setNewGameScreen(){
 
-        newGameScreen.setSize(new Dimension(getWidth(),getHeight()));
-        add(newGameScreen);
+        newGameScreen.setVisible(true);
+
         this.repaint();
     }
 

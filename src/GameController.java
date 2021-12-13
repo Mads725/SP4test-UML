@@ -46,10 +46,7 @@ public class GameController {
                     layer++;
                 }
                 //open OverView
-
-
             }
-
         }
         //Lose game
         System.out.println("Score: " + layer);
@@ -59,15 +56,17 @@ public class GameController {
     }
 
     private void newGameScreen() {
+        frame.newGameScreen.setVisible(true);
         synchronized (this) {
             try {
-                frame.setNewGameScreen(this);
+                frame.setNewGameScreen();
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
 
             }
         }
+        frame.newGameScreen.setVisible(false);
     }
 
     public void runOverview() {

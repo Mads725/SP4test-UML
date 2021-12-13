@@ -33,7 +33,6 @@ public class Player extends CombatEntity {
         usedCard = null;
 
         GameController.frame.panel.updateHand();
-        GameController.frame.panel.drawHand();
         GameController.frame.repaint();
 
         synchronized (this) {

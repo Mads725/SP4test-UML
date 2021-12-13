@@ -23,9 +23,10 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
     }
 
     public void updateHand() {
+
         for (CardLabel card : hand) {
-            remove(card);
-        }
+           remove(card);
+       }
         hand.clear();
         int index = 0;
         for (CombatCard card : player.playerHand) {
@@ -35,6 +36,8 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
             add(tempCard);
             index++;
         }
+
+        drawHand();
     }
 
     public void drawHand() {

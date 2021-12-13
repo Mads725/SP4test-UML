@@ -37,9 +37,6 @@ public class CombatPanel extends JPanel {
         String string = "Element: " + combat.activeEnemy.getElement();
         g2d.drawString(string, (int) (Width - 130 - string.length() * 3.5), 50);
 
-        //g2d.setBackground( Color.gray);
-        //g2d.drawString( );
-
 
         drawHealthBar(30, 100, combat.player);
         drawHealthBar(Width - 130, 100, combat.activeEnemy);
