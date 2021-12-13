@@ -100,6 +100,11 @@ public class Player extends CombatEntity {
         }
     }
 
+    public void removeCardsFromHand(){
+        playerCards.addAll(playerHand);
+        playerHand.clear();
+
+    }
 
 }
 

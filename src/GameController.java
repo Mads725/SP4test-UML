@@ -45,7 +45,7 @@ public class GameController {
                     rewardScreen(rewards[0], rewards[1], rewards[2]);
                     layer++;
                 }
-                //open OverView
+                player.removeCardsFromHand();//open OverView
             }
         }
         //Lose game
