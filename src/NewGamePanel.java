@@ -1,13 +1,15 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class NewGamePanel extends JPanel implements ActionListener {
 
     GameController gc;
     JButton newGameButton;
-
+    Image img;
     public NewGamePanel(GameController gc, Frame frame) {
         setLayout(null);
         int s = 300;
@@ -21,9 +23,19 @@ public class NewGamePanel extends JPanel implements ActionListener {
         setSize(new Dimension(frame.getWidth(), frame.getHeight()));
         newGameButton.setPreferredSize(new Dimension(s, 100));
         setBackground(Color.lightGray);
+        //img = new ImageIcon("/resources/background2.jpg").getImage();
+        try {
+            img = ImageIO.read(getClass().getResource("/resources/background2.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+    @Override
+    public void paintComponent(Graphics G){
+        G.drawImage(img,-300,0,getWidth()+600,getHeight(),null);
 
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 

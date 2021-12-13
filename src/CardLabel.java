@@ -23,7 +23,8 @@ public class CardLabel extends JButton implements MouseListener {
             string = card.getCardName() + "\n" + card.getCardText();
         }
         this.card = card;
-        this.setFont(new Font("Arial", Font.BOLD, 16));
+            this.setFont(new Font("Arial", Font.BOLD, 18));
+        setForeground(Color.BLACK);
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         this.setHorizontalTextPosition(JLabel.CENTER);
 
@@ -33,7 +34,7 @@ public class CardLabel extends JButton implements MouseListener {
             setBackground(new Color(0, 130, 255)); // Light blue
         if (card.getElement() == ElementType.EARTH)
 
-            setBackground(Color.green);
+            setBackground(new Color(63, 127, 52));
         if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }

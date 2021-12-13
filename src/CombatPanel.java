@@ -7,20 +7,26 @@ import java.util.ArrayList;
 
 public class CombatPanel extends JPanel {
     Graphics2D g2d;
-    int Width = 1185, Height = 450;
+    int Width = 1185, Height = 500;
     Combat combat;
-    BufferedImage enemyImage;
+    BufferedImage background;
 
     public CombatPanel(Combat combat) {
         //this.setBounds(0,0,1200,450);
         this.combat = combat;
+        try {
+            background = ImageIO.read(getClass().getResource("/resources/background1.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
 
+        }
     }
 
     @Override
     public void paint(Graphics g) {
         g2d = (Graphics2D) g;
-
+        g2d.drawImage(background,0,0,Width,Height,null);
+        g2d.setColor(Color.BLACK);
         try {
             g2d.drawImage(combat.activeEnemy.image, Width/2 -512/2, 0, 512,512, this);
 
@@ -62,6 +68,7 @@ public class CombatPanel extends JPanel {
     }
 
     public void drawPlayedCards(int x, int y) {
+
         g2d.setColor(Color.black);
         g2d.drawString("Enemy Played Cards", x, y);
         int size = 110, y1 = y + 10, width = 150;

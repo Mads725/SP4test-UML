@@ -12,6 +12,7 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
     public PlayersHandPanel(Player player) {
 
         this.player = player;
+        setBackground(new Color(33, 20, 42));
         button = new JButton("End Turn");
         button.setFont(new Font("Arial", Font.BOLD, 24));
         button.setBounds(0, 300, getWidth(), 50);
