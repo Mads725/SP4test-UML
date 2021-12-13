@@ -20,6 +20,7 @@ public class GameController {
     }
 
     public void startGame() {
+
         //New Game
         newGameScreen();
         initialiseGC();
@@ -84,7 +85,7 @@ public class GameController {
         enemy1Cards.add(fireBlast);
         enemy1Cards.add(fireTornado);
         enemy1Cards.add(burn);
-        Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1);
+        Enemy enemy1 = new Enemy("Fire Lizard", 70, ElementType.FIRE, enemy1Cards, 1,"/resources/firelizard.png");
 
         randomEnemies.add(enemy1);
 
@@ -126,7 +127,7 @@ public class GameController {
         bossCards.add(spores);
         bossCards.add(halloween);
 
-        Enemy boss1 = new Enemy("Pumpkin Man", 130, ElementType.EARTH, bossCards, 2);
+        Enemy boss1 = new Enemy("Pumpkin Man",130,ElementType.EARTH, bossCards,2,"/resources/p1.png");
 
         bosses.add(boss1);
 
@@ -226,7 +227,6 @@ public class GameController {
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
-
             }
         }
         frame.removeRewardScreen();

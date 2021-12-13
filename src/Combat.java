@@ -54,6 +54,7 @@ public class Combat {
 
             } else if (combatRound % 2 == 1) { // Enemy turn start.
                 System.out.println("Enemy turn: ");
+                activeEnemy.resetPlayedCard();
                 activeEnemy.setCurrentActionPoints(activeEnemy.getMaxActionPoints()-enemySlow);
 
                 statusEffectsEnemy();
