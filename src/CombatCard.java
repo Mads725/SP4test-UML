@@ -17,12 +17,12 @@ public class CombatCard {
     int stun;
     int increasedDamageTurns;
     int delay;
+    int delayDot;
     float increasedDamage;
     boolean invisible=false;
     boolean hasBeenPlayedThisTurnStun=false;
-    boolean hasBeenPlayedLastTurn=false;
+    boolean hasBeenPlayedLastTurnStun=false;
     boolean hasBeenPlayedThisTurnDot=false;
-    boolean hasBeenPlayedLastTurnDot=false;
     boolean isAscend=false;
     boolean canExplode=false;
 
@@ -63,14 +63,14 @@ public class CombatCard {
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(ElementType element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns){
+    public CombatCard(ElementType element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns, int delayDot){
         this.element=element;
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
         this.dot=dot;
         this.dotTurns=dotTurns;
-        hasBeenPlayedLastTurnDot=true;
+        this.delayDot=delayDot;
         hasBeenPlayedThisTurnDot=true;
     }
     public CombatCard(String cardName, String cardText,int fear, int actionPointsCost){
@@ -100,12 +100,13 @@ public class CombatCard {
         this.blind=blind;
         this.blindTurns=blindTurns;
         this.slow=slow;
-        this.hasBeenPlayedLastTurn=true;
+        this.hasBeenPlayedLastTurnStun=true;
     }
-    public CombatCard(int actionPointsCost, String cardName, String cardText){
+    public CombatCard(int actionPointsCost, int delay, String cardName, String cardText){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
+        this.delay=delay;
         this.invisible=true;
         this.isAscend=true;
     }
@@ -124,7 +125,7 @@ public class CombatCard {
         this.cardText = "Deals " + damage + " " + element + " damage" ;
         this.actionPointsCost = actionPointsCost;
         this.stun=stun;
-        this.hasBeenPlayedLastTurn=true;
+        this.hasBeenPlayedLastTurnStun=true;
     }
     public CombatCard(String cardName, String cardText, int actionPointsCost, float increasedDamage, int increasedDamageTurns, int delay){
         this.cardName=cardName;

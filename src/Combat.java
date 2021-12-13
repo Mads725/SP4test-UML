@@ -20,6 +20,7 @@ public class Combat {
     private int enemyReturnDamageTurns=0;
     private int playerDamageIncreaseTurns=0;
     private int enemyDamageIncreaseTurns=0;
+    private int delayDot=0;
     private float playerDamageIncrease=0;
     private float enemyDamageIncrease=0;
     private boolean playerFeared=false;
@@ -30,8 +31,6 @@ public class Combat {
     private boolean dontPlayNextTurnStun=false;
     private boolean wasPlayedLastTurnStun=false;
     private boolean dontPlayThisTurnDot=false;
-    private boolean dontPlayNextTurnDot=false;
-    private boolean wasPlayedLastTurnDot=false;
     private boolean descend=false;
     private boolean enemyIsInvisible=false;
     private boolean willExplode=false;
@@ -219,22 +218,9 @@ public class Combat {
             }
         }
 
-        if (playedCard.hasBeenPlayedLastTurnStun){
-            wasPlayedLastTurnStun=true;
-        }
-        if (playedCard.hasBeenPlayedThisTurnStun){
-            dontPlayThisTurnStun=true;
-        }
-        if (playedCard.hasBeenPlayedLastTurnDot){
-            wasPlayedLastTurnDot=true;
-        }
-        if (playedCard.hasBeenPlayedThisTurnDot){
-            dontPlayThisTurnDot=true;
-        }
-
         if (playedCard.isAscend){
             descend=true;
-            delay=3;
+            delay=playedCard.delay;
         }
         if (playedCard.invisible){
             enemyIsInvisible=true;
@@ -256,10 +242,26 @@ public class Combat {
                 enemyDamageIncreaseTurns = playedCard.increasedDamageTurns;
             }
         }
-        if (playedCard.delay != 0){
-            delay=playedCard.delay;
-        }
+        if (combatRound % 2 == 1) {
+            if (playedCard.hasBeenPlayedLastTurnStun){
+                wasPlayedLastTurnStun=true;
+            }
+            if (playedCard.hasBeenPlayedThisTurnStun){
+                dontPlayThisTurnStun=true;
+            }
 
+            if (playedCard.hasBeenPlayedThisTurnDot){
+                dontPlayThisTurnDot=true;
+            }
+
+            if (playedCard.delay != 0) {
+                delay = playedCard.delay;
+            }
+
+            if (playedCard.delayDot != 0) {
+                delayDot = playedCard.delayDot;
+            }
+        }
         //reduceAction Points
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
@@ -331,13 +333,9 @@ public class Combat {
         if(dontPlayNextTurnStun){
             wasPlayedLastTurnStun=false;
         }
-        if(dontPlayNextTurnDot){
-            wasPlayedLastTurnDot=false;
-        }
         dontPlayNextTurnStun=false;
         dontPlayThisTurnStun=false;
         dontPlayThisTurnDot=false;
-        dontPlayNextTurnDot=false;
         enemyIsInvisible=false;
 
         if(enemyDotTurns>0) {
@@ -360,12 +358,15 @@ public class Combat {
         if(wasPlayedLastTurnStun){
             dontPlayNextTurnStun=true;
         }
-        if(wasPlayedLastTurnDot){
-            dontPlayNextTurnDot=true;
-        }
+
         if (delay>0){
             delay--;
         }
+
+        if (delayDot>0){
+            delayDot--;
+        }
+
         if (playerReturnDamageTurns>0){
             playerReturnDamageTurns--;
         }
@@ -383,13 +384,10 @@ public class Combat {
         while((checkedCard.hasBeenPlayedLastTurnStun && dontPlayNextTurnStun) || (checkedCard.hasBeenPlayedThisTurnStun && dontPlayThisTurnStun)){
             checkedCard = activeEnemy.takeTurn();
         }
-        while((checkedCard.hasBeenPlayedLastTurnDot && dontPlayNextTurnDot) || (checkedCard.hasBeenPlayedThisTurnDot && dontPlayThisTurnDot)){
+        while((checkedCard.delayDot > 0 && delayDot > 0) || (checkedCard.hasBeenPlayedThisTurnDot && dontPlayThisTurnDot)){
             checkedCard = activeEnemy.takeTurn();
         }
-        while(checkedCard.isAscend && delay>0){
-            checkedCard = activeEnemy.takeTurn();
-        }
-        while(checkedCard.increasedDamage!=0 && delay>0){
+        while(checkedCard.delay > 0 && delay>0){
             checkedCard = activeEnemy.takeTurn();
         }
         while(checkedCard.returnDamage!=0 && playerReturnDamage>0){
