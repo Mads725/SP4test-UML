@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Frame extends JFrame {
     PlayersHandPanel panel;
@@ -8,8 +7,8 @@ public class Frame extends JFrame {
     CombatPanel combatPanel;
     RewardScreen rewardScreen;
     NewGamePanel newGameScreen;
-
-
+    Overview overviewScreen;
+    GameController gc;
     public Frame(Player player,GameController gc) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -20,10 +19,16 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.toFront();
+        this.gc = gc;
         newGameScreen = new NewGamePanel(gc,this);
         add(newGameScreen);
+
     }
 
+    public void setOverviewScreen() {
+        overviewScreen = new Overview(gc);
+        add(overviewScreen);
+    }
 
 
 

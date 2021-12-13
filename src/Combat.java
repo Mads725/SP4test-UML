@@ -67,8 +67,13 @@ public class Combat {
             combatRound++;
             //System.out.println("Player health: " + player.getCurrentHealth() + "... Enemy health: " + activeEnemy.getCurrentHealth());
         }
+        //Discard hand and add them to deck
+        player.playerCards.addAll(player.playerHand);
+        player.playerHand.clear();
+
 
         GameController.frame.removeCombatPanel();
+
     }
 
     private void megaLogic(CombatCard playedCard) {

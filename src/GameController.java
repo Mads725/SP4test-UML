@@ -16,7 +16,7 @@ public class GameController {
     public GameController() {
        initialiseGC();
         frame = new Frame(player,this);
-
+        frame.setOverviewScreen();
     }
 
     public void startGame() {
@@ -45,8 +45,9 @@ public class GameController {
                     rewardScreen(rewards[0], rewards[1], rewards[2]);
                     layer++;
                 }
-                player.removeCardsFromHand();//open OverView
+                //open OverView
             }
+            runOverview();
         }
         //Lose game
         System.out.println("Score: " + layer);
@@ -70,6 +71,18 @@ public class GameController {
     }
 
     public void runOverview() {
+        frame.overviewScreen.cardPanel.createCardsOverview();
+        frame.overviewScreen.cardPanel.drawCardsOverview();
+        synchronized (this) {
+            try {
+                frame.overviewScreen.setVisible(true);
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("e");
+
+            }
+        }
+
 
     }
 
