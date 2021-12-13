@@ -10,8 +10,8 @@ public class GameController {
     private ArrayList<Enemy> bosses = new ArrayList<>();
     private ArrayList<CombatCard> rewardCards = new ArrayList<>();
     private CombatCard[] bossRewards1;
-    private int layer = 1; // Number of combats completed. high score.
-    private int bossCounter = 0;
+    private int layer; // Number of combats completed. high score.
+    private int bossCounter;
 
     public GameController() {
        initialiseGC();
@@ -103,8 +103,8 @@ public class GameController {
         randomEnemies.add(enemy2);
 
         CombatCard splash = new CombatCard(8, ElementType.WATER, "Splash", 1);
-        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, 4, -3);
-        CombatCard drench = new CombatCard(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
+        CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -3, 3);
+        CombatCard drench = new CombatCard(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 2 actions points for 1 turn", 1, 2);
         ArrayList<CombatCard> enemy3Cards = new ArrayList<>();
         enemy3Cards.add(splash);
         enemy3Cards.add(splash);
