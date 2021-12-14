@@ -77,10 +77,10 @@ public class Player extends CombatEntity {
         playerCards.add(surf);
         Card earthquake = new Card(12, ElementType.EARTH, "Earthquake",  2);
         playerCards.add(earthquake);
-        Card heal = new Card(3, "Heal",1);
+        Card heal = new Card(4, "Heal",1);
         playerCards.add(heal);
         playerCards.add(heal);
-        Card majorHeal = new Card(9, "Major heal",2);
+        Card majorHeal = new Card(10, "Major heal",2);
         playerCards.add(majorHeal);
     }
 

@@ -81,6 +81,7 @@ public class Card {
         this.actionPointsCost = actionPointsCost;
         this.fear=fear;
         this.hasBeenPlayedThisTurnStun=true;
+        this.hasBeenPlayedLastTurnStun=true;
     }
     public Card(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns){
         this.cardName = cardName;
