@@ -5,16 +5,13 @@ import java.util.Collections;
 
 public class Player extends CombatEntity {
 
-    static Card usedCard;
+    static Card usedCard; // The current card played
     public ArrayList<Card> playerCards ;
     public ArrayList<Card> playerHand ;
-    public ArrayList<Card> inventory ;
+    public ArrayList<Card> inventory ; // Boss rewards list
+    private int heal=0; // Heal after every combat (reward from boss)
 
     public Player(int Health, int maxActionPoints) {
-        //Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        //System.out.println("Enter name:");
-        //setName(scanner.nextLine());
-        setName("TestPlayer123");
         this.setMaxActionPoints(maxActionPoints);
         this.setCurrentActionPoints(maxActionPoints);
         this.setMaxHealth(Health);
@@ -24,12 +21,11 @@ public class Player extends CombatEntity {
         playerHand = new ArrayList<>();
         inventory = new ArrayList<>();
 
-
         generatePlayerCards(); // Generates 14 standard cards for the player to use.
     }
 
     @Override
-    public Card takeTurn() {
+    public Card takeTurn() { // Player turn method
 
         usedCard = null;
 
@@ -47,11 +43,11 @@ public class Player extends CombatEntity {
         return usedCard;
     }
 
-    public void shuffleDeck() {
+    public void shuffleDeck() { // Shuffels the player card deck
         Collections.shuffle(playerCards);
     }
 
-    public void drawHand() {
+    public void drawHand() { // Darws up to the max hand size
         while (playerHand.size() < Balance.MAX_HAND_SIZE) {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
@@ -88,20 +84,24 @@ public class Player extends CombatEntity {
 
     public void setUsedCard(Card usedCard) {
         Player.usedCard = usedCard;
-
     }
 
-    public void removeCardFromHand(int index) {
+    public void removeCardFromHand(int index) { // Empties hand into deck
         try {
             playerCards.add(playerHand.get(index));
             playerHand.remove(index);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getCause());
-
         }
     }
+    // ----------------- Getters and setters -----------------------
 
+    public int getHeal() {
+        return heal;
+    }
+
+    public void setHeal(int heal) {
+        this.heal = heal;
+    }
 
 }
-
-

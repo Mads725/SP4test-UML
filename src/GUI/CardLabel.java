@@ -46,7 +46,6 @@ public class CardLabel extends JButton implements MouseListener {
         this.setSize(200, 300);
         this.setPreferredSize(new Dimension(200, 300));
         addMouseListener(this);
-
     }
 
     @Override

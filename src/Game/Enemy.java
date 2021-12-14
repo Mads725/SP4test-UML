@@ -8,8 +8,9 @@ import java.util.Random;
 
 public class Enemy extends CombatEntity {
 
-    private ArrayList<Card> playedCards = new ArrayList<>();
+    private ArrayList<Card> playedCards;
     private BufferedImage image;
+    private ArrayList<Card> cards;
 
     public Enemy(String name, int Health, ElementType element, ArrayList<Card> cards, int actionPoints) {
         this.setName(name);
@@ -37,7 +38,6 @@ public class Enemy extends CombatEntity {
         }
     }
 
-    ArrayList<Card> cards;
     @Override
     public Card takeTurn() { // The enemy takes its turn by playing one card from its cards, chosen randomly.
         Random r = new Random();
@@ -60,7 +60,6 @@ public class Enemy extends CombatEntity {
     }
 
     // ---------- Getters and setters -----------------
-
 
     public BufferedImage getImage() {
         return image;

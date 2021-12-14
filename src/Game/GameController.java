@@ -2,23 +2,22 @@ package Game;
 
 import GUI.Frame;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class GameController {
 
-    public static Player player; // Game.Player creation.
-    public static Frame frame;
+    public static Player player; // Player
+    public static Frame frame; // Game window with GUI.
     private ArrayList<Enemy> randomEnemies1 = new ArrayList<>(); // List of enemies the player can face.
-    private ArrayList<Enemy> randomEnemies2 = new ArrayList<>();
-    private ArrayList<Enemy> randomEnemies3 = new ArrayList<>();
-    private ArrayList<Enemy> bosses = new ArrayList<>();
-    ArrayList<Card> rewardCards = new ArrayList<>();
-    private Card[] bossRewards1;
+    private ArrayList<Enemy> randomEnemies2 = new ArrayList<>(); // List of enemies the player can face after the first boss.
+    private ArrayList<Enemy> randomEnemies3 = new ArrayList<>(); // List of enemies the player can face after the second boss.
+    private ArrayList<Enemy> bosses = new ArrayList<>(); // List of bosses the player can face.
+    ArrayList<Card> rewardCards = new ArrayList<>(); // List of rewards the player can get after a combat.
+    private Card[] bossRewards1; // List of boss rewards after a boos is defeated.
     private int layer; // Number of combats completed. high score.
-    private int bossCounter;
+    private int bossCounter; // Number of bosses defeated.
 
     public GameController() {
         initialiseGC();
@@ -37,46 +36,45 @@ public class GameController {
         generateBosses();
         generateBossRewards();
 
-
         //GamePlay loop
         while (player.getCurrentHealth() > 0) {
 
             checkInventory();
 
-            if (layer % Balance.BOSS_LAYER == 0) {
+            if (layer % Balance.BOSS_LAYER == 0) { // Checks if the layer is a boss layer or a normal combat.
                 initializeBossCombat();
-                if (player.getCurrentHealth() > 0) {
+                if (player.getCurrentHealth() > 0) { // Player wins
                     rewardScreen(bossRewards1[0], bossRewards1[1], bossRewards1[2]);
                     player.setCurrentHealth(player.getMaxHealth());
-
                 }
-            } else {
-                if(bossCounter==0) {
+
+            } else { // Normal combat
+                if(bossCounter==0) { // First tier of enemies before the boss
                     initializeCombat(randomEnemies1);
                     if (player.getCurrentHealth() > 0) {
                         Card[] rewards = rewardCards(rewardCards);
                         //OnceCombatFinishes Close combat and open reward screen
                         rewardScreen(rewards[0], rewards[1], rewards[2]);
-
                     }
-                } else if(bossCounter==1) {
+
+                } else if(bossCounter==1) { // Second tier of enemies after the first boss
                     initializeCombat(randomEnemies2);
                     if (player.getCurrentHealth() > 0) {
                         Card[] rewards = rewardCards(rewardCards);
                         //OnceCombatFinishes Close combat and open reward screen
                         rewardScreen(rewards[0], rewards[1], rewards[2]);
-
                     }
-                } else if(bossCounter==2) {
+
+                } else if(bossCounter==2) { // Third tier of enemies after the second boss.
                     initializeCombat(randomEnemies3);
                     if (player.getCurrentHealth() > 0) {
                         Card[] rewards = rewardCards(rewardCards);
                         //OnceCombatFinishes Close combat and open reward screen
                         rewardScreen(rewards[0], rewards[1], rewards[2]);
-
                     }
                 }
             }
+
             if (player.getCurrentHealth()>0) //If still alive, go up in level
             layer++;
             frame.removeHandPanel();
@@ -85,12 +83,12 @@ public class GameController {
             runOverview(); // Open OverView
 
         }
-        //Lose game
+        // Lose game
         System.out.println("Score: " + layer);
 
-    }
+    } // ------------------ StartGame() end -------------------
 
-    private void newGameScreen() {
+    private void newGameScreen() { // Show startup screen
         frame.getNewGameScreen().setVisible(true);
         synchronized (this) {
             try {
@@ -98,13 +96,12 @@ public class GameController {
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
-
             }
         }
         frame.getNewGameScreen().setVisible(false);
     }
 
-    public void runOverview() {
+    public void runOverview() { // Show overview screen
         frame.getOverviewScreen().getCardPanel().createCardsOverview();
         frame.getOverviewScreen().getCardPanel().drawCardsOverview();
         synchronized (this) {
@@ -113,12 +110,11 @@ public class GameController {
                 this.wait();
             } catch (InterruptedException e) {
                 System.out.println("e");
-
             }
         }
     }
 
-    public void generateEnemies() {
+    public void generateEnemies() { // Generates the enemies the player will face in the game
 
         Card burn = new Card(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1, 6, 3, 3);
         Card fireTornado = new Card(14, ElementType.FIRE, "Fire Tornado", 1);
@@ -210,7 +206,8 @@ public class GameController {
         randomEnemies3.add(enemy9);
     }
 
-    public void generateBosses() {
+    public void generateBosses() { // Generates the bosses the player will face.
+
         Card headbutt = new Card(10, ElementType.EARTH, "Headbutt", 1);
         Card haunt = new Card(ElementType.EARTH, "Haunt", "Deals 6 damage for 3 turns", 1, 6, 3, 3);
         Card halloween = new Card("Halloween", "33% chance to fear", 3, 1);
@@ -257,17 +254,7 @@ public class GameController {
         bosses.add(boss3);
     }
 
-    public Card[] rewardCards(ArrayList<Card> rewardCards) {
-        Collections.shuffle(rewardCards);
-        Card rewardOption1 = rewardCards.get(0);
-        Card rewardOption2 = rewardCards.get(1);
-        Card rewardOption3 = rewardCards.get(2);
-        Card[] rewards = {rewardOption1, rewardOption2, rewardOption3};
-        return rewards;
-
-    }
-
-    public void generateRewardCards() {
+    public void generateRewardCards() { // Generates the cards the player can get after a combat
         Card heat = new Card(7, "Heat", "gain an action point next turn", 2, -1, 0);
         Card rain = new Card(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         Card boulder = new Card(14, ElementType.EARTH, "Boulder", 2);
@@ -297,32 +284,13 @@ public class GameController {
         rewardCards.add(boulder);
     }
 
-    public void generateBossRewards() {
-        Card armour = new Card("Armour", "Raises Max hp by 30", -1);
-        Card boots = new Card("Boots", "Grants an extra Max Actionpoint", -1);
-        Card bandages = new Card("Bandages", "Recovers 10 hp after each combat", -1);
-        bossRewards1 = new Card[]{armour, boots, bandages};
-
-        Card sword = new Card("Sword", "Grants 25% increased damage", -1);
-        Card phdInMedicalScience = new Card("PhD In Medical Science", "Grants 25% increased healing", -1);
-    }
-
-    public void initializeCombat(ArrayList<Enemy> randomEnemies) {
-
-        Random r = new Random();
-        int randomNum = r.nextInt(randomEnemies.size());
-        System.out.println(randomEnemies.get(randomNum).getName());
-        Combat combat = new Combat(player, randomEnemies.get(randomNum));
-        combat.startCombat();
-        randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
-    }
-
-    public void initializeBossCombat() {
-        System.out.println(bosses.get(bossCounter).getName());
-        Combat combat = new Combat(player, bosses.get(bossCounter));
-        combat.startCombat();
-        bosses.get(bossCounter).setCurrentHealth(bosses.get(bossCounter).getMaxHealth());
-        bossCounter++;
+    public Card[] rewardCards(ArrayList<Card> rewardCards) { // Gets three random rewards card to show the player
+        Collections.shuffle(rewardCards);
+        Card rewardOption1 = rewardCards.get(0);
+        Card rewardOption2 = rewardCards.get(1);
+        Card rewardOption3 = rewardCards.get(2);
+        Card[] rewards = {rewardOption1, rewardOption2, rewardOption3};
+        return rewards;
     }
 
     public void rewardScreen(Card card1, Card card2, Card card3) {
@@ -342,7 +310,35 @@ public class GameController {
         frame.removeRewardScreen();
     }
 
-    public void checkInventory() {
+    public void generateBossRewards() { // Generates the cards the player can get after a boss is defeated
+        Card armour = new Card("Armour", "Raises Max hp by 30", -1);
+        Card boots = new Card("Boots", "Grants an extra Max Actionpoint", -1);
+        Card bandages = new Card("Bandages", "Recovers 10 hp after each combat", -1);
+
+        bossRewards1 = new Card[]{armour, boots, bandages};
+
+        Card sword = new Card("Sword", "Grants 25% increased damage", -1);
+        Card phdInMedicalScience = new Card("PhD In Medical Science", "Grants 25% increased healing", -1);
+    }
+
+    public void initializeCombat(ArrayList<Enemy> randomEnemies) { // Selects the enemy the player will fight
+        Random r = new Random();
+        int randomNum = r.nextInt(randomEnemies.size());
+        System.out.println(randomEnemies.get(randomNum).getName());
+        Combat combat = new Combat(player, randomEnemies.get(randomNum));
+        combat.startCombat();
+        randomEnemies.get(randomNum).setCurrentHealth(randomEnemies.get(randomNum).getMaxHealth());
+    }
+
+    public void initializeBossCombat() { // Selects the boss the player will fight
+        System.out.println(bosses.get(bossCounter).getName());
+        Combat combat = new Combat(player, bosses.get(bossCounter));
+        combat.startCombat();
+        bosses.get(bossCounter).setCurrentHealth(bosses.get(bossCounter).getMaxHealth());
+        bossCounter++;
+    }
+
+    public void checkInventory() { // Boss rewards check
         if (player.inventory.size() != 0) {
             for (int i = 0; i < player.inventory.size(); i++) {
                 if (player.inventory.get(i).getCardName().equals("Armour")) {
@@ -370,8 +366,9 @@ public class GameController {
         generateBossRewards();
         generateBosses();
         generateBossRewards();
-
     }
+
+    // ------------------ Getters and setters --------------------
 
     public int getLayer() {
         return layer;
