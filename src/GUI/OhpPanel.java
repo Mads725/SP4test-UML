@@ -1,3 +1,8 @@
+package GUI;
+
+import Game.GameController;
+import Game.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,8 +23,8 @@ public class OhpPanel extends JPanel {
         this.player = GameController.player;
         g2d = (Graphics2D) g;
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
-        g2d.drawString("Player health: " + player.getCurrentHealth(), 100,50);
-        g2d.drawString("Dungeon layer " + gc.getLayer(),100,75);
+        g2d.drawString("Player health: " + player.getCurrentHealth(), 50,50);
+        g2d.drawString("Dungeon layer " + gc.getLayer(),50,75);
 
         drawHealthBar(100,100, player);
        

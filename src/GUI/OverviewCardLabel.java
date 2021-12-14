@@ -1,12 +1,16 @@
+package GUI;
+
+import Game.Card;
+import Game.ElementType;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-
 public class OverviewCardLabel extends JLabel {
-    CombatCard card;
+    Card card;
 
-    public OverviewCardLabel(CombatCard card) {
+    public OverviewCardLabel(Card card) {
         setOpaque(true);
         setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -20,9 +24,9 @@ public class OverviewCardLabel extends JLabel {
         
         setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == ElementType.WATER)
-            setBackground(new Color(0, 110, 255));
+            setBackground(new Color(0, 130, 255));
         if (card.getElement() == ElementType.EARTH)
-            setBackground(Color.green);
+            setBackground(new Color(63, 127, 52));
         if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }

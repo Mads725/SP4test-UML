@@ -1,3 +1,7 @@
+package GUI;
+
+import Game.GameController;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

@@ -1,3 +1,5 @@
+package Game;
+
 public abstract class CombatEntity {
 
     private int currentHealth;
@@ -8,7 +10,7 @@ public abstract class CombatEntity {
     private String name;
     private int heal=0;
 
-    abstract public CombatCard takeTurn(); // Abstract method what can be done in the entities turn.
+    abstract public Card takeTurn(); // Abstract method what can be done in the entities turn.
 
     public void addHealth(int heal) { // Adds health when damage is healed.
         currentHealth = currentHealth + heal;

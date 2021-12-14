@@ -1,3 +1,10 @@
+package GUI;
+
+import GUI.CardLabel;
+import Game.Card;
+import Game.GameController;
+import Game.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +37,7 @@ public class PlayersHandPanel extends JPanel implements ActionListener {
        }
         hand.clear();
         int index = 0;
-        for (CombatCard card : player.playerHand) {
+        for (Card card : player.playerHand) {
             CardLabel tempCard = new CardLabel(card);
             tempCard.index = index;
             hand.add(tempCard);
