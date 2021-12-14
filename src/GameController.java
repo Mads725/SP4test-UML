@@ -263,7 +263,7 @@ public class GameController {
     }
 
     public void generateRewardCards() {
-        CombatCard heat = new CombatCard(7, "Heat", "gain an action point next turn", 2, -1, 0);
+        CombatCard heat = new CombatCard(7, "Heat", "gain an extra action point next turn", 2, -1, 0);
         CombatCard rain = new CombatCard(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         CombatCard boulder = new CombatCard(14, ElementType.EARTH, "Boulder", 2);
         CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);
@@ -274,8 +274,10 @@ public class GameController {
         CombatCard sprinkle = new CombatCard(3, ElementType.WATER, "Sprinkle", 0);
         CombatCard glassOfWater = new CombatCard(3, "Glass of Water", 0);
         CombatCard meteor = new CombatCard(24, ElementType.FIRE, "Meteor", 3);
-        CombatCard venom = new CombatCard(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2, 2);
+        CombatCard venom = new CombatCard(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2, 0);
         CombatCard healingWater = new CombatCard(14, "Healing Water", 2);
+        CombatCard camouflage = new CombatCard("Camouflage", "Becomes harder to hit and gains an extra actionpoint next turn", 2, 1, 1, -1);
+
 
         rewardCards.add(healingWater);
         rewardCards.add(venom);
@@ -290,6 +292,7 @@ public class GameController {
         rewardCards.add(heat);
         rewardCards.add(rain);
         rewardCards.add(boulder);
+        rewardCards.add(camouflage);
     }
 
     public void generateBossRewards() {
@@ -300,6 +303,7 @@ public class GameController {
 
         CombatCard sword = new CombatCard("Sword", "Grants 25% increased damage", -1);
         CombatCard phdInMedicalScience = new CombatCard("PhD In Medical Science", "Grants 25% increased healing", -1);
+
     }
 
     public void initializeCombat(ArrayList<Enemy> randomEnemies) {
