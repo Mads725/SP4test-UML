@@ -13,10 +13,30 @@ public class Combat {
     private int enemyDotTurns=0;
     private int playerBlindedTurns=0;
     private int enemyBlindedTurns=0;
+    private int delay=0;
+    private int playerReturnDamage=0;
+    private int enemyReturnDamage=0;
+    private int playerReturnDamageTurns=0;
+    private int enemyReturnDamageTurns=0;
+    private int playerDamageIncreaseTurns=0;
+    private int enemyDamageIncreaseTurns=0;
+    private int delayDot=0;
+    private float playerDamageIncrease=0;
+    private float enemyDamageIncrease=0;
     private boolean playerFeared=false;
     private boolean enemyFeared=false;
     private boolean playerBlinded=false;
     private boolean enemyBlinded=false;
+    private boolean dontPlayThisTurnStun=false;
+    private boolean dontPlayNextTurnStun=false;
+    private boolean wasPlayedLastTurnStun=false;
+    private boolean dontPlayThisTurnDot=false;
+    private boolean descend=false;
+    private boolean enemyIsInvisible=false;
+    private boolean willExplode=false;
+    private boolean hasExploded=false;
+    private boolean playerStunned=false;
+    private boolean enemyStunned=false;
 
     public Combat(Player activePlayer, Enemy activeEnemy) {
         this.player = activePlayer;
@@ -48,6 +68,7 @@ public class Combat {
 
 
                     if (usedCard !=null) {
+
                         megaLogic(usedCard);
                     }
                 }
@@ -60,7 +81,9 @@ public class Combat {
                 statusEffectsEnemy();
 
                 while (activeEnemy.getCurrentActionPoints()  >= 0) {
-                    megaLogic(activeEnemy.takeTurn());
+                    CombatCard usedEnemyCard = activeEnemy.takeTurn();
+                    usedEnemyCard=checkCard(usedEnemyCard);
+                    megaLogic(usedEnemyCard);
                 }
             } // Enemy turn end.
 
@@ -85,7 +108,7 @@ public class Combat {
                 int randomNum = r.nextInt(3);
                 if (randomNum == 0) {
                     playerBlinded = true;
-                    System.out.println(player.getName() + "is blinded and missed");
+                    System.out.println(player.getName() + " missed");
                 }
             }
         } else if (combatRound%2 == 1) {
@@ -94,17 +117,22 @@ public class Combat {
                 int randomNum = r.nextInt(3);
                 if (randomNum == 0) {
                     enemyBlinded = true;
-                    System.out.println(activeEnemy.getName() + "is blinded and missed");
+                    System.out.println(activeEnemy.getName() + " missed");
                 }
             }
         }
         if (playedCard.damage != 0) {
-            if (combatRound%2 == 0 && !playerBlinded) {
+            if (combatRound%2 == 0 && !playerBlinded && !enemyIsInvisible) {
 
-                activeEnemy.removeHealth(modifier(playedCard.getElement(), activeEnemy.getElement(), playedCard.damage));
-
+                activeEnemy.removeHealth(playerModifier(playedCard.getElement(), activeEnemy.getElement(), playedCard.damage));
+                if (playerReturnDamageTurns>0){
+                    player.addHealth(-playerReturnDamage);
+                }
             } else if (combatRound%2 == 1 && !enemyBlinded) {
-                player.removeHealth(playedCard.damage);
+                player.removeHealth(enemyModifier(playedCard.damage));
+                if (enemyReturnDamageTurns>0){
+                    activeEnemy.addHealth(-enemyReturnDamage);
+                }
             }
         }
 
@@ -117,7 +145,7 @@ public class Combat {
         }
 
         if (playedCard.slow != 0){
-            if (combatRound%2 == 0 && !playerBlinded){
+            if (combatRound%2 == 0 && !playerBlinded && !enemyIsInvisible){
                 if (playedCard.slow > 0) {
                     enemySlow = playedCard.slow;
                 }else {
@@ -133,7 +161,7 @@ public class Combat {
         }
 
         if (playedCard.dot != 0){
-            if (combatRound%2==0 && !playerBlinded){
+            if (combatRound%2==0 && !playerBlinded && !enemyIsInvisible){
                 if (playedCard.dot>0){
                  enemyDot=playedCard.dot;
                  enemyDotTurns=playedCard.dotTurns;
@@ -154,9 +182,9 @@ public class Combat {
 
         if (playedCard.fear != 0) {
             Random r = new Random();
-            int randomNum = r.nextInt(3);
+            int randomNum = r.nextInt(playedCard.fear);
             if (randomNum == 0) {
-                if (combatRound % 2 == 0 && !playerBlinded) {
+                if (combatRound % 2 == 0 && !playerBlinded && !enemyIsInvisible) {
                     enemyFeared = true;
                 } else if (combatRound % 2 == 1 && !enemyBlinded) {
                     playerFeared = true;
@@ -165,17 +193,81 @@ public class Combat {
                 System.out.println("Fear failed");
             }
         }
+        if (playedCard.stun != 0) {
+            Random r = new Random();
+            int randomNum = r.nextInt(playedCard.stun);
+            if (randomNum == 0) {
+                if (combatRound % 2 == 0 && !playerBlinded && !enemyIsInvisible) {
+                    enemyStunned = true;
+                } else if (combatRound % 2 == 1 && !enemyBlinded) {
+                    playerStunned = true;
+                }
+            } else {
+                System.out.println("Stun failed");
+            }
+        }
 
         if (playedCard.blind != 0) {
-                if (combatRound % 2 == 0 && !playerBlinded) {
+                if (combatRound % 2 == 0 && !playerBlinded && !enemyIsInvisible) {
                     enemyBlindedTurns=playedCard.blindTurns;
                 } else if (combatRound % 2 == 1 && !enemyBlinded) {
                     playerBlindedTurns=playedCard.blindTurns;
                 }
             }
+        if (playedCard.returnDamage!=0){
+            if (combatRound % 2 == 0) {
+                enemyReturnDamage=playedCard.returnDamage;
+                enemyReturnDamageTurns=playedCard.returnDamageTurns;
+            } else if (combatRound % 2 == 1) {
+                playerReturnDamage=playedCard.returnDamage;
+                playerReturnDamageTurns=playedCard.returnDamageTurns;
+            }
+        }
 
+        if (playedCard.isAscend){
+            descend=true;
+            delay=playedCard.delay;
+        }
+        if (playedCard.invisible){
+            enemyIsInvisible=true;
+        }
+        if (playedCard.canExplode){
+            willExplode=true;
+        }
+        if (hasExploded){
+            System.out.println(activeEnemy.getName()+" exploded itself, dealing 40 damage");
+            hasExploded=false;
+            activeEnemy.setCurrentHealth(0);
+        }
+        if (playedCard.increasedDamage!=0){
+            if (combatRound % 2 == 0) {
+                playerDamageIncrease = playedCard.increasedDamage;
+                playerDamageIncreaseTurns = playedCard.increasedDamageTurns;
+            }else if (combatRound % 2 == 1) {
+                enemyDamageIncrease = playedCard.increasedDamage;
+                enemyDamageIncreaseTurns = playedCard.increasedDamageTurns;
+            }
+        }
+        if (combatRound % 2 == 1) {
+            if (playedCard.hasBeenPlayedLastTurnStun){
+                wasPlayedLastTurnStun=true;
+            }
+            if (playedCard.hasBeenPlayedThisTurnStun){
+                dontPlayThisTurnStun=true;
+            }
 
+            if (playedCard.hasBeenPlayedThisTurnDot){
+                dontPlayThisTurnDot=true;
+            }
 
+            if (playedCard.delay != 0) {
+                delay = playedCard.delay;
+            }
+
+            if (playedCard.delayDot != 0) {
+                delayDot = playedCard.delayDot;
+            }
+        }
         //reduceAction Points
         if (playedCard.actionPointsCost != 0) {
             if (combatRound%2 == 0) {
@@ -193,7 +285,10 @@ public class Combat {
 
     }// megaLogic end
 
-    public int modifier(ElementType thisElement, ElementType targetElement, int damage){
+    public int playerModifier(ElementType thisElement, ElementType targetElement, int damage){
+        if (playerDamageIncrease!=0) {
+            damage= (int) (damage * playerDamageIncrease);
+        }
         if((thisElement.equals(ElementType.WATER) && targetElement.equals(ElementType.FIRE)||
                 (thisElement.equals(ElementType.FIRE) && targetElement.equals(ElementType.EARTH))||
                 (thisElement.equals(ElementType.EARTH) && targetElement.equals(ElementType.WATER))))
@@ -202,32 +297,120 @@ public class Combat {
         return damage;
     }
 
+    public int enemyModifier(int damage){
+        if (enemyDamageIncrease!=0) {
+            damage= (int) (damage * enemyDamageIncrease);
+        }
+        return damage;
+    }
+
     public void statusEffectsPlayer(){
         playerSlow=0;
         if(playerDotTurns>0) {
-            player.setCurrentHealth(player.getCurrentHealth() - playerDot);
+            player.addHealth(-playerDot);
             playerDotTurns--;
         }
-        if(playerFeared==true){
+        if(playerFeared){
             System.out.println("Player is feared");
             player.setCurrentActionPoints(0);
             playerFeared=false;
+        }
+        if(playerStunned){
+            System.out.println("Player is stunned");
+            player.setCurrentActionPoints(0);
+            playerStunned=false;
+        }
+        if (enemyIsInvisible){
+            System.out.println(activeEnemy.getName()+ " cannot be hit by any card this turn");
+        }
+        if (enemyReturnDamageTurns>0){
+            enemyReturnDamageTurns--;
+        }
+        if(playerDamageIncreaseTurns==0){
+            playerDamageIncrease=0;
+        }
+        if (playerDamageIncreaseTurns>0){
+            playerDamageIncreaseTurns--;
         }
     }
 
     public void statusEffectsEnemy(){
         enemySlow=0;
+        if(dontPlayNextTurnStun){
+            wasPlayedLastTurnStun=false;
+        }
+        dontPlayNextTurnStun=false;
+        dontPlayThisTurnStun=false;
+        dontPlayThisTurnDot=false;
+        enemyIsInvisible=false;
+
         if(enemyDotTurns>0) {
-            activeEnemy.setCurrentHealth(activeEnemy.getCurrentHealth() - enemyDot);
+            activeEnemy.addHealth(-enemyDot);
             enemyDotTurns--;
         }
-        if(enemyFeared==true){
+        if(enemyFeared){
             System.out.println("Enemy is feared");
             activeEnemy.setCurrentActionPoints(0);
             enemyFeared=false;
         }
+        if(enemyStunned){
+            System.out.println("Enemy is stunned");
+            activeEnemy.setCurrentActionPoints(0);
+            enemyStunned=false;
+        }
         if(playerBlindedTurns>0){
             playerBlindedTurns--;
         }
+        if(wasPlayedLastTurnStun){
+            dontPlayNextTurnStun=true;
+        }
+
+        if (delay>0){
+            delay--;
+        }
+
+        if (delayDot>0){
+            delayDot--;
+        }
+
+        if (playerReturnDamageTurns>0){
+            playerReturnDamageTurns--;
+        }
+        if (playerReturnDamageTurns==0){
+            playerReturnDamage=0;
+        }
+        if(enemyDamageIncreaseTurns==0){
+            enemyDamageIncrease=0;
+        }
+        if (enemyDamageIncreaseTurns>0){
+            enemyDamageIncreaseTurns--;
+        }
+    }
+    public CombatCard checkCard(CombatCard checkedCard){
+        while((checkedCard.hasBeenPlayedLastTurnStun && dontPlayNextTurnStun) || (checkedCard.hasBeenPlayedThisTurnStun && dontPlayThisTurnStun)){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        while((checkedCard.delayDot > 0 && delayDot > 0) || (checkedCard.hasBeenPlayedThisTurnDot && dontPlayThisTurnDot)){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        while(checkedCard.delay > 0 && delay>0){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        while(checkedCard.returnDamage!=0 && playerReturnDamage>0){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        while(checkedCard.heal != 0 && activeEnemy.getCurrentHealth() == activeEnemy.getMaxHealth()){
+            checkedCard = activeEnemy.takeTurn();
+        }
+        if(descend){
+            checkedCard=new CombatCard(26,ElementType.FIRE, "Descend", 2);
+            enemySlow++;
+            descend=false;
+        }
+        if (willExplode && combatRound>12){
+            checkedCard=new CombatCard(40, ElementType.FIRE, "Explode", 1) ;
+            hasExploded=true;
+        }
+        return checkedCard;
     }
 }
