@@ -12,16 +12,16 @@ public class Combat {
     private int playerReturnDamageTurns=0, enemyReturnDamageTurns=0; // How many turns you will return damage.
     private int delay=0, delayDot=0; // Delay for playing the same card again.
     private int playerBlindedTurns=0, enemyBlindedTurns=0; // How long you are blinded.
-    private int playerDamageIncreaseTurns=0, enemyDamageIncreaseTurns=0;
-    private float playerDamageIncrease=0, enemyDamageIncrease=0;
+    private int playerDamageIncreaseTurns=0, enemyDamageIncreaseTurns=0; // How long the increased damage lasts.
+    private float playerDamageIncrease=0, enemyDamageIncrease=0; // Damage increase multiplies the damage done.
     private boolean playerBlinded=false, enemyBlinded=false; // Chance to cards to miss and not work.
     private boolean playerFeared=false, enemyFeared=false; // Skips turn as you cower in fear.
-    private boolean dontPlayThisTurnStun=false, dontPlayNextTurnStun=false, wasPlayedLastTurnStun=false;
-    private boolean dontPlayThisTurnDot=false;
-    private boolean descend=false;
-    private boolean enemyIsInvisible=false;
-    private boolean willExplode=false, hasExploded=false;
-    private boolean playerStunned=false, enemyStunned=false;
+    private boolean dontPlayThisTurnStun=false, dontPlayNextTurnStun=false, wasPlayedLastTurnStun=false; // Prevents the enemy from using the same stun card repeatedly.
+    private boolean dontPlayThisTurnDot=false; // Prevents the enemy from using the same dot card on the same turn
+    private boolean descend=false; // Becomes true if ascend has been played, and sets the next enemy card as descend.
+    private boolean enemyIsInvisible=false; // Enemy is invisible and cannot take any damage.
+    private boolean willExplode=false, hasExploded=false; // Checks if and when explode card will be played.
+    private boolean playerStunned=false, enemyStunned=false; // Skips turn as you recover from a stunning blow.
 
     public Combat(Player activePlayer, Enemy activeEnemy) { // Combat constructor
         this.player = activePlayer;
