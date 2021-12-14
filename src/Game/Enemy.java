@@ -1,15 +1,17 @@
+package Game;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends CombatEntity{
+public class Enemy extends CombatEntity {
 
-    private ArrayList<CombatCard> playedCards = new ArrayList<>();
-    BufferedImage image;
+    private ArrayList<Card> playedCards = new ArrayList<>();
+    private BufferedImage image;
 
-    public Enemy(String name, int Health, ElementType element, ArrayList<CombatCard> cards,int actionPoints) {
+    public Enemy(String name, int Health, ElementType element, ArrayList<Card> cards, int actionPoints) {
         this.setName(name);
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
@@ -19,7 +21,7 @@ public class Enemy extends CombatEntity{
         playedCards = new ArrayList<>();
     }
 
-    public Enemy(String name, int Health, ElementType element, ArrayList<CombatCard> cards,int actionPoints, String imageUrl) {
+    public Enemy(String name, int Health, ElementType element, ArrayList<Card> cards, int actionPoints, String imageUrl) {
         this.setName(name);
         this.setMaxHealth(Health);
         this.setCurrentHealth(Health);
@@ -35,12 +37,12 @@ public class Enemy extends CombatEntity{
         }
     }
 
-    ArrayList<CombatCard> cards;
+    ArrayList<Card> cards;
     @Override
-    public CombatCard takeTurn() { // The enemy takes its turn by playing one card from its cards, chosen randomly.
+    public Card takeTurn() { // The enemy takes its turn by playing one card from its cards, chosen randomly.
         Random r = new Random();
         int randomNum = r.nextInt(cards.size());
-        CombatCard playedCard = cards.get(randomNum);
+        Card playedCard = cards.get(randomNum);
         addPlayedCard(playedCard);
         return playedCard;
     }
@@ -49,13 +51,18 @@ public class Enemy extends CombatEntity{
         playedCards = new ArrayList<>();
     }
 
-    public void addPlayedCard(CombatCard card){
+    public void addPlayedCard(Card card){
         playedCards.add(card);
     }
 
-    public ArrayList<CombatCard> getPlayedCards() {
+    public ArrayList<Card> getPlayedCards() {
         return playedCards;
     }
 
+    // ---------- Getters and setters -----------------
 
+
+    public BufferedImage getImage() {
+        return image;
+    }
 }

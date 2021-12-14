@@ -1,3 +1,10 @@
+package GUI;
+
+import Game.Card;
+import Game.Combat;
+import Game.GameController;
+import Game.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +16,7 @@ public class Frame extends JFrame {
     NewGamePanel newGameScreen;
     Overview overviewScreen;
     GameController gc;
-    public Frame(Player player,GameController gc) {
+    public Frame(Player player, GameController gc) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.player = player;
@@ -36,7 +43,7 @@ public class Frame extends JFrame {
         this.add(panel);
     }
 
-    public void setRewardScreen(CombatCard card1, CombatCard card2, CombatCard card3, GameController gc) {
+    public void setRewardScreen(Card card1, Card card2, Card card3, GameController gc) {
         rewardScreen = new RewardScreen(card1,card2,card3,gc);
         rewardScreen.setPreferredSize(new Dimension(1200,1000));
         rewardScreen.setVisible(true);
@@ -67,5 +74,17 @@ public class Frame extends JFrame {
         remove(rewardScreen);
     }
 
+    // ---------- Getters and setters -----------------
 
+    public PlayersHandPanel getPanel() {
+        return panel;
+    }
+
+    public NewGamePanel getNewGameScreen() {
+        return newGameScreen;
+    }
+
+    public Overview getOverviewScreen() {
+        return overviewScreen;
+    }
 }

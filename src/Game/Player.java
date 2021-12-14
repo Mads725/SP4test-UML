@@ -1,13 +1,16 @@
+package Game;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class Player extends CombatEntity {
 
-    static CombatCard usedCard;
-    public ArrayList<CombatCard> playerCards ;
-    public ArrayList<CombatCard> playerHand ;
-    public ArrayList<CombatCard> inventory ;
+
+
+    static Card usedCard;
+    public ArrayList<Card> playerCards ;
+    public ArrayList<Card> playerHand ;
+    public ArrayList<Card> inventory ;
     private float swordDamageIncrease=0;
 
     public Player(int Health, int maxActionPoints) {
@@ -29,11 +32,11 @@ public class Player extends CombatEntity {
     }
 
     @Override
-    public CombatCard takeTurn() {
+    public Card takeTurn() {
 
         usedCard = null;
 
-        GameController.frame.panel.updateHand();
+        GameController.frame.getPanel().updateHand();
         GameController.frame.repaint();
 
         synchronized (this) {
@@ -61,32 +64,32 @@ public class Player extends CombatEntity {
     private void generatePlayerCards() {
         //( int damage, String element, String cardName, String cardText,int actionPointsCost)
         //( int hea, String cardName, String cardText,int actionPointsCost)
-        CombatCard fireball = new CombatCard(5, ElementType.FIRE, "Fireball",  1);
+        Card fireball = new Card(5, ElementType.FIRE, "Fireball",  1);
         playerCards.add(fireball);
         playerCards.add(fireball);
         playerCards.add(fireball);
-        CombatCard iceBlast = new CombatCard(5, ElementType.WATER, "Ice blast",  1);
+        Card iceBlast = new Card(5, ElementType.WATER, "Ice blast",  1);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
         playerCards.add(iceBlast);
-        CombatCard overgrowth = new CombatCard(5, ElementType.EARTH, "Overgrowth",  1);
+        Card overgrowth = new Card(5, ElementType.EARTH, "Overgrowth",  1);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
         playerCards.add(overgrowth);
-        CombatCard inferno = new CombatCard(12, ElementType.FIRE, "Inferno",  2);
+        Card inferno = new Card(12, ElementType.FIRE, "Inferno",  2);
         playerCards.add(inferno);
-        CombatCard surf = new CombatCard(12, ElementType.WATER, "Surf",  2);
+        Card surf = new Card(12, ElementType.WATER, "Surf",  2);
         playerCards.add(surf);
-        CombatCard earthquake = new CombatCard(12, ElementType.EARTH, "Earthquake",  2);
+        Card earthquake = new Card(12, ElementType.EARTH, "Earthquake",  2);
         playerCards.add(earthquake);
-        CombatCard heal = new CombatCard(3, "Heal",1);
+        Card heal = new Card(3, "Heal",1);
         playerCards.add(heal);
         playerCards.add(heal);
-        CombatCard majorHeal = new CombatCard(9, "Major heal",2);
+        Card majorHeal = new Card(9, "Major heal",2);
         playerCards.add(majorHeal);
     }
 
-    public void setUsedCard(CombatCard usedCard) {
+    public void setUsedCard(Card usedCard) {
         Player.usedCard = usedCard;
 
     }

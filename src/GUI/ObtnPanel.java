@@ -1,3 +1,7 @@
+package GUI;
+
+import Game.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +46,7 @@ public class ObtnPanel extends JPanel implements ActionListener {
                 GameController.frame.repaint();
                 gc.notifyAll();
             }
-            //GameController.o.overview.setVisible(false);
+            //Game.GameController.o.overview.setVisible(false);
         } else if (e.getSource() == exitBtn) {
 
             System.exit(0);
