@@ -62,6 +62,7 @@ public class Combat {
                 while (activeEnemy.getCurrentActionPoints()  >= 0) {
                     Card usedEnemyCard = activeEnemy.takeTurn();
                     usedEnemyCard=checkCard(usedEnemyCard);
+                    activeEnemy.addPlayedCard(usedEnemyCard);
                     megaLogic(usedEnemyCard);
                 }
             } // Game.Enemy turn end.

@@ -43,11 +43,12 @@ public class Enemy extends CombatEntity {
         Random r = new Random();
         int randomNum = r.nextInt(cards.size());
         Card playedCard = cards.get(randomNum);
-        addPlayedCard(playedCard);
         return playedCard;
     }
 
     public void resetPlayedCard(){
+
+        playedCards.clear();
         playedCards = new ArrayList<>();
     }
 
@@ -60,6 +61,7 @@ public class Enemy extends CombatEntity {
     }
 
     // ---------- Getters and setters -----------------
+
 
 
     public BufferedImage getImage() {

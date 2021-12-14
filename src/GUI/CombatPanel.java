@@ -70,7 +70,7 @@ public class CombatPanel extends JPanel {
     public void drawPlayedCards(int x, int y) { // Draws the played cards by the enemy in its last turn.
 
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Game.Enemy Played Cards", x, y);
+        g2d.drawString("Enemy Played Cards", x, y);
         int size = 110, y1 = y + 10, width = 150;
 
         for (Card playedCard : combat.getActiveEnemy().getPlayedCards()) {
