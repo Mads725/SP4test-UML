@@ -5,11 +5,13 @@ import java.util.Collections;
 
 public class Player extends CombatEntity {
 
+
     static Card usedCard; // The current card played
     public ArrayList<Card> playerCards ;
     public ArrayList<Card> playerHand ;
     public ArrayList<Card> inventory ; // Boss rewards list
     private int heal=0; // Heal after every combat (reward from boss)
+    private float swordDamageIncrease=0;
 
     public Player(int Health, int maxActionPoints) {
         this.setMaxActionPoints(maxActionPoints);
@@ -99,9 +101,17 @@ public class Player extends CombatEntity {
     public int getHeal() {
         return heal;
     }
-
+    
     public void setHeal(int heal) {
         this.heal = heal;
     }
 
+    public float getSwordDamageIncrease() {
+        return swordDamageIncrease;
+    }
+
+    public void setSwordDamageIncrease(float swordDamageIncrease) {
+        this.swordDamageIncrease = swordDamageIncrease;
+    }
 }
+

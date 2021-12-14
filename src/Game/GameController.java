@@ -351,6 +351,9 @@ public class GameController {
                 } else if (player.inventory.get(i).getCardName().equals("Bandages")) {
                     player.setHeal(10);
                     player.inventory.remove(i);
+                } else if (player.inventory.get(i).getCardName().equals("Sword")){
+                    player.setSwordDamageIncrease(1.25f);
+                    player.inventory.remove(i);
                 }
             }
         }
