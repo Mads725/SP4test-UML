@@ -1,3 +1,5 @@
+package Game;
+
 import java.util.Random;
 
 public class Combat {
@@ -23,46 +25,46 @@ public class Combat {
     private boolean willExplode=false, hasExploded=false;
     private boolean playerStunned=false, enemyStunned=false;
 
-    public Combat(Player activePlayer, Enemy activeEnemy) { // Combat constructor
+    public Combat(Player activePlayer, Enemy activeEnemy) { // Game.Combat constructor
         this.player = activePlayer;
         this.activeEnemy = activeEnemy;
         this.combatRound = 0;
     }
 
-    public void startCombat() { // Combat start and loop.
-        //Initialise Combat Panel
+    public void startCombat() { // Game.Combat start and loop.
+        //Initialise Game.Combat Panel
         GameController.frame.setCombatPanel(this);
         GameController.frame.setHandPanel();
 
         player.shuffleDeck();
 
-        while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) { // Combat loop
-            if (combatRound % 2 == 0) { // Player turn start
+        while(player.getCurrentHealth()>0 && activeEnemy.getCurrentHealth()>0) { // Game.Combat loop
+            if (combatRound % 2 == 0) { // Game.Player turn start
 
                 player.setCurrentActionPoints(player.getMaxActionPoints()-playerSlow);
                 statusEffectsPlayer();
                 player.drawHand();
 
                 while (player.getCurrentActionPoints()  >= 0 && activeEnemy.getCurrentHealth()>0) {
-                    CombatCard usedCard = player.takeTurn();
+                    Card usedCard = player.takeTurn();
 
                     if (usedCard !=null) {
                         megaLogic(usedCard);
                     }
                 }
 
-            } else if (combatRound % 2 == 1) { // Enemy turn start, player turn end.
+            } else if (combatRound % 2 == 1) { // Game.Enemy turn start, player turn end.
                 activeEnemy.resetPlayedCard();
                 activeEnemy.setCurrentActionPoints(activeEnemy.getMaxActionPoints()-enemySlow);
 
                 statusEffectsEnemy();
 
                 while (activeEnemy.getCurrentActionPoints()  >= 0) {
-                    CombatCard usedEnemyCard = activeEnemy.takeTurn();
+                    Card usedEnemyCard = activeEnemy.takeTurn();
                     usedEnemyCard=checkCard(usedEnemyCard);
                     megaLogic(usedEnemyCard);
                 }
-            } // Enemy turn end.
+            } // Game.Enemy turn end.
 
             combatRound++; // Next round
         }
@@ -73,7 +75,7 @@ public class Combat {
         GameController.frame.removeCombatPanel();
     }
 
-    private void megaLogic(CombatCard playedCard) { // Calculates what every card played in the game does
+    private void megaLogic(Card playedCard) { // Calculates what every card played in the game does
         playerBlinded=false;
         enemyBlinded=false;
         if (combatRound%2 == 0) {
@@ -285,12 +287,12 @@ public class Combat {
             playerDotTurns--;
         }
         if(playerFeared){
-            System.out.println("Player is feared");
+            System.out.println("Game.Player is feared");
             player.setCurrentActionPoints(0);
             playerFeared=false;
         }
         if(playerStunned){
-            System.out.println("Player is stunned");
+            System.out.println("Game.Player is stunned");
             player.setCurrentActionPoints(0);
             playerStunned=false;
         }
@@ -323,12 +325,12 @@ public class Combat {
             enemyDotTurns--;
         }
         if(enemyFeared){
-            System.out.println("Enemy is feared");
+            System.out.println("Game.Enemy is feared");
             activeEnemy.setCurrentActionPoints(0);
             enemyFeared=false;
         }
         if(enemyStunned){
-            System.out.println("Enemy is stunned");
+            System.out.println("Game.Enemy is stunned");
             activeEnemy.setCurrentActionPoints(0);
             enemyStunned=false;
         }
@@ -361,7 +363,7 @@ public class Combat {
         }
     }
 
-    public CombatCard checkCard(CombatCard checkedCard){ // Checks if the enemy card is valid to play or try again.
+    public Card checkCard(Card checkedCard){ // Checks if the enemy card is valid to play or try again.
 
         while((checkedCard.isHasBeenPlayedLastTurnStun() && dontPlayNextTurnStun) || (checkedCard.isHasBeenPlayedThisTurnStun() && dontPlayThisTurnStun)){
             checkedCard = activeEnemy.takeTurn();
@@ -379,14 +381,25 @@ public class Combat {
             checkedCard = activeEnemy.takeTurn();
         }
         if(descend){
-            checkedCard=new CombatCard(26,ElementType.FIRE, "Descend", 2);
+            checkedCard=new Card(26, ElementType.FIRE, "Descend", 2);
             enemySlow++;
             descend=false;
         }
         if (willExplode && combatRound>12){
-            checkedCard=new CombatCard(40, ElementType.FIRE, "Explode", 1) ;
+            checkedCard=new Card(40, ElementType.FIRE, "Explode", 1) ;
             hasExploded=true;
         }
         return checkedCard;
+    }
+
+
+    // ---------- Getters and setters -----------------
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Enemy getActiveEnemy() {
+        return activeEnemy;
     }
 }

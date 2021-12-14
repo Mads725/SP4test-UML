@@ -1,3 +1,8 @@
+package GUI;
+
+import Game.Card;
+import Game.GameController;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +15,7 @@ public class RewardScreen extends JPanel {
     RewardCardLabel rewardCard3;
     BufferedImage img;
 
-    public RewardScreen(CombatCard rewardCard1, CombatCard rewardCard2, CombatCard rewardCard3 , GameController gc) {
+    public RewardScreen(Card rewardCard1, Card rewardCard2, Card rewardCard3 , GameController gc) {
 
 
         this.rewardCard1 = new RewardCardLabel(rewardCard1, gc);  this.rewardCard1.setBounds(GameController.frame.getWidth()/2-350,200,200,300);

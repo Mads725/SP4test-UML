@@ -1,3 +1,10 @@
+package GUI;
+
+import Game.Card;
+import Game.Combat;
+import Game.CombatEntity;
+import Game.ElementType;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +33,7 @@ public class CombatPanel extends JPanel {
         g2d.drawImage(background, 0, 0, Width, Height, null);
         g2d.setColor(Color.BLACK);
         try {
-            g2d.drawImage(combat.activeEnemy.image, Width / 2 - 512 / 2, 0, 512, 512, this);
+            g2d.drawImage(combat.getActiveEnemy().getImage(), Width / 2 - 512 / 2, 0, 512, 512, this);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -35,12 +42,12 @@ public class CombatPanel extends JPanel {
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
         g2d.drawRect(0, 0, Width, 500);
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Action points: " + combat.player.getCurrentActionPoints(), 30, 60);
-        String string = "Element: " + combat.activeEnemy.getElement();
+        g2d.drawString("Action points: " + combat.getPlayer().getCurrentActionPoints(), 30, 60);
+        String string = "Element: " + combat.getActiveEnemy().getElement();
         g2d.drawString(string, (int) (Width - 130 - string.length() * 3.5), 50);
 
-        drawHealthBar(30, 100, combat.player);
-        drawHealthBar(Width - 130, 100, combat.activeEnemy);
+        drawHealthBar(30, 100, combat.getPlayer());
+        drawHealthBar(Width - 130, 100, combat.getActiveEnemy());
         drawPlayedCards(Width - 350, 100);
 
     }
@@ -63,10 +70,10 @@ public class CombatPanel extends JPanel {
     public void drawPlayedCards(int x, int y) { // Draws the played cards by the enemy in its last turn.
 
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Enemy Played Cards", x, y);
+        g2d.drawString("Game.Enemy Played Cards", x, y);
         int size = 110, y1 = y + 10, width = 150;
 
-        for (CombatCard playedCard : combat.activeEnemy.getPlayedCards()) {
+        for (Card playedCard : combat.getActiveEnemy().getPlayedCards()) {
 
             if (playedCard.getElement() == ElementType.WATER) {
                 g2d.setColor(new Color(0, 130, 255));

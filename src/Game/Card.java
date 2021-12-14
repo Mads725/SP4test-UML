@@ -1,4 +1,6 @@
-public class CombatCard {
+package Game;
+
+public class Card {
 
     private int damage;
     private int heal;
@@ -26,20 +28,20 @@ public class CombatCard {
     private boolean isAscend=false;
     private boolean canExplode=false;
 
-    public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost){ // Damage card.
+    public Card(int damage, ElementType element, String cardName, int actionPointsCost){ // Damage card.
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
         this.cardText = "Deals " + damage + " " + element + " damage" ;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(int heal, String cardName, int actionPointsCost){ // Healing card.
+    public Card(int heal, String cardName, int actionPointsCost){ // Healing card.
         this.heal=heal;
         this.cardName = cardName;
         this.cardText = "Heals for " + heal + " damage";
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(int damage, ElementType element, String cardName, String cardText, int actionPointsCost, int slow){
+    public Card(int damage, ElementType element, String cardName, String cardText, int actionPointsCost, int slow){
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
@@ -47,7 +49,7 @@ public class CombatCard {
         this.actionPointsCost = actionPointsCost;
         this.slow=slow;
     }
-    public CombatCard(int heal, String cardName, String cardText, int actionPointsCost, int slow, int delay){
+    public Card(int heal, String cardName, String cardText, int actionPointsCost, int slow, int delay){
         this.heal=heal;
         this.cardName = cardName;
         this.cardText = "Heals for " + heal + " damage and " + cardText;
@@ -55,7 +57,7 @@ public class CombatCard {
         this.slow=slow;
         this.delay=delay;
     }
-    public CombatCard(int damage,int heal,ElementType element, String cardName, String cardText, int actionPointsCost){
+    public Card(int damage, int heal, ElementType element, String cardName, String cardText, int actionPointsCost){
         this.damage=damage;
         this.element=element;
         this.heal=heal;
@@ -63,7 +65,7 @@ public class CombatCard {
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
     }
-    public CombatCard(ElementType element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns, int delayDot){
+    public Card(ElementType element, String cardName, String cardText, int actionPointsCost, int dot, int dotTurns, int delayDot){
         this.element=element;
         this.cardName = cardName;
         this.cardText = cardText;
@@ -73,14 +75,14 @@ public class CombatCard {
         this.delayDot=delayDot;
         hasBeenPlayedThisTurnDot=true;
     }
-    public CombatCard(String cardName, String cardText,int fear, int actionPointsCost){
+    public Card(String cardName, String cardText, int fear, int actionPointsCost){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
         this.fear=fear;
         this.hasBeenPlayedThisTurnStun=true;
     }
-    public CombatCard(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns){
+    public Card(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
@@ -88,12 +90,12 @@ public class CombatCard {
         this.blindTurns=blindTurns;
         this.hasBeenPlayedThisTurnStun=true;
     }
-    public CombatCard(String cardName, String cardText, int actionPointsCost){
+    public Card(String cardName, String cardText, int actionPointsCost){
         this.cardName=cardName;
         this.cardText=cardText;
         this.actionPointsCost=actionPointsCost;
     }
-    public CombatCard(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns, int slow){
+    public Card(String cardName, String cardText, int actionPointsCost, int blind, int blindTurns, int slow){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
@@ -102,7 +104,7 @@ public class CombatCard {
         this.slow=slow;
         this.hasBeenPlayedLastTurnStun=true;
     }
-    public CombatCard(int actionPointsCost, int delay, String cardName, String cardText){
+    public Card(int actionPointsCost, int delay, String cardName, String cardText){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
@@ -110,7 +112,7 @@ public class CombatCard {
         this.invisible=true;
         this.isAscend=true;
     }
-    public CombatCard(String cardName, int actionPointsCost, String cardText, int returnDamage, int returnDamageTurns){
+    public Card(String cardName, int actionPointsCost, String cardText, int returnDamage, int returnDamageTurns){
         this.cardName = cardName;
         this.cardText = cardText;
         this.actionPointsCost = actionPointsCost;
@@ -118,7 +120,7 @@ public class CombatCard {
         this.canExplode=true;
         this.returnDamageTurns=returnDamageTurns;
     }
-    public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost, int stun){ // Damage card.
+    public Card(int damage, ElementType element, String cardName, int actionPointsCost, int stun){ // Damage card.
         this.damage=damage;
         this.element=element;
         this.cardName = cardName;
@@ -127,7 +129,7 @@ public class CombatCard {
         this.stun=stun;
         this.hasBeenPlayedLastTurnStun=true;
     }
-    public CombatCard(String cardName, String cardText, int actionPointsCost, float increasedDamage, int increasedDamageTurns, int delay){
+    public Card(String cardName, String cardText, int actionPointsCost, float increasedDamage, int increasedDamageTurns, int delay){
         this.cardName=cardName;
         this.cardText=cardText;
         this.actionPointsCost=actionPointsCost;
@@ -149,7 +151,7 @@ public class CombatCard {
 
     @Override
     public String toString() {
-        return "CombatCard{" +
+        return "Game.Card{" +
                 "cardName='" + cardName + '\'' +
                 ", cardText='" + cardText + '\'' +
                 '}';

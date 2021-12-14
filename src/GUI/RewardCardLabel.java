@@ -1,12 +1,15 @@
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+package GUI;
+
+import GUI.CardLabel;
+import Game.Card;
+import Game.GameController;
+
 import java.awt.event.MouseEvent;
 
 public class RewardCardLabel extends CardLabel {
     GameController gc;
 
-    public RewardCardLabel(CombatCard card, GameController gc) {
+    public RewardCardLabel(Card card, GameController gc) {
         super(card);
         this.gc = gc;
     }

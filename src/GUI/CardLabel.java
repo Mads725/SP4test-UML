@@ -1,3 +1,9 @@
+package GUI;
+
+import Game.Card;
+import Game.ElementType;
+import Game.GameController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7,9 +13,9 @@ import java.awt.event.MouseListener;
 public class CardLabel extends JButton implements MouseListener {
     int sizeX = 100, sizeY = 200;
     int index;
-    CombatCard card;
+    Card card;
 
-    public CardLabel(CombatCard card) {
+    public CardLabel(Card card) {
         setOpaque(true);
         setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);

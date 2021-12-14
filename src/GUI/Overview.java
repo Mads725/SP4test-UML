@@ -1,3 +1,7 @@
+package GUI;
+
+import Game.GameController;
+
 import javax.swing.*;
 
 public class Overview extends JPanel {
@@ -26,5 +30,10 @@ public class Overview extends JPanel {
 
     }
 
+    // ---------- Getters and setters -----------------
 
+
+    public OcardPanel getCardPanel() {
+        return cardPanel;
+    }
 }

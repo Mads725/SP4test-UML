@@ -1,3 +1,9 @@
+package GUI;
+
+import GUI.OverviewCardLabel;
+import Game.Card;
+import Game.GameController;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +13,7 @@ import java.util.ArrayList;
 
 public class OcardPanel extends JPanel {
     
-    private ArrayList<CombatCard> overviewCards;
+    private ArrayList<Card> overviewCards;
     private ArrayList<OverviewCardLabel> overviewCardLabel = new ArrayList<>();
     private GameController gc;
 
@@ -37,7 +43,7 @@ public class OcardPanel extends JPanel {
         this.removeAll();
         overviewCardLabel.removeAll(overviewCardLabel);
         overviewCards = GameController.player.playerCards;
-        for (CombatCard c: overviewCards) {
+        for (Card c: overviewCards) {
                 overviewCardLabel.add(new OverviewCardLabel(c));
                 //System.out.println(overviewCardLabel.get(idx));
                 //idx++;

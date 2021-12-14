@@ -1,3 +1,5 @@
+package Game;
+
 public class Balance {
 
     public static int MAX_HAND_SIZE = 5;
