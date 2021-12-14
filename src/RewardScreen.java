@@ -12,14 +12,14 @@ public class RewardScreen extends JPanel {
 
     public RewardScreen(CombatCard rewardCard1, CombatCard rewardCard2, CombatCard rewardCard3 , GameController gc) {
 
-        TextField text = new TextField("Choose a reward");
-        JButton button = new JButton();
+
         this.rewardCard1 = new RewardCardLabel(rewardCard1, gc);  this.rewardCard1.setBounds(GameController.frame.getWidth()/2-350,200,200,300);
         this.rewardCard2 = new RewardCardLabel(rewardCard2, gc);    this.rewardCard2.setBounds(GameController.frame.getWidth()/2-100,200,200,300);
         this.rewardCard3 = new RewardCardLabel(rewardCard3, gc);    this.rewardCard3.setBounds(GameController.frame.getWidth()/2+150,200,200,300);
         this.setLayout(null);
 
         JLabel label = new JLabel("Choose a Reward");
+        label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, 35));
         label.setBounds(GameController.frame.getWidth()/2-150,100,300,100);
         add(label);

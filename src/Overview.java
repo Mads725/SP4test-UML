@@ -2,7 +2,6 @@ import javax.swing.*;
 
 public class Overview extends JPanel {
 
-
     OcardPanel cardPanel;
     OhpPanel hpPanel;
     ObtnPanel btnPanel;
@@ -18,7 +17,7 @@ public class Overview extends JPanel {
 
 
         btnPanel = new ObtnPanel(gc);
-        hpPanel = new OhpPanel();
+        hpPanel = new OhpPanel(gc);
         cardPanel = new OcardPanel(gc);
 
         this.add(btnPanel);
