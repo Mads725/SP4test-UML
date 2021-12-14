@@ -8,8 +8,8 @@ public class Combat {
     Enemy activeEnemy;
     private int combatRound; // Round counter. Even is the players turn. Odd is the enemies turn.
     private int playerSlow=0, enemySlow=0; // Slow is reduced action points.
-    private int playerDot=0, enemyDot=0; // Dot is damage over time, damage at the start of the turn.
-    private int playerDotTurns=0, enemyDotTurns=0; // How long the dot will last.
+    private int playerDot=0, enemyDot=0, enemyDot2=0; // Dot is damage over time, damage at the start of the turn.
+    private int playerDotTurns=0, enemyDotTurns=0, enemyDotTurns2; // How long the dot will last.
     private int playerReturnDamage=0, enemyReturnDamage=0; // Takes damage when you deal damage.
     private int playerReturnDamageTurns=0, enemyReturnDamageTurns=0; // How many turns you will return damage.
     private int delay=0, delayDot=0; // Delay for playing the same card again.
@@ -59,7 +59,7 @@ public class Combat {
 
                 statusEffectsEnemy();
 
-                while (activeEnemy.getCurrentActionPoints()  >= 0) {
+                while (activeEnemy.getCurrentActionPoints()  > 0) {
                     Card usedEnemyCard = activeEnemy.takeTurn();
                     usedEnemyCard=checkCard(usedEnemyCard);
                     megaLogic(usedEnemyCard);
@@ -138,12 +138,23 @@ public class Combat {
 
         if (playedCard.getDot() != 0){
             if (combatRound%2==0 && !playerBlinded && !enemyIsInvisible){
-                if (playedCard.getDot()>0){
-                 enemyDot=playedCard.getDot();
-                 enemyDotTurns=playedCard.getDotTurns();
-                } else {
-                playerDot=playedCard.getDot();
-                playerDotTurns=playedCard.getDotTurns();
+                if (enemyDot != 0) {
+                    if (playedCard.getDot() > 0) {
+                        enemyDot2 = playedCard.getDot();
+                        enemyDotTurns2 = playedCard.getDotTurns();
+                    } else {
+                        playerDot = playedCard.getDot();
+                        playerDotTurns = playedCard.getDotTurns();
+                    }
+                }
+                if (enemyDot == 0) {
+                    if (playedCard.getDot() > 0) {
+                        enemyDot = playedCard.getDot();
+                        enemyDotTurns = playedCard.getDotTurns();
+                    } else {
+                        playerDot = playedCard.getDot();
+                        playerDotTurns = playedCard.getDotTurns();
+                    }
                 }
             }else if (combatRound%2 == 1 && !enemyBlinded){
                 if (playedCard.getDot()<0){
@@ -323,9 +334,13 @@ public class Combat {
         dontPlayThisTurnDot=false;
         enemyIsInvisible=false;
 
-        if(enemyDotTurns>0) {
+        if(enemyDotTurns > 0) {
             activeEnemy.addHealth(-enemyDot);
             enemyDotTurns--;
+        }
+        if(enemyDotTurns2 > 0) {
+            activeEnemy.addHealth(-enemyDot2);
+            enemyDotTurns2--;
         }
         if(enemyFeared){
             System.out.println("Game.Enemy is feared");

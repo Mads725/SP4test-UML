@@ -121,7 +121,7 @@ public class GameController {
     public void generateEnemies() {
 
         Card burn = new Card(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1, 6, 3, 3);
-        Card fireTornado = new Card(14, ElementType.FIRE, "Fire Tornado", 1);
+        Card fireTornado = new Card(13, ElementType.FIRE, "Fire Tornado", 1);
         Card fireBlast = new Card(7, ElementType.FIRE, "Fireblast", 1);
         ArrayList<Card> enemy1Cards = new ArrayList<>();
         enemy1Cards.add(fireBlast);
@@ -135,7 +135,7 @@ public class GameController {
 
         Card eatBanana = new Card(7, "Eat Banana", 1);
         Card throwBanana = new Card(6, ElementType.EARTH, "Throw Banana", 1);
-        Card throwBananaHarder = new Card(12, ElementType.EARTH, "Throw Banana Harder", 1);
+        Card throwBananaHarder = new Card(11, ElementType.EARTH, "Throw Banana Harder", 1);
         ArrayList<Card> enemy2Cards = new ArrayList<>();
         enemy2Cards.add(throwBanana);
         enemy2Cards.add(throwBanana);
@@ -146,7 +146,7 @@ public class GameController {
         Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards, 1);
         randomEnemies1.add(enemy2);
 
-        Card splash = new Card(7, ElementType.WATER, "Splash", 1);
+        Card splash = new Card(6, ElementType.WATER, "Splash", 1);
         Card regenerate = new Card(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);
         Card drench = new Card(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
         ArrayList<Card> enemy3Cards = new ArrayList<>();
@@ -211,14 +211,14 @@ public class GameController {
     }
 
     public void generateBosses() {
+        Card pumpkinPunch = new Card(6, ElementType.EARTH, "Pumpkin Punch", 1);
         Card headbutt = new Card(10, ElementType.EARTH, "Headbutt", 1);
         Card haunt = new Card(ElementType.EARTH, "Haunt", "Deals 6 damage for 3 turns", 1, 6, 3, 3);
         Card halloween = new Card("Halloween", "33% chance to fear", 3, 1);
         ArrayList<Card> bossCards = new ArrayList<>();
         bossCards.add(headbutt);
-        bossCards.add(headbutt);
-        bossCards.add(headbutt);
-        bossCards.add(haunt);
+        bossCards.add(pumpkinPunch);
+        bossCards.add(pumpkinPunch);
         bossCards.add(haunt);
         bossCards.add(halloween);
 
