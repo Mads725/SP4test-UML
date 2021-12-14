@@ -1,24 +1,38 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class OcardPanel extends JPanel {
     
-    ArrayList<CombatCard> overviewCards;
-    ArrayList<OverviewCardLabel> overviewCardLabel = new ArrayList<>();
-    GameController gc;
+    private ArrayList<CombatCard> overviewCards;
+    private ArrayList<OverviewCardLabel> overviewCardLabel = new ArrayList<>();
+    private GameController gc;
+
+    BufferedImage background;
+
     public OcardPanel(GameController gc) {
         this.gc = gc;
         this.setBounds(GameController.frame.getWidth()/4, 0, (GameController.frame.getWidth()/4)*3, GameController.frame.getHeight()-150);
         this.setLayout(null);
-        this.setBackground(Color.ORANGE);
         
-
+        try {
+            background = ImageIO.read(getClass().getResource("/resources/background3.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         createCardsOverview();
         drawCardsOverview();
 
     }
 
+    public void paintComponent(Graphics G){
+        G.drawImage(background,0,0,null);
+
+
+    }
     public void createCardsOverview() {
         this.removeAll();
         overviewCardLabel.removeAll(overviewCardLabel);

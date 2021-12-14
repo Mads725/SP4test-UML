@@ -2,14 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OhpPanel extends JPanel {
+   private GameController gc;
+   private Graphics2D g2d;
+   private int Width = GameController.frame.getWidth()/4, Height = GameController.frame.getHeight()-150;
+   private Player player;
 
-    Graphics2D g2d;
-    //int Width = 1185, Height = 450;
-    int Width = GameController.frame.getWidth()/4, Height = GameController.frame.getHeight()-150;
-    Player player;
-
-    public OhpPanel() {
-        
+    public OhpPanel(GameController gc) {
+        this.gc = gc;
         this.player = GameController.player;
         this.setBounds(0, 0, Width, Height);
     }
@@ -18,15 +17,17 @@ public class OhpPanel extends JPanel {
     public void paint(Graphics g){
         this.player = GameController.player;
         g2d = (Graphics2D) g;
-        
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
         g2d.drawString("Player health: " + player.getCurrentHealth(), 100,50);
-        
+        g2d.drawString("Dungeon layer " + gc.getLayer(),100,75);
+
         drawHealthBar(100,100, player);
        
     }
 
     public void drawHealthBar(int x, int y, Player player){
         int height = 300;
+
         g2d.setColor(Color.red);
         g2d.fillRect(x,y,100,height);
         g2d.setColor(Color.green);
@@ -34,9 +35,8 @@ public class OhpPanel extends JPanel {
         g2d.setColor(Color.DARK_GRAY);
         g2d.setStroke( new BasicStroke(5));
         g2d.drawRect(x,y,100,300);
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
         g2d.drawString("" + player.getCurrentHealth(),x + 40,y+height-20);
-
-       
 
     }
 
