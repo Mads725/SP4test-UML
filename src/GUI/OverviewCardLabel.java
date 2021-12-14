@@ -9,13 +9,19 @@ import java.awt.*;
 
 public class OverviewCardLabel extends JLabel {
     Card card;
+    String string;
 
     public OverviewCardLabel(Card card) {
         setOpaque(true);
         setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
-        String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
+        if(card.getElement()!=null) {
+            string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
+        }else{
+            string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.getActionPointsCost();
+        }
+
         this.card = card;
         this.setFont(new Font("Arial", Font.BOLD, 16));
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
