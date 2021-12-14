@@ -35,7 +35,7 @@ public class OcardPanel extends JPanel {
     }
 
     public void paintComponent(Graphics G){
-        G.drawImage(background,0,0,null);
+        G.drawImage(background,0,0,getWidth()+500,getHeight(),null);
         G.setFont(new Font("Ariel", Font.BOLD, 40));
         G.drawString("Player Cards", GameController.frame.getWidth()/4 + 10, 55);
     }

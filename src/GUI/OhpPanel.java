@@ -22,12 +22,19 @@ public class OhpPanel extends JPanel {
     public void paint(Graphics g){
         this.player = GameController.player;
         g2d = (Graphics2D) g;
+        g2d.setColor(new Color(134, 45, 89));
+        g2d.fillRect(0,0,getWidth(),getHeight());
+
+
+
+        g2d.setColor(Color.BLACK);
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
         g2d.drawString("Player health: " + player.getCurrentHealth(), 50,50);
         g2d.drawString("Dungeon layer " + gc.getLayer(),50,75);
 
         drawHealthBar(100,100, player);
-       
+
+
     }
 
     public void drawHealthBar(int x, int y, Player player){
@@ -37,7 +44,7 @@ public class OhpPanel extends JPanel {
         g2d.fillRect(x,y,100,height);
         g2d.setColor(Color.green);
         g2d.fillRect(x,(int) (y + height*((1-((float)player.getCurrentHealth()/(float)player.getMaxHealth())))),100,(int) (height*((float)player.getCurrentHealth()/(float)player.getMaxHealth())));
-        g2d.setColor(Color.DARK_GRAY);
+        g2d.setColor(Color.BLACK);
         g2d.setStroke( new BasicStroke(5));
         g2d.drawRect(x,y,100,300);
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
