@@ -27,6 +27,7 @@ public class Card {
     private boolean hasBeenPlayedThisTurnDot=false;
     private boolean isAscend=false;
     private boolean canExplode=false;
+    private boolean isReGrow=false;
 
     public Card(int damage, ElementType element, String cardName, int actionPointsCost){ // Damage card.
         this.damage=damage;
@@ -56,6 +57,15 @@ public class Card {
         this.actionPointsCost = actionPointsCost;
         this.slow=slow;
         this.delay=delay;
+    }
+    public Card(int heal, String cardName, String cardText, int actionPointsCost, int slow, int delay, int regrow){
+        this.heal=heal;
+        this.cardName = cardName;
+        this.cardText = "Heals for " + heal + " damage and " + cardText;
+        this.actionPointsCost = actionPointsCost;
+        this.slow=slow;
+        this.delay=delay;
+        this.isReGrow=true;
     }
     public Card(int damage, int heal, ElementType element, String cardName, String cardText, int actionPointsCost){
         this.damage=damage;
@@ -247,4 +257,7 @@ public class Card {
         return canExplode;
     }
 
+    public boolean isReGrow() {
+        return isReGrow;
+    }
 }

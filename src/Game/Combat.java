@@ -256,6 +256,9 @@ public class Combat {
                 delayDot = playedCard.getDelayDot();
             }
         }
+            if (playedCard.isReGrow()){
+                enemySlow++;
+            }
         //reduceAction Points
         if (playedCard.getActionPointsCost() != 0) {
             if (combatRound%2 == 0) {

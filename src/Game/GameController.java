@@ -165,7 +165,7 @@ public class GameController {
         enemy4Cards.add(fireShield);
         enemy4Cards.add(fireShield);
 
-        Enemy enemy4 = new Enemy("Unstable Lava", 90, ElementType.FIRE, enemy4Cards, 1);
+        Enemy enemy4 = new Enemy("Unstable Lava", 100, ElementType.FIRE, enemy4Cards, 1);
         randomEnemies2.add(enemy4);
 
         Card bite = new Card(12, ElementType.EARTH, "Bite", 1);
@@ -177,11 +177,11 @@ public class GameController {
         enemy5Cards.add(camouflage);
         enemy5Cards.add(venom);
 
-        Enemy enemy5 = new Enemy("Venomous Snake", 70, ElementType.EARTH, enemy5Cards, 1);
+        Enemy enemy5 = new Enemy("Venomous Snake", 80, ElementType.EARTH, enemy5Cards, 1);
         randomEnemies2.add(enemy5);
 
         Card pinch = new Card(9, ElementType.WATER, "Pinch", 1);
-        Card regrow = new Card(26, "Regrow", "gives one less actionpoint next turn", 1, 1, 3);
+        Card regrow = new Card(26, "Regrow", "gives one less actionpoint next turn", 1, 1, 3, 1);
         Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 5 damage for 5 turns", 1, 5, 5, 5);
         ArrayList<Card> enemy6Cards = new ArrayList<>();
         enemy6Cards.add(pinch);

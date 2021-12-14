@@ -2,6 +2,11 @@
 'https://plantuml.com/class-diagram
 
 class Main
+enum ElementType {
+WATER
+EARTH
+FIRE
+}
 class GameController {
 Player player
 Frame frame
@@ -10,7 +15,7 @@ ArrayList Boss
 int layer
 startGame()
 generateEnemies()
-generateRewardCards
+generateRewardCards()
 }
 
 class Combat {
@@ -47,8 +52,7 @@ generatePlayerCards()
 class Enemy{
 takeTurn()
 }
-class Boss
-class CombatCard {
+class Card {
 getElement()
 getCardName()
 getCardText()
@@ -64,19 +68,14 @@ Main - GameController : Starts
 GameController "1" *-- "1"Combat
 Combat "1" *-- "1" Player
 Combat "1" *-- "1" Enemy
-Combat *-- Boss
 CombatEntity <|-- Player
 CombatEntity <|-- Enemy
-CombatEntity <|-- Boss
-Player "1" *-- "many" CombatCard : contains
-Enemy "1" *-- "3-5" CombatCard : contains
-Boss "1" *-- "3-5" CombatCard : contains
-
+Player "1" *-- "many" Card : contains
+Enemy "1" *-- "3-5" Card : contains
 
 GameController - Frame : Starts
 Frame *-- CombatPanel
 Frame *-- PlayerHandPanel
 PlayerHandPanel "1" *-- "5" CardLabel
-
 
 @enduml
