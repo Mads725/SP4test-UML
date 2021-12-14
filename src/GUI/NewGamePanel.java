@@ -21,6 +21,7 @@ public class NewGamePanel extends JPanel implements ActionListener, TextListener
         setLayout(null);
         int s = 300;
         newGameButton = new JButton("New Game");
+        newGameButton.setFont(new Font("Ariel", Font.PLAIN, 40));
         newGameButton.setSize(s, 100);
         newGameButton.addActionListener(this);
         newGameButton.setBounds((1200 - s) / 2, 800 / 2, s, 100);

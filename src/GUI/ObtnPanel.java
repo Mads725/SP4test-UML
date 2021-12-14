@@ -16,9 +16,10 @@ public class ObtnPanel extends JPanel implements ActionListener {
         this.gc = gc;
         this.setBounds(0, GameController.frame.getHeight()-150, GameController.frame.getWidth(), 150);
         this.setLayout(null);
-        this.setBackground(Color.GREEN);
+        //this.setBackground(Color.GREEN);
 
         nextBtn = new JButton("Next");
+        nextBtn.setFont(new Font("Ariel", Font.BOLD, 40));
         nextBtn.setBounds(0, 0, GameController.frame.getWidth()/2, 100);
         nextBtn.setSize((GameController.frame.getWidth()/2), 100);
         nextBtn.setPreferredSize(new Dimension(GameController.frame.getWidth()/2, 100));
@@ -26,6 +27,7 @@ public class ObtnPanel extends JPanel implements ActionListener {
         nextBtn.addActionListener(this);
 
         exitBtn = new JButton("Exit");
+        exitBtn.setFont(new Font("Ariel", Font.BOLD, 40));
         exitBtn.setBounds(GameController.frame.getWidth()/2, 0, GameController.frame.getWidth()/2, 100);
         exitBtn.setSize(GameController.frame.getWidth()/2, 100);
         exitBtn.setPreferredSize(new Dimension(GameController.frame.getWidth()/4, 100));

@@ -41,7 +41,7 @@ public class OhpPanel extends JPanel {
         g2d.setStroke( new BasicStroke(5));
         g2d.drawRect(x,y,100,300);
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
-        g2d.drawString("" + player.getCurrentHealth(),x + 40,y+height-20);
+        g2d.drawString("" + player.getCurrentHealth() + " / " + player.getMaxHealth(),x + 15,y+height-20);
 
     }
 
