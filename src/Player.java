@@ -8,6 +8,7 @@ public class Player extends CombatEntity {
     public ArrayList<CombatCard> playerCards ;
     public ArrayList<CombatCard> playerHand ;
     public ArrayList<CombatCard> inventory ;
+    private float swordDamageIncrease=0;
 
     public Player(int Health, int maxActionPoints) {
         //Scanner scanner = new Scanner(System.in);  // Create a Scanner object
@@ -101,6 +102,13 @@ public class Player extends CombatEntity {
     }
 
 
+    public float getSwordDamageIncrease() {
+        return swordDamageIncrease;
+    }
+
+    public void setSwordDamageIncrease(float swordDamageIncrease) {
+        this.swordDamageIncrease = swordDamageIncrease;
+    }
 }
 
 

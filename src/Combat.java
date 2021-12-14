@@ -260,8 +260,11 @@ public class Combat {
     } // -------------------------------------- megaLogic end ----------------------------------------------
 
     public int playerModifier(ElementType thisElement, ElementType targetElement, int damage){ // Sets player damage modifier
-        if (playerDamageIncrease!=0) {
+        if (playerDamageIncrease != 0) {
             damage= (int) (damage * playerDamageIncrease);
+        }
+        if (player.getSwordDamageIncrease() != 0){
+            damage= (int) (damage * player.getSwordDamageIncrease());
         }
         if((thisElement.equals(ElementType.WATER) && targetElement.equals(ElementType.FIRE)||
                 (thisElement.equals(ElementType.FIRE) && targetElement.equals(ElementType.EARTH))||
