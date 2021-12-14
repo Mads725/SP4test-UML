@@ -283,7 +283,7 @@ public class GameController {
 
         CombatCard sword = new CombatCard("Sword", "Grants 25% increased damage", -1);
         CombatCard phdInMedicalScience = new CombatCard( "PhD In Medical Science", "Grants 25% increased healing", -1);
-        
+
     }
     public void initializeCombat(ArrayList<Enemy> randomEnemies){
         Random r = new Random();
