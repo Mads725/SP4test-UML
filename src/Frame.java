@@ -22,7 +22,6 @@ public class Frame extends JFrame {
         this.gc = gc;
         newGameScreen = new NewGamePanel(gc,this);
         add(newGameScreen);
-
     }
 
     public void setOverviewScreen() {
@@ -30,15 +29,11 @@ public class Frame extends JFrame {
         add(overviewScreen);
     }
 
-
-
     public void setHandPanel() {
         panel = new PlayersHandPanel(GameController.player);
         panel.setBounds(0, getHeight() - 400, getWidth(), 400);
         panel.setPreferredSize(new Dimension(1200, 400));
         this.add(panel);
-
-
     }
 
     public void setRewardScreen(CombatCard card1, CombatCard card2, CombatCard card3, GameController gc) {
@@ -47,24 +42,16 @@ public class Frame extends JFrame {
         rewardScreen.setVisible(true);
         rewardScreen.setBounds(0,0,1200,1000);
         this.add(rewardScreen);
-
-
     }
 
     public void setCombatPanel(Combat combat) {
         combatPanel = new CombatPanel(combat);
-
-        //combatPanel.setBounds(0,0,getWidth(),500);
         combatPanel.setSize(new Dimension(getWidth(), 500));
         add(combatPanel);
-
-
     }
 
     public void setNewGameScreen(){
-
         newGameScreen.setVisible(true);
-
         this.repaint();
     }
 

@@ -9,9 +9,8 @@ public class OhpPanel extends JPanel {
     Player player;
 
     public OhpPanel() {
-        //this.player = GameController.player;
-        //this.setBounds(0,0,1200,450);
-        this.player = player;
+        
+        this.player = GameController.player;
         this.setBounds(0, 0, Width, Height);
     }
 
@@ -19,21 +18,11 @@ public class OhpPanel extends JPanel {
     public void paint(Graphics g){
         this.player = GameController.player;
         g2d = (Graphics2D) g;
-        //g2d.setStroke( new BasicStroke(5));
-        //g2d.drawRect(0,0,Width,500);
-
+        
         g2d.drawString("Player health: " + player.getCurrentHealth(), 100,50);
-
-        //g2d.drawString(combat.activeEnemy.getName(), Width-160-40,40);
-        //g2d.drawString("Element: " + combat.activeEnemy.getElement(), Width -160-40, 50 );
-
-        //g2d.setBackground( Color.gray);
-        //g2d.drawString( );
-
-
+        
         drawHealthBar(100,100, player);
-        //drawHealthBar(Width-200,100, combat.activeEnemy);
-
+       
     }
 
     public void drawHealthBar(int x, int y, Player player){
@@ -47,8 +36,7 @@ public class OhpPanel extends JPanel {
         g2d.drawRect(x,y,100,300);
         g2d.drawString("" + player.getCurrentHealth(),x + 40,y+height-20);
 
-        // g2d.fillRect(x,y+(height-(player.getCurrentHealth()*height)/(player.getMaxHealth()*height)),100,300-height-(player.getCurrentHealth()*height)/(player.getMaxHealth()*height));
-
+       
 
     }
 

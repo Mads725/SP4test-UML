@@ -23,21 +23,20 @@ public class CardLabel extends JButton implements MouseListener {
             string = card.getCardName() + "\n" + card.getCardText();
         }
         this.card = card;
-            this.setFont(new Font("Arial", Font.BOLD, 18));
+        this.setFont(new Font("Arial", Font.BOLD, 18));
         setForeground(Color.BLACK);
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         this.setHorizontalTextPosition(JLabel.CENTER);
 
-        //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
         setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == ElementType.WATER)
             setBackground(new Color(0, 130, 255)); // Light blue
         if (card.getElement() == ElementType.EARTH)
-
             setBackground(new Color(63, 127, 52));
         if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }
+
         this.setSize(200, 300);
         this.setPreferredSize(new Dimension(200, 300));
         addMouseListener(this);
@@ -47,23 +46,14 @@ public class CardLabel extends JButton implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        //Do the thing
         if (GameController.player.getCurrentActionPoints() >= card.actionPointsCost) {
             GameController.player.setUsedCard(card);
             synchronized (GameController.player) {
                 GameController.player.notifyAll();
-
             }
             GameController.player.removeCardFromHand(index);
-        } else {
-            //todo: drawtheActionPoints
-            System.out.println("not enough action points");
-
         }
-
-
     }
-
 
     @Override
     public void mousePressed(MouseEvent e) {

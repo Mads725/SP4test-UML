@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy extends CombatEntity{
+
     private ArrayList<CombatCard> playedCards = new ArrayList<>();
     BufferedImage image;
+
     public Enemy(String name, int Health, ElementType element, ArrayList<CombatCard> cards,int actionPoints) {
         this.setName(name);
         this.setMaxHealth(Health);
@@ -30,10 +32,7 @@ public class Enemy extends CombatEntity{
             image = ImageIO.read(getClass().getResource(imageUrl));
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-
-//        this.image = imageUrl;
     }
 
     ArrayList<CombatCard> cards;

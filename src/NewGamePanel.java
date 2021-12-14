@@ -17,18 +17,18 @@ public class NewGamePanel extends JPanel implements ActionListener {
         newGameButton.setSize(s, 100);
         newGameButton.addActionListener(this);
         newGameButton.setBounds((1200 - s) / 2, 800 / 2, s, 100);
+        newGameButton.setPreferredSize(new Dimension(s, 100));
         add(newGameButton);
         this.setVisible(true);
+
         this.gc = gc;
         setSize(new Dimension(frame.getWidth(), frame.getHeight()));
-        newGameButton.setPreferredSize(new Dimension(s, 100));
         setBackground(Color.lightGray);
-        //img = new ImageIcon("/resources/background2.jpg").getImage();
+
         try {
             img = ImageIO.read(getClass().getResource("/resources/background2.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
     @Override
@@ -38,9 +38,8 @@ public class NewGamePanel extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //when you press on new game there are no other buttons on this screen
         //Start Game
-        //GameController.frame.remove(this);
         synchronized (gc) {
             this.setVisible(false);
             gc.notifyAll();

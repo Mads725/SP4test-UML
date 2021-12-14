@@ -4,9 +4,6 @@ import java.awt.*;
 
 
 public class OverviewCardLabel extends JLabel {
-    //int sizeX0 = 100, sizeY = 200;
-    int index;
-
     CombatCard card;
 
     public OverviewCardLabel(CombatCard card) {
@@ -20,7 +17,7 @@ public class OverviewCardLabel extends JLabel {
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         this.setHorizontalTextPosition(JLabel.CENTER);
 
-        //this.setText(card.getCardName() + "\n" + card.getCardText() + "\n" + card.getElement());
+        
         setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == ElementType.WATER)
             setBackground(new Color(0, 110, 255));
@@ -29,7 +26,7 @@ public class OverviewCardLabel extends JLabel {
         if (card.getElement() == ElementType.FIRE) {
             setBackground(Color.red);
         }
-        //ændret fra height = 300
+        
         this.setSize(200, 100);
         this.setPreferredSize(new Dimension(200,100));
 
