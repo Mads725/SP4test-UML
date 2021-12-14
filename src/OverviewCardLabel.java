@@ -11,7 +11,7 @@ public class OverviewCardLabel extends JLabel {
         setVisible(true);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
-        String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
+        String string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
         this.card = card;
         this.setFont(new Font("Arial", Font.BOLD, 16));
         this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon

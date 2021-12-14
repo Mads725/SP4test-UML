@@ -1,30 +1,30 @@
 public class CombatCard {
 
-    int damage;
-    int heal;
+    private int damage;
+    private int heal;
     private ElementType element;
     private String cardName;
     private String cardText;
-    int actionPointsCost;
-    int slow;
-    int dot;
-    int dotTurns;
-    int fear;
-    int blind;
-    int blindTurns;
-    int returnDamage;
-    int returnDamageTurns;
-    int stun;
-    int increasedDamageTurns;
-    int delay;
-    int delayDot;
-    float increasedDamage;
-    boolean invisible=false;
-    boolean hasBeenPlayedThisTurnStun=false;
-    boolean hasBeenPlayedLastTurnStun=false;
-    boolean hasBeenPlayedThisTurnDot=false;
-    boolean isAscend=false;
-    boolean canExplode=false;
+    private int actionPointsCost;
+    private int slow;
+    private int dot;
+    private int dotTurns;
+    private int fear;
+    private int blind;
+    private int blindTurns;
+    private int returnDamage;
+    private int returnDamageTurns;
+    private int stun;
+    private int increasedDamageTurns;
+    private int delay;
+    private int delayDot;
+    private float increasedDamage;
+    private boolean invisible=false;
+    private boolean hasBeenPlayedThisTurnStun=false;
+    private boolean hasBeenPlayedLastTurnStun=false;
+    private boolean hasBeenPlayedThisTurnDot=false;
+    private boolean isAscend=false;
+    private boolean canExplode=false;
 
     public CombatCard(int damage, ElementType element, String cardName,  int actionPointsCost){ // Damage card.
         this.damage=damage;
@@ -153,5 +153,181 @@ public class CombatCard {
                 "cardName='" + cardName + '\'' +
                 ", cardText='" + cardText + '\'' +
                 '}';
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getHeal() {
+        return heal;
+    }
+
+    public void setHeal(int heal) {
+        this.heal = heal;
+    }
+
+    public int getActionPointsCost() {
+        return actionPointsCost;
+    }
+
+    public void setActionPointsCost(int actionPointsCost) {
+        this.actionPointsCost = actionPointsCost;
+    }
+
+    public int getSlow() {
+        return slow;
+    }
+
+    public void setSlow(int slow) {
+        this.slow = slow;
+    }
+
+    public int getDot() {
+        return dot;
+    }
+
+    public void setDot(int dot) {
+        this.dot = dot;
+    }
+
+    public int getDotTurns() {
+        return dotTurns;
+    }
+
+    public void setDotTurns(int dotTurns) {
+        this.dotTurns = dotTurns;
+    }
+
+    public int getFear() {
+        return fear;
+    }
+
+    public void setFear(int fear) {
+        this.fear = fear;
+    }
+
+    public int getBlind() {
+        return blind;
+    }
+
+    public void setBlind(int blind) {
+        this.blind = blind;
+    }
+
+    public int getBlindTurns() {
+        return blindTurns;
+    }
+
+    public void setBlindTurns(int blindTurns) {
+        this.blindTurns = blindTurns;
+    }
+
+    public int getReturnDamage() {
+        return returnDamage;
+    }
+
+    public void setReturnDamage(int returnDamage) {
+        this.returnDamage = returnDamage;
+    }
+
+    public int getReturnDamageTurns() {
+        return returnDamageTurns;
+    }
+
+    public void setReturnDamageTurns(int returnDamageTurns) {
+        this.returnDamageTurns = returnDamageTurns;
+    }
+
+    public int getStun() {
+        return stun;
+    }
+
+    public void setStun(int stun) {
+        this.stun = stun;
+    }
+
+    public int getIncreasedDamageTurns() {
+        return increasedDamageTurns;
+    }
+
+    public void setIncreasedDamageTurns(int increasedDamageTurns) {
+        this.increasedDamageTurns = increasedDamageTurns;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public int getDelayDot() {
+        return delayDot;
+    }
+
+    public void setDelayDot(int delayDot) {
+        this.delayDot = delayDot;
+    }
+
+    public float getIncreasedDamage() {
+        return increasedDamage;
+    }
+
+    public void setIncreasedDamage(float increasedDamage) {
+        this.increasedDamage = increasedDamage;
+    }
+
+    public boolean isInvisible() {
+        return invisible;
+    }
+
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
+    }
+
+    public boolean isHasBeenPlayedThisTurnStun() {
+        return hasBeenPlayedThisTurnStun;
+    }
+
+    public void setHasBeenPlayedThisTurnStun(boolean hasBeenPlayedThisTurnStun) {
+        this.hasBeenPlayedThisTurnStun = hasBeenPlayedThisTurnStun;
+    }
+
+    public boolean isHasBeenPlayedLastTurnStun() {
+        return hasBeenPlayedLastTurnStun;
+    }
+
+    public void setHasBeenPlayedLastTurnStun(boolean hasBeenPlayedLastTurnStun) {
+        this.hasBeenPlayedLastTurnStun = hasBeenPlayedLastTurnStun;
+    }
+
+    public boolean isHasBeenPlayedThisTurnDot() {
+        return hasBeenPlayedThisTurnDot;
+    }
+
+    public void setHasBeenPlayedThisTurnDot(boolean hasBeenPlayedThisTurnDot) {
+        this.hasBeenPlayedThisTurnDot = hasBeenPlayedThisTurnDot;
+    }
+
+    public boolean isAscend() {
+        return isAscend;
+    }
+
+    public void setAscend(boolean ascend) {
+        isAscend = ascend;
+    }
+
+    public boolean isCanExplode() {
+        return canExplode;
+    }
+
+    public void setCanExplode(boolean canExplode) {
+        this.canExplode = canExplode;
     }
 }

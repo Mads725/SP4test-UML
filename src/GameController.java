@@ -263,7 +263,7 @@ public class GameController {
     }
 
     public void generateRewardCards() {
-        CombatCard heat = new CombatCard(7, "Heat", "Heals 7 damage and gain an action point next turn", 2, -1, 0);
+        CombatCard heat = new CombatCard(7, "Heat", "gain an action point next turn", 2, -1, 0);
         CombatCard rain = new CombatCard(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         CombatCard boulder = new CombatCard(14, ElementType.EARTH, "Boulder", 2);
         CombatCard regenerate = new CombatCard(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);

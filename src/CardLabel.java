@@ -16,9 +16,9 @@ public class CardLabel extends JButton implements MouseListener {
         setBorder(border);
         String string="";
         if(card.getElement()!=null) {
-            string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.actionPointsCost;
-        } else if (card.actionPointsCost>=0) {
-            string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.actionPointsCost;
+            string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
+        } else if (card.getActionPointsCost()>=0) {
+            string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.getActionPointsCost();
         }else{
             string = card.getCardName() + "\n" + card.getCardText();
         }
@@ -46,7 +46,7 @@ public class CardLabel extends JButton implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (GameController.player.getCurrentActionPoints() >= card.actionPointsCost) {
+        if (GameController.player.getCurrentActionPoints() >= card.getActionPointsCost()) {
             GameController.player.setUsedCard(card);
             synchronized (GameController.player) {
                 GameController.player.notifyAll();
