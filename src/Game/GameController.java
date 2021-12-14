@@ -18,6 +18,7 @@ public class GameController {
     private Card[] bossRewards1; // List of boss rewards after a boos is defeated.
     private int layer; // Number of combats completed. high score.
     private int bossCounter; // Number of bosses defeated.
+    private String playerName;
 
     public GameController() {
         initialiseGC();
@@ -362,6 +363,7 @@ public class GameController {
 
     public void initialiseGC() {
         player = new Player(Balance.MAX_PLAYER_HEALTH, Balance.MAX_ACTION_POINTS);
+        player.setName(playerName);
         layer = 1;
         bossCounter = 0;
         generateEnemies(); // Generates the enemies the player will face
@@ -371,7 +373,9 @@ public class GameController {
         generateBossRewards();
     }
 
-    // ------------------ Getters and setters --------------------
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 
     public int getLayer() {
         return layer;
