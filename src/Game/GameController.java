@@ -45,7 +45,12 @@ public class GameController {
             if (layer % Balance.BOSS_LAYER == 0) { // Checks if the layer is a boss layer or a normal combat.
                 initializeBossCombat();
                 if (player.getCurrentHealth() > 0) { // Player wins
-                    rewardScreen(bossRewards1[0], bossRewards1[1], bossRewards1[2]);
+                    if(bossCounter==1) {
+                        rewardScreen(bossRewards1[0], bossRewards1[1], bossRewards1[2]);
+                    }
+                    else {
+                        rewardScreen(bossRewards2[0], bossRewards2[1], bossRewards2[2]);
+                    }
                     player.setCurrentHealth(player.getMaxHealth());
                 }
 
@@ -181,7 +186,7 @@ public class GameController {
         randomEnemies2.add(enemy5);
 
         Card pinch = new Card(9, ElementType.WATER, "Pinch", 1);
-        Card regrow = new Card(30, "Regrow", "gives one less actionpoint next turn", 1, 1, 3, 1);
+        Card regrow = new Card(30, "Regrow", "gives one less actionpoint next turn", 1, 0, 3, 1);
         Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 5 damage for 5 turns", 1, 5, 5, 5);
         ArrayList<Card> enemy6Cards = new ArrayList<>();
         enemy6Cards.add(pinch);
@@ -202,11 +207,10 @@ public class GameController {
         ArrayList<Card> enemy7Cards = new ArrayList<>();
         enemy7Cards.add(fireBreath);
         enemy7Cards.add(fireBreath);
-        enemy7Cards.add(fireBreath);
         enemy7Cards.add(flash);
         enemy7Cards.add(flameWhirl);
         enemy7Cards.add(lightUp);
-        Enemy enemy7 = new Enemy("Pyromancer", 120, ElementType.FIRE, enemy7Cards,1);
+        Enemy enemy7 = new Enemy("Pyromancer", 130, ElementType.FIRE, enemy7Cards,1);
         randomEnemies3.add(enemy7);
 
         Card spores = new Card(ElementType.EARTH, "Spores", "Deals 8 damage for 3 turns", 1, 8,3,3);
@@ -218,7 +222,7 @@ public class GameController {
         enemy8Cards.add(sapLife);
         enemy8Cards.add(naturalDefense);
         enemy8Cards.add(naturalDefense);
-        Enemy enemy8 = new Enemy("Poisonous Plant", 160, ElementType.EARTH, enemy8Cards, 1);
+        Enemy enemy8 = new Enemy("Poisonous Plant", 170, ElementType.EARTH, enemy8Cards, 1);
         randomEnemies3.add(enemy8);
 
         Card lash = new Card(10, ElementType.WATER, "Lash", 1);
@@ -231,7 +235,7 @@ public class GameController {
         enemy9Cards.add(charge);
         enemy9Cards.add(charge);
 
-        Enemy enemy9 = new Enemy("Electric Eel", 130, ElementType.WATER, enemy9Cards, 1);
+        Enemy enemy9 = new Enemy("Electric Eel", 140, ElementType.WATER, enemy9Cards, 1);
         randomEnemies3.add(enemy9);
     }
 
@@ -278,7 +282,7 @@ public class GameController {
         bossCards3.add(incinerate);
         bossCards3.add(ascend);
 
-        Enemy boss3 = new Enemy("Dragon", 200, ElementType.FIRE, bossCards3, 2);
+        Enemy boss3 = new Enemy("Dragon", 220, ElementType.FIRE, bossCards3, 2);
         bosses.add(boss3);
     }
 
@@ -351,10 +355,11 @@ public class GameController {
 
         bossRewards1 = new Card[]{armour, boots, bandages};
 
+        Card enhancedArmour = new Card("Enhanced Armour", "Raises Max hp by 50", -1);
         Card sword = new Card("Sword", "Grants 25% increased damage", -1);
         Card phdInMedicalScience = new Card("PhD In Medical Science", "Grants 25% increased healing", -1);
 
-        bossRewards2 = new Card[]{sword, phdInMedicalScience};
+        bossRewards2 = new Card[]{enhancedArmour, sword, phdInMedicalScience};
     }
 
     public void initializeCombat(ArrayList<Enemy> randomEnemies) { // Selects the enemy the player will fight
@@ -392,6 +397,10 @@ public class GameController {
                     player.inventory.remove(i);
                 } else if (player.inventory.get(i).getCardName().equals("PhD In Medical Science")){
                     player.setPhDHealingIncrease(1.25f);
+                    player.inventory.remove(i);
+                } else if (player.inventory.get(i).getCardName().equals("Enhanced Armour")) {
+                    player.setMaxHealth(player.getMaxHealth()+50);
+                    player.setCurrentHealth(player.getMaxHealth());
                     player.inventory.remove(i);
                 }
             }

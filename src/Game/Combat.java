@@ -8,8 +8,8 @@ public class Combat {
     Enemy activeEnemy;
     private int combatRound; // Round counter. Even is the players turn. Odd is the enemies turn.
     private int playerSlow=0, enemySlow=0; // Slow is reduced action points.
-    private int playerDot=0, enemyDot=0, enemyDot2=0; // Dot is damage over time, damage at the start of the turn.
-    private int playerDotTurns=0, enemyDotTurns=0, enemyDotTurns2; // How long the dot will last.
+    private int playerDot=0, playerDot2=0, enemyDot=0, enemyDot2=0; // Dot is damage over time, damage at the start of the turn.
+    private int playerDotTurns=0, playerDotTurns2=0, enemyDotTurns=0, enemyDotTurns2; // How long the dot will last.
     private int playerReturnDamage=0, enemyReturnDamage=0; // Takes damage when you deal damage.
     private int playerReturnDamageTurns=0, enemyReturnDamageTurns=0; // How many turns you will return damage.
     private int delay=0, delayDot=0; // Delay for playing the same card again.
@@ -140,15 +140,20 @@ public class Combat {
             }
         }
 
-        if (playedCard.getDot() != 0){
-            if (combatRound%2==0 && !playerBlinded && !enemyIsInvisible){
+        if (playedCard.getDot() != 0) {
+            if (combatRound % 2 == 0 && !playerBlinded && !enemyIsInvisible) {
                 if (enemyDot != 0) {
                     if (playedCard.getDot() > 0) {
                         enemyDot2 = playedCard.getDot();
                         enemyDotTurns2 = playedCard.getDotTurns();
                     } else {
-                        playerDot = playedCard.getDot();
-                        playerDotTurns = playedCard.getDotTurns();
+                        if (playerDot != 0) {
+                            playerDot = playedCard.getDot();
+                            playerDotTurns = playedCard.getDotTurns();
+                        }else {
+                            playerDot2 = playedCard.getDot();
+                            playerDotTurns2 = playedCard.getDotTurns();
+                        }
                     }
                 }
                 if (enemyDot == 0) {
@@ -156,21 +161,35 @@ public class Combat {
                         enemyDot = playedCard.getDot();
                         enemyDotTurns = playedCard.getDotTurns();
                     } else {
+                        if (playerDot != 0) {
+                            playerDot = playedCard.getDot();
+                            playerDotTurns = playedCard.getDotTurns();
+                        }else {
+                            playerDot2 = playedCard.getDot();
+                            playerDotTurns2 = playedCard.getDotTurns();
+                        }
+                    }
+                }
+            } else if (combatRound % 2 == 1 && !enemyBlinded) {
+                if (playerDot != 0) {
+                    if (playedCard.getDot() < 0) {
+                        enemyDot = playedCard.getDot();
+                        enemyDotTurns = playedCard.getDotTurns();
+                    } else {
+                        playerDot2 = playedCard.getDot();
+                        playerDotTurns2 = playedCard.getDotTurns();
+                    }
+                }else {
+                    if (playedCard.getDot() < 0) {
+                        enemyDot = playedCard.getDot();
+                        enemyDotTurns = playedCard.getDotTurns();
+                    } else {
                         playerDot = playedCard.getDot();
                         playerDotTurns = playedCard.getDotTurns();
                     }
                 }
-            }else if (combatRound%2 == 1 && !enemyBlinded){
-                if (playedCard.getDot()<0){
-                    enemyDot=playedCard.getDot();
-                    enemyDotTurns=playedCard.getDotTurns();
-                } else {
-                    playerDot=playedCard.getDot();
-                    playerDotTurns=playedCard.getDotTurns();
-                }
             }
         }
-
         if (playedCard.getFear() != 0) {
             Random r = new Random();
             int randomNum = r.nextInt(playedCard.getFear());
@@ -307,6 +326,14 @@ public class Combat {
                 player.addHealth(-playerDot);
             }
             playerDotTurns--;
+        }
+        if(playerDotTurns2>0) {
+            if (playerDot2 < 0 && player.getPhDHealingIncrease() != 0){
+                player.addHealth((int) (-playerDot2*player.getPhDHealingIncrease()));
+            }else {
+                player.addHealth(-playerDot2);
+            }
+            playerDotTurns2--;
         }
         if(playerFeared){
             System.out.println("Player is feared");
