@@ -15,7 +15,7 @@ public class GameController {
     private ArrayList<Enemy> randomEnemies3 = new ArrayList<>(); // List of enemies the player can face after the second boss.
     private ArrayList<Enemy> bosses = new ArrayList<>(); // List of bosses the player can face.
     ArrayList<Card> rewardCards = new ArrayList<>(); // List of rewards the player can get after a combat.
-    private Card[] bossRewards1; // List of boss rewards after a boos is defeated.
+    private Card[] bossRewards1, bossRewards2; // List of boss rewards after a boos is defeated.
     private int layer; // Number of combats completed. high score.
     private int bossCounter; // Number of bosses defeated.
     private String playerName;
@@ -118,7 +118,7 @@ public class GameController {
     public void generateEnemies() { // Generates the enemies the player will face in the game
 
         Card burn = new Card(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1, 6, 3, 3);
-        Card fireTornado = new Card(13, ElementType.FIRE, "Fire Tornado", 1);
+        Card fireTornado = new Card(14, ElementType.FIRE, "Fire Tornado", 1);
         Card fireBlast = new Card(7, ElementType.FIRE, "Fireblast", 1);
         ArrayList<Card> enemy1Cards = new ArrayList<>();
         enemy1Cards.add(fireBlast);
@@ -132,7 +132,7 @@ public class GameController {
 
         Card eatBanana = new Card(7, "Eat Banana", 1);
         Card throwBanana = new Card(6, ElementType.EARTH, "Throw Banana", 1);
-        Card throwBananaHarder = new Card(11, ElementType.EARTH, "Throw Banana Harder", 1);
+        Card throwBananaHarder = new Card(12, ElementType.EARTH, "Throw Banana Harder", 1);
         ArrayList<Card> enemy2Cards = new ArrayList<>();
         enemy2Cards.add(throwBanana);
         enemy2Cards.add(throwBanana);
@@ -143,7 +143,7 @@ public class GameController {
         Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards, 1);
         randomEnemies1.add(enemy2);
 
-        Card splash = new Card(6, ElementType.WATER, "Splash", 1);
+        Card splash = new Card(7, ElementType.WATER, "Splash", 1);
         Card regenerate = new Card(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);
         Card drench = new Card(8, ElementType.WATER, "Drench", "Deals 8 water damage and slows player for 1 turn", 1, 2);
         ArrayList<Card> enemy3Cards = new ArrayList<>();
@@ -155,8 +155,8 @@ public class GameController {
         Enemy enemy3 = new Enemy("Fish", 60, ElementType.WATER, enemy3Cards, 1);
         randomEnemies1.add(enemy3);
 
-        Card lavaSpit = new Card(5, ElementType.FIRE, "Lava Spit", 1);
-        Card intensity = new Card(6, "Intensity", 1);
+        Card lavaSpit = new Card(6, ElementType.FIRE, "Lava Spit", 1);
+        Card intensity = new Card(7, "Intensity", 1);
         Card fireShield = new Card("Fire Shield", 1, "Deals 3 damage to attacker when damaged", 3, 5);
         ArrayList<Card> enemy4Cards = new ArrayList<>();
         enemy4Cards.add(lavaSpit);
@@ -168,7 +168,7 @@ public class GameController {
         Enemy enemy4 = new Enemy("Unstable Lava", 100, ElementType.FIRE, enemy4Cards, 1);
         randomEnemies2.add(enemy4);
 
-        Card bite = new Card(12, ElementType.EARTH, "Bite", 1);
+        Card bite = new Card(13, ElementType.EARTH, "Bite", 1);
         Card camouflage = new Card("Camouflage", "Becomes harder to hit and gains an extra actionpoint next turn", 1, 1, 1, -1);
         Card venom = new Card(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2, 2);
         ArrayList<Card> enemy5Cards = new ArrayList<>();
@@ -192,6 +192,14 @@ public class GameController {
 
         Enemy enemy6 = new Enemy("Giant Crab", 120, ElementType.WATER, enemy6Cards, 1);
         randomEnemies2.add(enemy6);
+
+        Card spores = new Card(ElementType.EARTH, "Spores", "Deals 10 damage for 3 turns", 1, 10,3,3);
+        Card sapLife = new Card(6, 6, ElementType.EARTH, "Sap Life", "Deals 5 damage and heals 5 damage", 1);
+        
+        ArrayList<Card> enemy8Cards = new ArrayList<>();
+
+        Enemy enemy8 = new Enemy("Poisonous Plant", 130, ElementType.EARTH, enemy8Cards, 1);
+        randomEnemies3.add(enemy8);
 
         Card lash = new Card(10, ElementType.WATER, "Lash", 1);
         Card electrocute = new Card(8, ElementType.WATER, "Electrocute", 1, 2);
@@ -238,7 +246,7 @@ public class GameController {
         Enemy boss2 = new Enemy("Kraken", 170, ElementType.WATER, bossCards2, 2);
         bosses.add(boss2);
 
-        Card claw = new Card(7, ElementType.FIRE, "Claw", 1);
+        Card claw = new Card(9, ElementType.FIRE, "Claw", 1);
         Card incinerate = new Card(ElementType.FIRE, "Incinerate", "Deals 7 damage for 3 turns", 1, 7, 3, 3);
         Card ascend = new Card(2, 3, "Ascend", "Becomes untargetable and charges an attack");
         //Game.Card descend = new Game.Card(26,Game.ElementType.FIRE, "Descend", 2);
@@ -250,7 +258,7 @@ public class GameController {
         bossCards3.add(incinerate);
         bossCards3.add(ascend);
 
-        Enemy boss3 = new Enemy("Dragon", 180, ElementType.FIRE, bossCards3, 2);
+        Enemy boss3 = new Enemy("Dragon", 200, ElementType.FIRE, bossCards3, 2);
         bosses.add(boss3);
     }
 
@@ -319,6 +327,8 @@ public class GameController {
 
         Card sword = new Card("Sword", "Grants 25% increased damage", -1);
         Card phdInMedicalScience = new Card("PhD In Medical Science", "Grants 25% increased healing", -1);
+
+        bossRewards2 = new Card[]{sword, phdInMedicalScience};
     }
 
     public void initializeCombat(ArrayList<Enemy> randomEnemies) { // Selects the enemy the player will fight
@@ -353,6 +363,9 @@ public class GameController {
                     player.inventory.remove(i);
                 } else if (player.inventory.get(i).getCardName().equals("Sword")){
                     player.setSwordDamageIncrease(1.25f);
+                    player.inventory.remove(i);
+                } else if (player.inventory.get(i).getCardName().equals("PhD In Medical Science")){
+                    player.setPhDHealingIncrease(1.25f);
                     player.inventory.remove(i);
                 }
             }

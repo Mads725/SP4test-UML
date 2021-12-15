@@ -12,6 +12,7 @@ public class Player extends CombatEntity {
     public ArrayList<Card> inventory ; // Boss rewards list
     private int heal=0; // Heal after every combat (reward from boss)
     private float swordDamageIncrease=0;
+    private float PhDHealingIncrease=0;
 
     public Player(int Health, int maxActionPoints) {
         this.setMaxActionPoints(maxActionPoints);
@@ -49,7 +50,7 @@ public class Player extends CombatEntity {
         Collections.shuffle(playerCards);
     }
 
-    public void drawHand() { // Darws up to the max hand size
+    public void drawHand() { // Draws up to the max hand size
         while (playerHand.size() < Balance.MAX_HAND_SIZE) {
             playerHand.add(playerCards.get(0));
             playerCards.remove(0);
@@ -113,5 +114,10 @@ public class Player extends CombatEntity {
     public void setSwordDamageIncrease(float swordDamageIncrease) {
         this.swordDamageIncrease = swordDamageIncrease;
     }
+
+    public float getPhDHealingIncrease() {
+        return PhDHealingIncrease;
+    }
+    public void setPhDHealingIncrease(float phDHealingIncrease){ this.PhDHealingIncrease = phDHealingIncrease; }
 }
 

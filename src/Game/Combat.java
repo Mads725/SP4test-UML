@@ -115,6 +115,9 @@ public class Combat {
 
         if (playedCard.getHeal() != 0) {
             if (combatRound%2 == 0 && !playerBlinded) {
+                if (player.getPhDHealingIncrease() != 0){
+                    player.addHealth((int) (playedCard.getHeal()*player.getPhDHealingIncrease()));
+                }
                 player.addHealth(playedCard.getHeal());
             } else if (combatRound%2 == 1 && !enemyBlinded) {
                 activeEnemy.addHealth(playedCard.getHeal());
@@ -301,16 +304,20 @@ public class Combat {
     public void statusEffectsPlayer(){ // Sets the status effects on the player
         playerSlow=0;
         if(playerDotTurns>0) {
-            player.addHealth(-playerDot);
+            if (playerDot < 0 && player.getPhDHealingIncrease() != 0){
+                player.addHealth((int) (-playerDot*player.getPhDHealingIncrease()));
+            }else {
+                player.addHealth(-playerDot);
+            }
             playerDotTurns--;
         }
         if(playerFeared){
-            System.out.println("Game.Player is feared");
+            System.out.println("Player is feared");
             player.setCurrentActionPoints(0);
             playerFeared=false;
         }
         if(playerStunned){
-            System.out.println("Game.Player is stunned");
+            System.out.println("Player is stunned");
             player.setCurrentActionPoints(0);
             playerStunned=false;
         }
@@ -347,12 +354,12 @@ public class Combat {
             enemyDotTurns2--;
         }
         if(enemyFeared){
-            System.out.println("Game.Enemy is feared");
+            System.out.println("Enemy is feared");
             activeEnemy.setCurrentActionPoints(0);
             enemyFeared=false;
         }
         if(enemyStunned){
-            System.out.println("Game.Enemy is stunned");
+            System.out.println("Enemy is stunned");
             activeEnemy.setCurrentActionPoints(0);
             enemyStunned=false;
         }
