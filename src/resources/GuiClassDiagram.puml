@@ -1,0 +1,139 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class JFrame
+class Frame {
+PlayerHandPanel panel
+Overview overviewScreen
+NewGamePanel newGameScreen
+GameController gc;
+Player player;
+CombatPanel combatPanel;
+
+Frame(Player player, Player player)
+void setOverviewScreen()
+void setRewardScreen(Card card1, Card card2, Card3)
+void setCombatPanel(Combat combat)
+void setNewGameScreen()
+void removeCombatPanel()
+void removeRewardScreen()
+
+
+
+}
+
+class CombatPanel{
+Graphics g2d
+Combat combat
+BufferedImage background
+CombatPanel(Combat combat)
+void Paint(Graphics G)
+void drawHealthBar(int x, int y, CombatEntity unit)
+void drawPlayedCards(x,y)
+
+
+
+}
+class PlayerHandPanel{
+Player player
+ArrayList<Card>Label hand
+Jbutton endTurn
+
+}
+class NewGamePanel{
+GameController gc
+Jbutton newGameButton
+Image background
+JTextField textfield
+
+
+textValueChanged(TextEvent e)
+}
+class RewardScreen{
+RewardCardLabel rewardCard1;
+                   RewardCardLabel rewardCard2;
+                   RewardCardLabel rewardCard3;
+                   BufferedImage background;
+
+                   RewardScreen(Card rewardCard1, Card rewardCard2, Card rewardCard3)
+}
+
+class CardLabel{
+int sizeX, sizeY
+Card card
+CardLabel(Card card)
+mouseClicked(MouseEvent e)
+
+}
+class RewardCardLabel{
+
+
+}
+
+'overview
+class Overview{
+OCardPanel cardPanel
+OhpPanel hpPanel
+ObtnPanel   btnPanel
+GameController gc
+
+}
+class OCardPanel{
+ArrayList<Card> overviewCards
+ArrayList<OverviewCardLabel> overviewCardLabel
+GameController
+
+buffered background
+}
+class OhpPanel{
+GameController gc
+Graphics2D g2d
+int Width
+Player player
+OhpPanel(gc)
+
+paint(Graphics g)
+drawHealthBar(int x,int y, Player player)
+
+}
+class ObtnPanel{
+JButton nextBtn
+JButton exitBtn
+GameController gc
+
+}
+
+class OverviewCardLabel{
+Card card
+String cardText
+}
+
+
+JFrame <|-- Frame
+Frame *--CombatPanel
+Frame *--Overview
+Frame *-- RewardScreen
+Frame *--NewGamePanel
+Frame *--PlayerHandPanel
+RewardScreen "3" *-- "has" RewardCardLabel
+
+JPanel <|-- Overview
+JPanel <|-- CombatPanel
+JPanel <|-- RewardScreen
+JPanel <|-- PlayerHandPanel
+JPanel <|-- OCardPanel
+JPanel <|-- OhpPanel
+JPanel <|-- ObtnPanel
+JPanel <|-- NewGamePanel
+
+Overview *--ObtnPanel
+Overview *--OhpPanel
+Overview *--OCardPanel
+OCardPanel *-- OverviewCardLabel
+
+CardLabel <|-- RewardCardLabel
+JLabel <|-- OverviewCardLabel
+Jbutton <|--CardLabel
+
+
+@enduml
