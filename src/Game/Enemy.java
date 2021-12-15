@@ -56,13 +56,13 @@ public class Enemy extends CombatEntity {
         playedCards.add(card);
     }
 
-    public ArrayList<Card> getPlayedCards() {
-        return playedCards;
-    }
-
     // ---------- Getters and setters -----------------
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public ArrayList<Card> getPlayedCards() {
+        return playedCards;
     }
 }

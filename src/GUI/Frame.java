@@ -9,13 +9,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Frame extends JFrame {
-    PlayersHandPanel panel;
     Player player;
+    PlayersHandPanel panel;
     CombatPanel combatPanel;
     RewardScreen rewardScreen;
     NewGamePanel newGameScreen;
     Overview overviewScreen;
     GameController gc;
+
     public Frame(Player player, GameController gc) {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
