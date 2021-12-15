@@ -173,11 +173,10 @@ removeHandPanel()
 removeRewardScreen()
 }
 
-
 Main - GameController : Starts
-GameController "1" *-- "1"Combat
-Combat "1" *-- "1" Player
-Combat "1" *-- "1" Enemy
+GameController "1" *-- "1"Combat : Have
+Combat "1" *-- "1" Player : Have
+Combat "1" *-- "1" Enemy : Have
 CombatEntity <|-- Player
 CombatEntity <|-- Enemy
 Player "1" *-- "many" Card : contains
