@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class OverviewCardLabel extends JLabel {
     Card card;
-    String string;
+    String cardText;
 
     public OverviewCardLabel(Card card) {
         setOpaque(true);
@@ -17,9 +17,9 @@ public class OverviewCardLabel extends JLabel {
         Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         setBorder(border);
         if(card.getElement()!=null) {
-            string = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
+            cardText = card.getCardName() + "\n" + card.getCardText() + "\nElement: " + card.getElement() + "\nActionpoints: " + card.getActionPointsCost();
         }else{
-            string = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.getActionPointsCost();
+            cardText = card.getCardName() + "\n" + card.getCardText() + "\nActionpoints: " + card.getActionPointsCost();
         }
 
         this.card = card;
@@ -28,7 +28,7 @@ public class OverviewCardLabel extends JLabel {
         this.setHorizontalTextPosition(JLabel.CENTER);
 
         
-        setText("<html>" + string.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+        setText("<html>" + cardText.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
         if (card.getElement() == ElementType.WATER)
             setBackground(new Color(0, 130, 255));
         if (card.getElement() == ElementType.EARTH)
