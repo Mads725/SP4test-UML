@@ -165,7 +165,7 @@ public class GameController {
         enemy4Cards.add(fireShield);
         enemy4Cards.add(fireShield);
 
-        Enemy enemy4 = new Enemy("Unstable Lava", 100, ElementType.FIRE, enemy4Cards, 1);
+        Enemy enemy4 = new Enemy("Unstable Lava", 110, ElementType.FIRE, enemy4Cards, 1);
         randomEnemies2.add(enemy4);
 
         Card bite = new Card(13, ElementType.EARTH, "Bite", 1);
@@ -177,28 +177,48 @@ public class GameController {
         enemy5Cards.add(camouflage);
         enemy5Cards.add(venom);
 
-        Enemy enemy5 = new Enemy("Venomous Snake", 80, ElementType.EARTH, enemy5Cards, 1);
+        Enemy enemy5 = new Enemy("Venomous Snake", 90, ElementType.EARTH, enemy5Cards, 1);
         randomEnemies2.add(enemy5);
 
         Card pinch = new Card(9, ElementType.WATER, "Pinch", 1);
-        Card regrow = new Card(26, "Regrow", "gives one less actionpoint next turn", 1, 1, 3, 1);
+        Card regrow = new Card(30, "Regrow", "gives one less actionpoint next turn", 1, 1, 3, 1);
         Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 5 damage for 5 turns", 1, 5, 5, 5);
         ArrayList<Card> enemy6Cards = new ArrayList<>();
         enemy6Cards.add(pinch);
         enemy6Cards.add(pinch);
+        enemy6Cards.add(pinch);
         enemy6Cards.add(regrow);
+        enemy6Cards.add(lacerate);
         enemy6Cards.add(lacerate);
         enemy6Cards.add(lacerate);
 
         Enemy enemy6 = new Enemy("Giant Crab", 120, ElementType.WATER, enemy6Cards, 1);
         randomEnemies2.add(enemy6);
 
-        Card spores = new Card(ElementType.EARTH, "Spores", "Deals 10 damage for 3 turns", 1, 10,3,3);
-        Card sapLife = new Card(6, 6, ElementType.EARTH, "Sap Life", "Deals 5 damage and heals 5 damage", 1);
-        
-        ArrayList<Card> enemy8Cards = new ArrayList<>();
+        Card fireBreath = new Card(10, ElementType.FIRE, "Fire Breath", 1);
+        Card flash = new Card("Flash", "Blinds target for 2 turns", 1, 1, 2);
+        Card flameWhirl = new Card(16, ElementType.FIRE, "Flame Whirl", 1);
+        Card lightUp = new Card(4, "Light Up", "gain an extra actionpoint next turn",1, -1, 3);
+        ArrayList<Card> enemy7Cards = new ArrayList<>();
+        enemy7Cards.add(fireBreath);
+        enemy7Cards.add(fireBreath);
+        enemy7Cards.add(fireBreath);
+        enemy7Cards.add(flash);
+        enemy7Cards.add(flameWhirl);
+        enemy7Cards.add(lightUp);
+        Enemy enemy7 = new Enemy("Pyromancer", 120, ElementType.FIRE, enemy7Cards,1);
+        randomEnemies3.add(enemy7);
 
-        Enemy enemy8 = new Enemy("Poisonous Plant", 130, ElementType.EARTH, enemy8Cards, 1);
+        Card spores = new Card(ElementType.EARTH, "Spores", "Deals 8 damage for 3 turns", 1, 8,3,3);
+        Card sapLife = new Card(4, 10, ElementType.EARTH, "Sap Life", "Deals 4 damage and heals 10 damage", 1);
+        Card naturalDefense = new Card("Natural Defense", 1, "Deals 4 damage to attacker when damaged", 4, 4);
+        ArrayList<Card> enemy8Cards = new ArrayList<>();
+        enemy8Cards.add(spores);
+        enemy8Cards.add(spores);
+        enemy8Cards.add(sapLife);
+        enemy8Cards.add(naturalDefense);
+        enemy8Cards.add(naturalDefense);
+        Enemy enemy8 = new Enemy("Poisonous Plant", 160, ElementType.EARTH, enemy8Cards, 1);
         randomEnemies3.add(enemy8);
 
         Card lash = new Card(10, ElementType.WATER, "Lash", 1);
@@ -211,7 +231,7 @@ public class GameController {
         enemy9Cards.add(charge);
         enemy9Cards.add(charge);
 
-        Enemy enemy9 = new Enemy("Electric Eel", 110, ElementType.WATER, enemy9Cards, 1);
+        Enemy enemy9 = new Enemy("Electric Eel", 130, ElementType.WATER, enemy9Cards, 1);
         randomEnemies3.add(enemy9);
     }
 
@@ -263,7 +283,7 @@ public class GameController {
     }
 
     public void generateRewardCards() { // Generates the cards the player can get after a combat
-        Card heat = new Card(7, "Heat", "gain an action point next turn", 2, -1, 0);
+        Card heat = new Card(7, "Heat", "gain an extra action point next turn", 2, -1, 0);
         Card rain = new Card(8, 8, ElementType.WATER, "Rain", "Deals 8 water damage, Heals 8 hp", 2);
         Card boulder = new Card(14, ElementType.EARTH, "Boulder", 2);
         Card regenerate = new Card(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);
@@ -273,10 +293,14 @@ public class GameController {
         Card fireBlast = new Card(6, ElementType.FIRE, "Fireblast", 1);
         Card sprinkle = new Card(3, ElementType.WATER, "Sprinkle", 0);
         Card glassOfWater = new Card(3, "Glass of Water", 0);
-        Card meteor = new Card(24, ElementType.FIRE, "Meteor", 3);
-        Card venom = new Card(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 1, 9, 2, 2);
+        Card meteor = new Card(22, ElementType.FIRE, "Meteor", 3);
+        Card venom = new Card(ElementType.EARTH, "Venom", "Deals 9 damage for 2 turns", 2, 9, 2, 2);
         Card healingWater = new Card(14, "Healing Water", 2);
+        Card charge = new Card("Charge", "Increases damage from attacks by 30% for 5 turns", 2, 1.30f, 5, 0);
+        Card camouflage = new Card("Camouflage", "Becomes harder to hit and gains an extra actionpoint next turn", 1, 1, 1, -1);
+        Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 4 damage for 5 turns", 2, 5, 5, 0);
 
+        rewardCards.add(charge);
         rewardCards.add(healingWater);
         rewardCards.add(venom);
         rewardCards.add(meteor);
@@ -290,6 +314,8 @@ public class GameController {
         rewardCards.add(heat);
         rewardCards.add(rain);
         rewardCards.add(boulder);
+        rewardCards.add(camouflage);
+        rewardCards.add(lacerate);
     }
 
     public Card[] rewardCards(ArrayList<Card> rewardCards) { // Gets three random rewards card to show the player

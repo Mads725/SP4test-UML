@@ -203,6 +203,7 @@ public class Combat {
                     enemyBlindedTurns=playedCard.getBlindTurns();
                 } else if (combatRound % 2 == 1 && !enemyBlinded) {
                     playerBlindedTurns=playedCard.getBlindTurns();
+                    delay=playedCard.getBlindTurns();
                 }
             }
         if (playedCard.getReturnDamage()!=0){
@@ -268,10 +269,6 @@ public class Combat {
                 player.setCurrentActionPoints( player.getCurrentActionPoints() - playedCard.getActionPointsCost() );
             } else if (combatRound%2 == 1) {
                 activeEnemy.setCurrentActionPoints( activeEnemy.getCurrentActionPoints() - playedCard.getActionPointsCost() );
-                if (!playedCard.getCardName().equals("Shuffle")) {
-                    activeEnemy.setCurrentActionPoints(activeEnemy.getCurrentActionPoints() -
-                            playedCard.getActionPointsCost());
-                }
             }
         }
 
@@ -394,7 +391,7 @@ public class Combat {
 
     public Card checkCard(Card checkedCard){ // Checks if the enemy card is valid to play or try again.
 
-        while((checkedCard.isHasBeenPlayedLastTurnStun() && dontPlayNextTurnStun) || (checkedCard.isHasBeenPlayedThisTurnStun() && dontPlayThisTurnStun)){
+        while((checkedCard.isHasBeenPlayedLastTurnStun() && dontPlayNextTurnStun) || (checkedCard.isHasBeenPlayedThisTurnStun() && dontPlayThisTurnStun) || (checkedCard.getBlindTurns() > 0 && delay > 0)){
             checkedCard = activeEnemy.takeTurn();
         }
         while((checkedCard.getDelayDot() > 0 && delayDot > 0) || (checkedCard.isHasBeenPlayedThisTurnDot() && dontPlayThisTurnDot)){
