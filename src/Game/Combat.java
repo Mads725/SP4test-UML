@@ -98,6 +98,10 @@ public class Combat {
                 }
             }
         }
+        if (playedCard.isAscend()){
+            descend=true;
+            delay=playedCard.getDelay();
+        }
         if (playedCard.getDamage() != 0) {
             if (combatRound%2 == 0 && !playerBlinded && !enemyIsInvisible) {
 
@@ -236,10 +240,6 @@ public class Combat {
             }
         }
 
-        if (playedCard.isAscend()){
-            descend=true;
-            delay=playedCard.getDelay();
-        }
         if (playedCard.isInvisible()){
             enemyIsInvisible=true;
         }
@@ -345,6 +345,9 @@ public class Combat {
             System.out.println("Player is stunned");
             player.setCurrentActionPoints(0);
             playerStunned=false;
+        }
+        if(enemyBlindedTurns>0){
+            enemyBlindedTurns--;
         }
         if (enemyIsInvisible){
             System.out.println(activeEnemy.getName()+ " cannot be hit by any card this turn");
