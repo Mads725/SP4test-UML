@@ -131,6 +131,13 @@ public class Card {
         this.canExplode=true;
         this.returnDamageTurns=returnDamageTurns;
     }
+    public Card(String cardName, int actionPointsCost, int returnDamage, String cardText, int returnDamageTurns){
+        this.cardName = cardName;
+        this.cardText = cardText;
+        this.actionPointsCost = actionPointsCost;
+        this.returnDamage=returnDamage;
+        this.returnDamageTurns=returnDamageTurns;
+    }
     public Card(int damage, ElementType element, String cardName, int actionPointsCost, int stun){ // Damage card.
         this.damage=damage;
         this.element=element;
