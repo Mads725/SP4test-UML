@@ -82,7 +82,7 @@ public class GameController {
             }
 
             if (player.getCurrentHealth()>0) //If still alive, go up in level
-            layer++;
+                layer++;
             frame.removeHandPanel();
             frame.removeCombatPanel();
             frame.repaint();
@@ -122,7 +122,7 @@ public class GameController {
 
     public void generateEnemies() { // Generates the enemies the player will face in the game
 
-        Card burn = new Card(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1, 6, 3, 3);
+        Card burn = new Card(ElementType.FIRE, "Burn", "Deals 5 fire damage for 3 turns", 1, 5, 3, 3);
         Card fireTornado = new Card(14, ElementType.FIRE, "Fire Tornado", 1);
         Card fireBlast = new Card(7, ElementType.FIRE, "Fireblast", 1);
         ArrayList<Card> enemy1Cards = new ArrayList<>();
@@ -215,14 +215,14 @@ public class GameController {
 
         Card spores = new Card(ElementType.EARTH, "Spores", "Deals 8 damage for 3 turns", 1, 8,3,3);
         Card sapLife = new Card(4, 10, ElementType.EARTH, "Sap Life", "Deals 4 damage and heals 10 damage", 1);
-        Card naturalDefense = new Card("Natural Defense", 1, "Deals 4 damage to attacker when damaged", 4, 4);
+        Card naturalDefense = new Card("Natural Defense", 1, 4, "Deals 4 damage to attacker when damaged", 5);
         ArrayList<Card> enemy8Cards = new ArrayList<>();
         enemy8Cards.add(spores);
         enemy8Cards.add(spores);
         enemy8Cards.add(sapLife);
         enemy8Cards.add(naturalDefense);
         enemy8Cards.add(naturalDefense);
-        Enemy enemy8 = new Enemy("Poisonous Plant", 170, ElementType.EARTH, enemy8Cards, 1);
+        Enemy enemy8 = new Enemy("Poisonous Plant", 160, ElementType.EARTH, enemy8Cards, 1);
         randomEnemies3.add(enemy8);
 
         Card lash = new Card(10, ElementType.WATER, "Lash", 1);
@@ -248,13 +248,15 @@ public class GameController {
         bossCards.add(headbutt);
         bossCards.add(pumpkinPunch);
         bossCards.add(pumpkinPunch);
+        bossCards.add(pumpkinPunch);
+        bossCards.add(haunt);
         bossCards.add(haunt);
         bossCards.add(halloween);
 
         Enemy boss1 = new Enemy("Pumpkin Man", 130, ElementType.EARTH, bossCards, 2, "/resources/p1.png");
         bosses.add(boss1);
 
-        Card ink = new Card("Ink", "Blinds enemy for 2 turns", 1, 1, 2);
+        Card ink = new Card("Ink", "Blinds target for 2 turns", 1, 1, 2);
         Card devour = new Card(16, ElementType.WATER, "Devour", 1);
         Card dive = new Card(12, "Dive", 1);
         Card flail = new Card(5, ElementType.WATER, "Flail", 1);
@@ -292,7 +294,7 @@ public class GameController {
         Card boulder = new Card(14, ElementType.EARTH, "Boulder", 2);
         Card regenerate = new Card(ElementType.WATER, "Regenerate", "Heals 4 hp for 3 turns", 1, -4, 3, 3);
         Card splash = new Card(6, ElementType.WATER, "Splash", 1);
-        Card burn = new Card(ElementType.FIRE, "Burn", "Deals 6 fire damage for 3 turns", 1, 6, 3, 3);
+        Card burn = new Card(ElementType.FIRE, "Burn", "Deals 5 fire damage for 3 turns", 1, 5, 3, 3);
         Card fireTornado = new Card(14, ElementType.FIRE, "Fire Tornado", 2);
         Card fireBlast = new Card(6, ElementType.FIRE, "Fireblast", 1);
         Card sprinkle = new Card(3, ElementType.WATER, "Sprinkle", 0);
@@ -302,7 +304,7 @@ public class GameController {
         Card healingWater = new Card(14, "Healing Water", 2);
         Card charge = new Card("Charge", "Increases damage from attacks by 30% for 5 turns", 2, 1.30f, 5, 0);
         Card camouflage = new Card("Camouflage", "Becomes harder to hit and gains an extra actionpoint next turn", 1, 1, 1, -1);
-        Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 4 damage for 5 turns", 2, 5, 5, 0);
+        Card lacerate = new Card(ElementType.WATER, "Lacerate", "Deals 4 damage for 5 turns", 2, 4, 5, 0);
 
         rewardCards.add(charge);
         rewardCards.add(healingWater);
