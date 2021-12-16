@@ -117,8 +117,9 @@ public class Combat {
             if (combatRound%2 == 0 && !playerBlinded) {
                 if (player.getPhDHealingIncrease() != 0){
                     player.addHealth((int) (playedCard.getHeal()*player.getPhDHealingIncrease()));
+                }else {
+                    player.addHealth(playedCard.getHeal());
                 }
-                player.addHealth(playedCard.getHeal());
             } else if (combatRound%2 == 1 && !enemyBlinded) {
                 activeEnemy.addHealth(playedCard.getHeal());
             }
