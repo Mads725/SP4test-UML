@@ -145,7 +145,7 @@ public class GameController {
         enemy2Cards.add(eatBanana);
         enemy2Cards.add(throwBananaHarder);
 
-        Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards, 1);
+        Enemy enemy2 = new Enemy("Monkey", 80, ElementType.EARTH, enemy2Cards, 1,"/resources/monkey.tif");
         randomEnemies1.add(enemy2);
 
         Card splash = new Card(7, ElementType.WATER, "Splash", 1);
@@ -157,7 +157,7 @@ public class GameController {
         enemy3Cards.add(regenerate);
         enemy3Cards.add(drench);
 
-        Enemy enemy3 = new Enemy("Fish", 60, ElementType.WATER, enemy3Cards, 1);
+        Enemy enemy3 = new Enemy("Fish", 60, ElementType.WATER, enemy3Cards, 1,"/resources/fish.tif");
         randomEnemies1.add(enemy3);
 
         Card lavaSpit = new Card(6, ElementType.FIRE, "Lava Spit", 1);
